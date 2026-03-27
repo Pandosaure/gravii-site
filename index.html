@@ -354,6 +354,35 @@ Example: &quot;Sarah from DataFlow called again about bulk import. She said they
         <button id="demo-analyze-btn" onclick="analyzeText()" style="width:100%;height:48px;border-radius:10px;background:var(--accent);color:white;font-size:15px;font-weight:700;border:none;cursor:pointer;font-family:inherit;transition:all 0.2s;display:flex;align-items:center;justify-content:center;gap:8px" onmouseover="this.style.background='var(--accent2)'" onmouseout="this.style.background='var(--accent)'">
           Analyze
         </button>
+
+        <!-- Privacy block -->
+        <div style="margin-top:10px">
+          <button onclick="var d=document.getElementById('privacy-detail');d.style.display=d.style.display==='none'?'block':'none';this.querySelector('span').textContent=d.style.display==='none'?'\u25B8':'\u25BE'" style="background:none;border:none;color:var(--text3);font-size:11px;cursor:pointer;display:flex;align-items:center;gap:6px;font-family:inherit;padding:4px 0">
+            <svg width="12" height="12" viewBox="0 0 12 12" style="flex-shrink:0"><rect x="1" y="3" width="10" height="8" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M3.5 3V2a2.5 2.5 0 015 0v1" fill="none" stroke="currentColor" stroke-width="1.2"/></svg>
+            Your data is not stored <span style="font-size:8px">\u25B8</span>
+          </button>
+          <div id="privacy-detail" style="display:none;padding:10px 14px;background:var(--surface);border:1px solid var(--border);border-radius:8px;margin-top:4px;font-size:11px;color:var(--text3);line-height:1.7">
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <div style="display:flex;align-items:flex-start;gap:8px">
+                <span style="color:var(--green);flex-shrink:0;margin-top:1px">&#10003;</span>
+                <span><strong style="color:var(--text2)">Zero storage.</strong> Your text is processed in memory and immediately discarded. No database. No logs. Nothing is saved on our servers.</span>
+              </div>
+              <div style="display:flex;align-items:flex-start;gap:8px">
+                <span style="color:var(--green);flex-shrink:0;margin-top:1px">&#10003;</span>
+                <span><strong style="color:var(--text2)">Stateless processing.</strong> The analysis runs on a Vercel serverless function that exists only for the duration of your request. When the response is sent, the function and all its memory is destroyed.</span>
+              </div>
+              <div style="display:flex;align-items:flex-start;gap:8px">
+                <span style="color:var(--green);flex-shrink:0;margin-top:1px">&#10003;</span>
+                <span><strong style="color:var(--text2)">AI zero data retention.</strong> Text is processed by Anthropic Claude under their <a href="https://www.anthropic.com/policies" target="_blank" rel="noopener noreferrer" style="color:var(--accent2);text-decoration:underline">zero data retention policy</a>. Your text is never used for AI training.</span>
+              </div>
+              <div style="display:flex;align-items:flex-start;gap:8px">
+                <span style="color:var(--green);flex-shrink:0;margin-top:1px">&#10003;</span>
+                <span><strong style="color:var(--text2)">Verifiable.</strong> This demo has no database, no user accounts, no analytics tracking on your content. The only thing we store is your email if you choose to request early access.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <p id="demo-counter" style="text-align:center;font-size:11px;color:var(--text3);margin-top:8px"></p>
       </div>
 
