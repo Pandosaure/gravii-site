@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gravii — Company Intelligence Graph</title>
+<meta name="description" content="Turn every meeting into product intelligence. AI-powered signal extraction, traction scoring, and roadmap prioritization for product teams.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0a0b0f;--bg2:#12131a;--bg3:#1a1b25;
+  --surface:#1e1f2e;--surface2:#252638;--surface3:#2e2f44;
+  --border:#2a2b3d;--border2:#363750;
+  --text:#e8e9f0;--text2:#a0a1b5;--text3:#6b6c82;
+  --accent:#6366f1;--accent2:#818cf8;--accent-glow:rgba(99,102,241,0.15);
+  --green:#10b981;--red:#ef4444;--amber:#f59e0b;--blue:#3b82f6;--purple:#8b5cf6;
+  --radius:12px;--radius-sm:8px;
+}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.container{max-width:1160px;margin:0 auto;padding:0 24px}
+.mono{font-family:'JetBrains Mono',monospace}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 0;backdrop-filter:blur(20px);background:rgba(10,11,15,0.8);border-bottom:1px solid transparent;transition:border-color 0.3s}
+nav.scrolled{border-bottom-color:var(--border)}
+nav .container{display:flex;align-items:center;justify-content:space-between}
+.nav-logo{font-size:20px;font-weight:800;letter-spacing:-0.5px;display:flex;align-items:center;gap:8px}
+.nav-logo .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px var(--accent)}
+.nav-links{display:flex;align-items:center;gap:32px}
+.nav-links a{font-size:14px;color:var(--text2);font-weight:500;transition:color 0.2s}
+.nav-links a:hover{color:var(--text)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:var(--radius-sm);font-size:14px;font-weight:600;border:none;cursor:pointer;transition:all 0.2s}
+.btn-primary{background:var(--accent);color:white}
+.btn-primary:hover{background:var(--accent2);transform:translateY(-1px);box-shadow:0 4px 20px rgba(99,102,241,0.4)}
+.btn-secondary{background:var(--surface);color:var(--text);border:1px solid var(--border)}
+.btn-secondary:hover{border-color:var(--border2);background:var(--surface2)}
+.btn-large{padding:14px 28px;font-size:15px;border-radius:var(--radius)}
+
+.hero{padding:160px 0 80px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-200px;left:50%;transform:translateX(-50%);width:800px;height:800px;background:radial-gradient(circle,var(--accent-glow) 0%,transparent 70%);pointer-events:none}
+.hero-content{text-align:center;position:relative;z-index:1}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:100px;background:var(--surface);border:1px solid var(--border);font-size:12px;color:var(--text2);font-weight:500;margin-bottom:24px}
+.hero-badge .pulse{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+.hero h1{font-size:clamp(40px,6vw,72px);font-weight:800;letter-spacing:-2px;line-height:1.05;margin-bottom:20px;background:linear-gradient(135deg,var(--text) 0%,var(--text2) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero h1 em{font-style:normal;-webkit-text-fill-color:var(--accent2)}
+.hero p{font-size:18px;color:var(--text2);max-width:560px;margin:0 auto 36px;line-height:1.7}
+.hero-buttons{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.hero-sub{font-size:13px;color:var(--text3);margin-top:16px}
+
+.section-label{font-size:12px;font-weight:600;color:var(--accent2);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:12px}
+.section-title{font-size:clamp(28px,4vw,40px);font-weight:800;letter-spacing:-1px;margin-bottom:16px}
+.section-desc{font-size:16px;color:var(--text2);max-width:500px;margin-bottom:48px}
+
+/* Synergy diagram */
+.syn-node{opacity:0;animation:synAppear 0.7s ease forwards}
+.syn-node[data-idx="0"]{animation-delay:0.2s}
+.syn-node[data-idx="1"]{animation-delay:0.5s}
+.syn-node[data-idx="2"]{animation-delay:0s}
+.syn-node[data-idx="3"]{animation-delay:0.8s}
+.syn-node[data-idx="4"]{animation-delay:0.6s}
+.syn-node[data-idx="5"]{animation-delay:1s}
+@keyframes synAppear{0%{opacity:0;transform:scale(0.8) translateY(10px)}100%{opacity:1;transform:scale(1) translateY(0)}}
+.syn-rect{transition:stroke 0.3s,filter 0.3s}
+.syn-node:hover .syn-rect{stroke:#6366f1;filter:drop-shadow(0 0 12px rgba(99,102,241,0.3))}
+.syn-edge{stroke-dasharray:800;stroke-dashoffset:800;animation:synEdge 2s ease forwards 0.3s}
+@keyframes synEdge{to{stroke-dashoffset:0}}
+
+/* Showcase windows */
+.win{background:var(--bg2);border:1px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,0.4)}
+.win-bar{padding:10px 14px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:6px;background:var(--bg3)}
+.win-dot{width:8px;height:8px;border-radius:50%;display:inline-block}
+
+/* Feature cards */
+.feature-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.feature-card{background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:28px;transition:border-color 0.3s}
+.feature-card:hover{border-color:var(--accent)}
+.feature-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;font-size:18px}
+.feature-card h3{font-size:16px;font-weight:700;margin-bottom:6px}
+.feature-card p{font-size:13px;color:var(--text2);line-height:1.6}
+
+/* Pricing */
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:960px;margin:0 auto}
+.price-card{background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:32px;position:relative;transition:transform 0.3s}
+.price-card:hover{transform:translateY(-4px)}
+.price-card.featured{border-color:var(--accent);background:linear-gradient(180deg,rgba(99,102,241,0.08) 0%,var(--bg2) 100%)}
+.price-card.featured::before{content:'Most popular';position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--accent);color:white;font-size:11px;font-weight:600;padding:4px 14px;border-radius:100px}
+.price-amount{font-size:36px;font-weight:800;margin-bottom:4px;letter-spacing:-1px}
+.price-amount span{font-size:15px;font-weight:500;color:var(--text3)}
+.price-features{list-style:none;margin-bottom:28px}
+.price-features li{font-size:13px;color:var(--text2);padding:6px 0;display:flex;align-items:center;gap:8px}
+.price-features li::before{content:'✓';color:var(--green);font-weight:700;font-size:12px}
+
+/* Security */
+.security-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.sec-card{background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:28px;text-align:center}
+
+/* Animations */
+.fade-up{opacity:0;transform:translateY(30px);transition:opacity 0.8s ease,transform 0.8s ease}
+.fade-up.visible{opacity:1;transform:translateY(0)}
+.s1{transition-delay:0.1s}.s2{transition-delay:0.2s}.s3{transition-delay:0.3s}.s4{transition-delay:0.4s}.s5{transition-delay:0.5s}.s6{transition-delay:0.6s}
+
+.capture-hl{animation:hlFade 2s ease infinite alternate}
+@keyframes hlFade{0%{opacity:0.7}100%{opacity:1}}
+
+.traction-ring{stroke-dashoffset:226;animation:ringFill 1.8s ease forwards 0.5s}
+@keyframes ringFill{to{stroke-dashoffset:41}}
+.traction-num{opacity:0;animation:numReveal 0.6s ease forwards 1.2s}
+@keyframes numReveal{0%{opacity:0;transform:scale(0.5)}60%{transform:scale(1.1)}100%{opacity:1;transform:scale(1)}}
+.traction-bar{transform:scaleX(0);transform-origin:left;animation:barFill 1s ease forwards 0.6s}
+@keyframes barFill{to{transform:scaleX(1)}}
+.traction-row{opacity:0;transform:translateX(-10px);animation:rowSlide 0.5s ease forwards}
+.traction-row:nth-child(1){animation-delay:0.3s}.traction-row:nth-child(2){animation-delay:0.45s}
+.traction-row:nth-child(3){animation-delay:0.6s}.traction-row:nth-child(4){animation-delay:0.75s}
+.traction-row:nth-child(5){animation-delay:0.9s}
+@keyframes rowSlide{to{opacity:1;transform:translateX(0)}}
+
+.graph-node{opacity:0;transform-origin:center;animation:nodeAppear 0.6s ease forwards}
+@keyframes nodeAppear{0%{opacity:0;transform:scale(0)}60%{transform:scale(1.15)}100%{opacity:1;transform:scale(1)}}
+.graph-edge{stroke-dasharray:500;stroke-dashoffset:500;animation:edgeDraw 1.5s ease forwards 0.3s}
+@keyframes edgeDraw{to{stroke-dashoffset:0}}
+.gantt-bar{opacity:0;transform-origin:left center;animation:barGrow 0.8s ease forwards}
+@keyframes barGrow{0%{opacity:0;transform:scaleX(0)}100%{opacity:1;transform:scaleX(1)}}
+
+/* Flow step animation */
+@media(max-width:768px){
+  .feature-grid,.security-grid,.pricing-grid{grid-template-columns:1fr}
+  .nav-links a:not(.btn){display:none}
+  .hero h1{font-size:36px;letter-spacing:-1px}
+  .traction-grid{grid-template-columns:1fr !important}
+  .traction-callouts{grid-template-columns:1fr !important}
+  .showcase-split{grid-template-columns:1fr !important}
+  .showcase-split>div{order:unset !important}
+  .capture-split{flex-direction:column !important}
+  .capture-split>div{width:100% !important}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════ NAV ═══════════ -->
+<nav id="nav">
+  <div class="container">
+    <div class="nav-logo"><span class="dot"></span> Gravii</div>
+    <div class="nav-links">
+      <a href="#flow">How it works</a>
+      <a href="#features">Features</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#security">Security</a>
+      <a href="https://gravii-iota.vercel.app" class="btn btn-primary">Start free trial</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══════════ 1. HERO ═══════════ -->
+<section class="hero">
+  <div class="container hero-content">
+    <div class="hero-badge fade-up"><span class="pulse"></span> AI-powered product intelligence</div>
+    <h1 class="fade-up s1">Your meetings have<br>answers. <em>Extract them.</em></h1>
+    <p class="fade-up s2">Paste a meeting transcript. Get entities, signals, decisions, and a traction score that tells you what to build next — backed by evidence, not opinions.</p>
+    <div class="hero-buttons fade-up s3">
+      <a href="https://gravii-iota.vercel.app" class="btn btn-primary btn-large">Start 14-day free trial</a>
+      <a href="#flow" class="btn btn-secondary btn-large">See how it works</a>
+    </div>
+    <p class="hero-sub fade-up s4">No credit card required · Unlimited users · Full features</p>
+  </div>
+</section>
+
+<!-- ═══════════ 2. SYNERGY DIAGRAM ═══════════ -->
+<section style="padding:80px 0 100px" id="flow">
+  <div class="container" style="text-align:center">
+    <div class="section-label fade-up">The Intelligence System</div>
+    <div class="section-title fade-up s1" style="margin-left:auto;margin-right:auto">Everything feeds everything.<br>Intelligence compounds.</div>
+    <p class="fade-up s2" style="font-size:15px;color:var(--text2);max-width:520px;margin:0 auto 56px">Gravii isn't a pipeline — it's a living system. Every capture enriches the graph, every signal strengthens the score, every decision creates a trail back to the evidence that drove it.</p>
+
+    <div class="fade-up s3" style="max-width:720px;margin:0 auto;position:relative">
+      <svg id="synergy" viewBox="0 0 720 520" style="width:100%;display:block">
+        <defs>
+          <!-- Animated flowing particles -->
+          <filter id="glow"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          <linearGradient id="edgeGrad1" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#6366f1" stop-opacity="0.1"/><stop offset="50%" stop-color="#6366f1" stop-opacity="0.4"/><stop offset="100%" stop-color="#6366f1" stop-opacity="0.1"/></linearGradient>
+          <linearGradient id="edgeGrad2" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#10b981" stop-opacity="0.1"/><stop offset="50%" stop-color="#10b981" stop-opacity="0.35"/><stop offset="100%" stop-color="#10b981" stop-opacity="0.1"/></linearGradient>
+          <linearGradient id="edgeGrad3" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#f59e0b" stop-opacity="0.1"/><stop offset="50%" stop-color="#f59e0b" stop-opacity="0.35"/><stop offset="100%" stop-color="#f59e0b" stop-opacity="0.1"/></linearGradient>
+          <!-- Particle that travels along paths -->
+          <circle id="particle" r="2.5" fill="#818cf8" filter="url(#glow)"/>
+        </defs>
+
+        <!-- ═══ CONNECTION LINES (drawn first, behind nodes) ═══ -->
+        <!-- Capture → AI Engine (center) -->
+        <path class="syn-edge" d="M145,135 C200,170 260,200 360,260" stroke="url(#edgeGrad1)" stroke-width="1.5" fill="none"/>
+        <!-- AI Engine → Signals -->
+        <path class="syn-edge" d="M360,260 C430,220 500,170 575,135" stroke="url(#edgeGrad1)" stroke-width="1.5" fill="none"/>
+        <!-- Signals → Traction -->
+        <path class="syn-edge" d="M575,135 C590,200 590,300 575,385" stroke="url(#edgeGrad2)" stroke-width="1.5" fill="none"/>
+        <!-- AI Engine → Graph -->
+        <path class="syn-edge" d="M360,260 C300,300 200,350 145,385" stroke="url(#edgeGrad1)" stroke-width="1.5" fill="none"/>
+        <!-- Traction → Roadmap -->
+        <path class="syn-edge" d="M575,385 C500,420 420,440 360,450" stroke="url(#edgeGrad3)" stroke-width="1.5" fill="none"/>
+        <!-- Graph → Roadmap -->
+        <path class="syn-edge" d="M145,385 C220,420 280,440 360,450" stroke="url(#edgeGrad2)" stroke-width="1.5" fill="none"/>
+        <!-- Capture → Graph (direct) -->
+        <path class="syn-edge" d="M145,135 C120,200 120,300 145,385" stroke="#2a2b3d" stroke-width="1" fill="none" stroke-dasharray="4,4"/>
+        <!-- Signals → AI Engine (feedback) -->
+        <path class="syn-edge" d="M575,135 C500,180 430,230 360,260" stroke="#2a2b3d" stroke-width="1" fill="none" stroke-dasharray="4,4"/>
+        <!-- Roadmap → Capture (loop) -->
+        <path class="syn-edge" d="M360,450 C250,480 100,440 80,300 C60,180 90,140 145,135" stroke="#2a2b3d" stroke-width="1" fill="none" stroke-dasharray="6,4" opacity="0.5"/>
+        <!-- AI Engine → Traction (direct) -->
+        <path class="syn-edge" d="M360,260 C420,290 500,340 575,385" stroke="url(#edgeGrad3)" stroke-width="1" fill="none"/>
+
+        <!-- Animated particles traveling along key paths -->
+        <circle r="3" fill="#818cf8" opacity="0.8" filter="url(#glow)">
+          <animateMotion dur="3s" repeatCount="indefinite" path="M145,135 C200,170 260,200 360,260"/>
+        </circle>
+        <circle r="3" fill="#818cf8" opacity="0.8" filter="url(#glow)">
+          <animateMotion dur="3s" repeatCount="indefinite" begin="1s" path="M360,260 C430,220 500,170 575,135"/>
+        </circle>
+        <circle r="2.5" fill="#10b981" opacity="0.7" filter="url(#glow)">
+          <animateMotion dur="4s" repeatCount="indefinite" begin="0.5s" path="M575,135 C590,200 590,300 575,385"/>
+        </circle>
+        <circle r="2.5" fill="#f59e0b" opacity="0.7" filter="url(#glow)">
+          <animateMotion dur="3.5s" repeatCount="indefinite" begin="1.5s" path="M575,385 C500,420 420,440 360,450"/>
+        </circle>
+        <circle r="2.5" fill="#818cf8" opacity="0.6" filter="url(#glow)">
+          <animateMotion dur="5s" repeatCount="indefinite" begin="2s" path="M360,260 C300,300 200,350 145,385"/>
+        </circle>
+        <circle r="2" fill="#6b6c82" opacity="0.5">
+          <animateMotion dur="8s" repeatCount="indefinite" path="M360,450 C250,480 100,440 80,300 C60,180 90,140 145,135"/>
+        </circle>
+
+        <!-- ═══ NODES ═══ -->
+
+        <!-- CAPTURE (top-left) -->
+        <g class="syn-node" data-idx="0" style="cursor:pointer">
+          <rect x="85" y="85" width="120" height="100" rx="16" fill="#12131a" stroke="#2a2b3d" stroke-width="1.5" class="syn-rect"/>
+          <rect x="85" y="85" width="120" height="3" rx="1.5" fill="#3b82f6" class="syn-accent"/>
+          <image href="/images/icon-capture.png" x="115" y="96" width="60" height="60"/>
+          <text x="145" y="150" text-anchor="middle" fill="white" font-size="13" font-weight="700" font-family="Plus Jakarta Sans">Capture</text>
+          <text x="145" y="166" text-anchor="middle" fill="#6b6c82" font-size="9" font-family="Plus Jakarta Sans">Meetings · Calls · Notes</text>
+        </g>
+
+        <!-- SIGNALS (top-right) -->
+        <g class="syn-node" data-idx="1" style="cursor:pointer">
+          <rect x="515" y="85" width="120" height="100" rx="16" fill="#12131a" stroke="#2a2b3d" stroke-width="1.5" class="syn-rect"/>
+          <rect x="515" y="85" width="120" height="3" rx="1.5" fill="#f59e0b" class="syn-accent"/>
+          <image href="/images/icon-signals.png" x="545" y="96" width="60" height="60"/>
+          <text x="575" y="150" text-anchor="middle" fill="white" font-size="13" font-weight="700" font-family="Plus Jakarta Sans">Signals</text>
+          <text x="575" y="166" text-anchor="middle" fill="#6b6c82" font-size="9" font-family="Plus Jakarta Sans">Requests · Risks · Priorities</text>
+        </g>
+
+        <!-- AI ENGINE (center) -->
+        <g class="syn-node" data-idx="2" style="cursor:pointer">
+          <rect x="295" y="210" width="130" height="100" rx="20" fill="#1a1b25" stroke="#6366f1" stroke-width="2" class="syn-rect" filter="url(#glow)"/>
+          <rect x="295" y="210" width="130" height="3" rx="1.5" fill="#6366f1" class="syn-accent"/>
+          <image href="/images/icon-ai-engine.png" x="330" y="218" width="60" height="60"/>
+          <text x="360" y="275" text-anchor="middle" fill="white" font-size="13" font-weight="700" font-family="Plus Jakarta Sans">AI Engine</text>
+          <text x="360" y="291" text-anchor="middle" fill="#818cf8" font-size="9" font-family="Plus Jakarta Sans">Extract · Classify · Link</text>
+        </g>
+
+        <!-- GRAPH (bottom-left) -->
+        <g class="syn-node" data-idx="3" style="cursor:pointer">
+          <rect x="85" y="335" width="120" height="100" rx="16" fill="#12131a" stroke="#2a2b3d" stroke-width="1.5" class="syn-rect"/>
+          <rect x="85" y="335" width="120" height="3" rx="1.5" fill="#8b5cf6" class="syn-accent"/>
+          <image href="/images/icon-graph.png" x="115" y="346" width="60" height="60"/>
+          <text x="145" y="400" text-anchor="middle" fill="white" font-size="13" font-weight="700" font-family="Plus Jakarta Sans">Graph</text>
+          <text x="145" y="416" text-anchor="middle" fill="#6b6c82" font-size="9" font-family="Plus Jakarta Sans">Entities · Relationships</text>
+        </g>
+
+        <!-- TRACTION (bottom-right) -->
+        <g class="syn-node" data-idx="4" style="cursor:pointer">
+          <rect x="515" y="335" width="120" height="100" rx="16" fill="#12131a" stroke="#2a2b3d" stroke-width="1.5" class="syn-rect"/>
+          <rect x="515" y="335" width="120" height="3" rx="1.5" fill="#10b981" class="syn-accent"/>
+          <image href="/images/icon-traction.png" x="545" y="346" width="60" height="60"/>
+          <text x="575" y="400" text-anchor="middle" fill="white" font-size="13" font-weight="700" font-family="Plus Jakarta Sans">Traction</text>
+          <text x="575" y="416" text-anchor="middle" fill="#6b6c82" font-size="9" font-family="Plus Jakarta Sans">Score 0-100 · Evidence</text>
+        </g>
+
+        <!-- ROADMAP (bottom-center) -->
+        <g class="syn-node" data-idx="5" style="cursor:pointer">
+          <rect x="295" y="400" width="130" height="100" rx="16" fill="#12131a" stroke="#2a2b3d" stroke-width="1.5" class="syn-rect"/>
+          <rect x="295" y="400" width="130" height="3" rx="1.5" fill="#ef4444" class="syn-accent"/>
+          <image href="/images/icon-roadmap.png" x="330" y="408" width="60" height="60"/>
+          <text x="360" y="465" text-anchor="middle" fill="white" font-size="13" font-weight="700" font-family="Plus Jakarta Sans">Roadmap</text>
+          <text x="360" y="481" text-anchor="middle" fill="#6b6c82" font-size="9" font-family="Plus Jakarta Sans">Prioritized by evidence</text>
+        </g>
+
+        <!-- Edge labels -->
+        <text x="240" y="195" text-anchor="middle" fill="#4a4b60" font-size="8" font-family="Plus Jakarta Sans" transform="rotate(-20 240 195)">raw text</text>
+        <text x="480" y="195" text-anchor="middle" fill="#4a4b60" font-size="8" font-family="Plus Jakarta Sans" transform="rotate(20 480 195)">classified</text>
+        <text x="600" y="260" text-anchor="middle" fill="#4a4b60" font-size="8" font-family="Plus Jakarta Sans" transform="rotate(90 600 260)">accumulates</text>
+        <text x="240" y="330" text-anchor="middle" fill="#4a4b60" font-size="8" font-family="Plus Jakarta Sans" transform="rotate(20 240 330)">entities</text>
+        <text x="480" y="430" text-anchor="middle" fill="#4a4b60" font-size="8" font-family="Plus Jakarta Sans" transform="rotate(-15 480 430)">informs</text>
+        <text x="240" y="430" text-anchor="middle" fill="#4a4b60" font-size="8" font-family="Plus Jakarta Sans" transform="rotate(15 240 430)">connects</text>
+        <text x="55" y="260" text-anchor="middle" fill="#3a3b50" font-size="7" font-family="Plus Jakarta Sans" transform="rotate(-90 55 260)">compounds ↻</text>
+
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ 3. CAPTURE IN ACTION ═══════════ -->
+<section style="padding:80px 0">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:48px">
+      <div class="section-label fade-up">AI Capture in Action</div>
+      <div class="section-title fade-up s1">Paste a transcript.<br>Get instant intelligence.</div>
+    </div>
+
+    <div class="fade-up s2 win" style="max-width:1000px;margin:0 auto;box-shadow:0 40px 100px rgba(0,0,0,0.5)">
+      <div class="win-bar">
+        <span class="win-dot" style="background:#ff5f57"></span><span class="win-dot" style="background:#febc2e"></span><span class="win-dot" style="background:#28c840"></span>
+        <span class="mono" style="font-size:11px;color:var(--text3);margin-left:6px">Capture Results</span>
+      </div>
+      <div class="capture-split" style="display:flex;min-height:420px">
+        <!-- LEFT: Transcript -->
+        <div style="width:38%;border-right:1px solid var(--border);padding:20px;background:rgba(18,19,26,0.5)">
+          <div style="font-size:9px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px">Source</div>
+          <div class="mono" style="font-size:10px;line-height:1.8;color:var(--text2)">
+            <div style="color:var(--text3);margin-bottom:8px">— Product Review, March 24 —</div>
+            <div>Sarah from <span class="capture-hl" style="background:rgba(59,130,246,0.2);border-radius:3px;padding:0 3px;color:var(--blue)">DataFlow</span> called again about <span class="capture-hl" style="background:rgba(99,102,241,0.2);border-radius:3px;padding:0 3px;color:var(--accent2)">bulk import</span>. She said they're processing 50K records manually each week.</div>
+            <div style="margin-top:8px">Tom mentioned that if we don't ship <span class="capture-hl" style="background:rgba(99,102,241,0.2);border-radius:3px;padding:0 3px;color:var(--accent2)">bulk import</span> by June, <span class="capture-hl" style="background:rgba(59,130,246,0.2);border-radius:3px;padding:0 3px;color:var(--blue)">DataFlow</span> might churn — that's <span class="capture-hl" style="background:rgba(239,68,68,0.2);border-radius:3px;padding:0 3px;color:var(--red)">€120K ARR</span> at risk.</div>
+            <div style="margin-top:8px"><span class="capture-hl" style="background:rgba(16,185,129,0.2);border-radius:3px;padding:0 3px;color:var(--green)">TechPulse</span> also asked about it last week.</div>
+            <div style="margin-top:8px"><span style="color:var(--text3)">Decision:</span> We prioritize <span class="capture-hl" style="background:rgba(99,102,241,0.2);border-radius:3px;padding:0 3px;color:var(--accent2)">bulk import</span> for Q2. Alex will lead.</div>
+            <div style="margin-top:8px"><span class="capture-hl" style="background:rgba(139,92,246,0.2);border-radius:3px;padding:0 3px;color:var(--purple)">Rival Inc</span> just shipped CSV import. We need to go beyond — full API pipeline.</div>
+            <div style="margin-top:8px">The <span class="capture-hl" style="background:rgba(99,102,241,0.2);border-radius:3px;padding:0 3px;color:var(--accent2)">API webhooks</span> depends on this.</div>
+          </div>
+        </div>
+        <!-- RIGHT: Results -->
+        <div style="width:62%;padding:20px;overflow-y:auto">
+          <div style="font-size:16px;font-weight:700;margin-bottom:2px">Product Review — Q2 Planning</div>
+          <div style="display:flex;gap:4px;margin-bottom:12px">
+            <span style="font-size:9px;background:var(--surface2);color:var(--text3);padding:2px 8px;border-radius:100px">roadmap</span>
+            <span style="font-size:9px;background:var(--surface2);color:var(--text3);padding:2px 8px;border-radius:100px">churn-risk</span>
+          </div>
+          <div style="background:rgba(99,102,241,0.08);border-radius:8px;padding:10px 12px;margin-bottom:12px">
+            <div style="font-size:10px;font-weight:600;color:var(--accent2);margin-bottom:2px">Summary</div>
+            <div style="font-size:11px;color:var(--text2);line-height:1.5">Team prioritized bulk import for Q2 after multiple customer requests and €120K churn risk. API webhooks depends on completion.</div>
+          </div>
+          <!-- Entity: Bulk Import -->
+          <div style="border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:8px">
+            <div style="display:flex;align-items:center;gap:6px;padding:7px 10px;background:var(--surface)">
+              <span style="color:var(--green);font-size:11px">✓</span>
+              <div style="width:7px;height:7px;border-radius:50%;background:var(--accent)"></div>
+              <span style="font-size:12px;font-weight:600;flex:1">Bulk Import</span>
+              <span style="font-size:9px;color:var(--text3);background:var(--surface2);padding:2px 6px;border-radius:4px">Feature</span>
+              <span style="font-size:9px;color:var(--accent2);font-weight:600">3 signals</span>
+            </div>
+            <div style="padding:8px 10px;border-top:1px solid var(--border)">
+              <div style="font-size:10px;color:var(--text2);font-style:italic;margin-bottom:5px">"Processing 50K records manually each week"</div>
+              <div style="display:flex;gap:4px;margin-bottom:4px"><span style="font-size:9px;color:var(--text3)">DataFlow</span><span style="font-size:8px;background:rgba(245,158,11,0.15);color:var(--amber);padding:1px 5px;border-radius:3px;font-weight:600">high</span></div>
+              <div style="display:flex;gap:3px;flex-wrap:wrap">
+                <span style="font-size:8px;padding:2px 7px;border-radius:100px;font-weight:600;background:rgba(59,130,246,0.12);color:var(--blue);border:1px solid rgba(59,130,246,0.25)">✓ Customer Request</span>
+                <span style="font-size:8px;padding:2px 7px;border-radius:100px;color:var(--text3);border:1px solid var(--border)">Revenue Risk</span>
+                <span style="font-size:8px;padding:2px 7px;border-radius:100px;color:var(--text3);border:1px solid var(--border)">Competitive</span>
+              </div>
+            </div>
+            <div style="padding:8px 10px;border-top:1px solid var(--border)">
+              <div style="font-size:10px;color:var(--text2);font-style:italic;margin-bottom:5px">"DataFlow might churn — €120K ARR at risk"</div>
+              <div style="display:flex;gap:3px;flex-wrap:wrap">
+                <span style="font-size:8px;padding:2px 7px;border-radius:100px;color:var(--text3);border:1px solid var(--border)">Customer Request</span>
+                <span style="font-size:8px;padding:2px 7px;border-radius:100px;font-weight:600;background:rgba(239,68,68,0.12);color:var(--red);border:1px solid rgba(239,68,68,0.25)">✓ Revenue Risk</span>
+              </div>
+            </div>
+          </div>
+          <!-- Compact entities -->
+          <div style="display:flex;gap:6px;margin-bottom:8px;flex-wrap:wrap">
+            <div style="display:flex;align-items:center;gap:4px;padding:5px 10px;border:1px solid var(--border);border-radius:8px;background:var(--surface);font-size:11px"><span style="color:var(--green)">✓</span><span style="width:6px;height:6px;border-radius:50%;background:var(--green)"></span><span style="font-weight:600">DataFlow</span><span style="color:var(--text3)">Client</span></div>
+            <div style="display:flex;align-items:center;gap:4px;padding:5px 10px;border:1px solid var(--accent);border-radius:8px;background:var(--surface);font-size:11px"><span style="color:var(--accent2)">✓</span><span style="color:var(--accent2);font-size:9px">+</span><span style="font-weight:600">TechPulse</span><span style="color:var(--accent2);font-size:9px">new</span></div>
+            <div style="display:flex;align-items:center;gap:4px;padding:5px 10px;border:1px solid var(--border);border-radius:8px;background:var(--surface);font-size:11px"><span style="color:var(--green)">✓</span><span style="width:6px;height:6px;border-radius:50%;background:var(--red)"></span><span style="font-weight:600">Rival Inc</span><span style="color:var(--text3)">Competitor</span></div>
+          </div>
+          <!-- Decision -->
+          <div style="border:1px solid var(--border);border-radius:8px;padding:8px 10px;background:var(--surface);margin-bottom:8px;display:flex;align-items:center;gap:6px">
+            <span style="color:var(--green);font-size:10px">✓</span>
+            <div style="flex:1"><span style="font-size:11px;font-weight:600">Prioritize bulk import for Q2</span><span style="font-size:9px;color:var(--accent2);margin-left:6px">→ Bulk Import</span></div>
+            <span style="font-size:9px;color:var(--text3)">✏️ Edit</span>
+          </div>
+          <!-- Confirm bar -->
+          <div style="display:flex;align-items:center;justify-content:space-between;padding-top:10px;border-top:1px solid var(--border)">
+            <span style="font-size:9px;color:var(--text3)">4 entities | 3 signals | 1 decision | 2 relationships</span>
+            <div style="background:var(--accent);color:white;padding:5px 14px;border-radius:8px;font-size:10px;font-weight:600">Confirm & Add to Graph</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ 4. TRACTION SCORING ═══════════ -->
+<section style="padding:100px 0;position:relative;overflow:hidden">
+  <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:900px;height:900px;background:radial-gradient(circle,rgba(16,185,129,0.06) 0%,transparent 60%);pointer-events:none"></div>
+  <div class="container" style="position:relative;z-index:1">
+    <div style="text-align:center;margin-bottom:56px">
+      <div class="section-label fade-up">Traction Scoring</div>
+      <div class="section-title fade-up s1" style="font-size:clamp(28px,4vw,42px)">The loudest voice<br>no longer wins</div>
+      <p class="fade-up s2" style="font-size:16px;color:var(--text2);max-width:540px;margin:0 auto">Every roadmap item earns a 0-100 score from accumulated evidence. Configurable dimensions. Expandable reasoning. AI-powered weight tuning.</p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:380px 1fr;gap:24px;max-width:1000px;margin:0 auto" class="traction-grid">
+      <!-- Detail card -->
+      <div class="fade-up s1">
+        <div class="win">
+          <div style="padding:16px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px">
+            <div style="width:8px;height:8px;border-radius:50%;background:var(--accent)"></div>
+            <span style="font-size:14px;font-weight:700">Bulk Import</span>
+            <span style="font-size:10px;color:var(--text3);background:var(--surface2);padding:2px 8px;border-radius:100px;margin-left:auto">Feature</span>
+          </div>
+          <div style="padding:18px">
+            <div style="display:flex;gap:18px;align-items:flex-start">
+              <div style="position:relative;flex-shrink:0">
+                <svg width="88" height="88" viewBox="0 0 88 88"><circle cx="44" cy="44" r="36" fill="none" stroke="var(--surface2)" stroke-width="6"/><circle cx="44" cy="44" r="36" fill="none" stroke="var(--green)" stroke-width="6" stroke-dasharray="226" stroke-dashoffset="41" stroke-linecap="round" transform="rotate(-90 44 44)" class="traction-ring"/></svg>
+                <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center"><span style="font-size:24px;font-weight:800;color:var(--green)" class="traction-num">82</span><span style="font-size:8px;color:var(--text3)">/100</span></div>
+              </div>
+              <div style="flex:1;padding-top:2px">
+                <!-- Demand (expanded) -->
+                <div style="margin-bottom:2px">
+                  <div style="display:flex;align-items:center;gap:6px;padding:4px 0">
+                    <div style="width:8px;height:8px;border-radius:50%;background:var(--blue);flex-shrink:0"></div>
+                    <span style="font-size:10px;color:var(--text2);width:68px">Demand</span>
+                    <div style="flex:1;height:5px;background:var(--surface2);border-radius:100px;overflow:hidden"><div class="traction-bar" style="height:100%;width:85%;background:var(--blue);border-radius:100px"></div></div>
+                    <span style="font-size:9px;color:var(--text3);width:28px;text-align:right">17/20</span>
+                    <span style="font-size:8px;color:var(--text3)">▼</span>
+                  </div>
+                  <div style="margin-left:14px;padding-left:10px;border-left:2px solid var(--border);margin-bottom:6px">
+                    <div style="font-size:9px;color:var(--text2);margin-bottom:4px">4 requests from DataFlow, TechPulse, Acme Corp</div>
+                    <div style="background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:6px 8px;margin-bottom:3px">
+                      <div style="font-size:9px;color:var(--text2);font-style:italic">"Processing 50K records manually"</div>
+                      <div style="display:flex;gap:4px;margin-top:3px"><span style="font-size:8px;font-weight:600;color:var(--text2)">DataFlow</span><span style="font-size:8px;color:var(--accent2)">×3</span><span style="font-size:8px;color:var(--red)">€120K</span><span style="font-size:8px;color:var(--text3);margin-left:auto">2d</span></div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Other dims collapsed -->
+                <div style="display:flex;align-items:center;gap:6px;padding:4px 0"><div style="width:8px;height:8px;border-radius:50%;background:var(--red)"></div><span style="font-size:10px;color:var(--text2);width:68px">Risk</span><div style="flex:1;height:5px;background:var(--surface2);border-radius:100px;overflow:hidden"><div class="traction-bar" style="height:100%;width:75%;background:var(--red);border-radius:100px"></div></div><span style="font-size:9px;color:var(--text3);width:28px;text-align:right">15/20</span><span style="font-size:8px;color:var(--text3)">▸</span></div>
+                <div style="display:flex;align-items:center;gap:6px;padding:4px 0"><div style="width:8px;height:8px;border-radius:50%;background:var(--purple)"></div><span style="font-size:10px;color:var(--text2);width:68px">Competitive</span><div style="flex:1;height:5px;background:var(--surface2);border-radius:100px;overflow:hidden"><div class="traction-bar" style="height:100%;width:50%;background:var(--purple);border-radius:100px"></div></div><span style="font-size:9px;color:var(--text3);width:28px;text-align:right">10/20</span><span style="font-size:8px;color:var(--text3)">▸</span></div>
+                <div style="display:flex;align-items:center;gap:6px;padding:4px 0"><div style="width:8px;height:8px;border-radius:50%;background:var(--amber)"></div><span style="font-size:10px;color:var(--text2);width:68px">Momentum</span><div style="flex:1;height:5px;background:var(--surface2);border-radius:100px;overflow:hidden"><div class="traction-bar" style="height:100%;width:90%;background:var(--amber);border-radius:100px"></div></div><span style="font-size:9px;color:var(--text3);width:28px;text-align:right">18/20</span><span style="font-size:8px;color:var(--text3)">▸</span></div>
+                <div style="display:flex;align-items:center;gap:6px;padding:4px 0"><div style="width:8px;height:8px;border-radius:50%;background:#8b5cf6"></div><span style="font-size:10px;color:var(--text2);width:68px">Breadth</span><div style="flex:1;height:5px;background:var(--surface2);border-radius:100px;overflow:hidden"><div class="traction-bar" style="height:100%;width:60%;background:#8b5cf6;border-radius:100px"></div></div><span style="font-size:9px;color:var(--text3);width:28px;text-align:right">12/20</span><span style="font-size:8px;color:var(--text3)">▸</span></div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-top:12px;padding-top:10px;border-top:1px solid var(--border)">
+              <div style="display:flex;gap:8px;align-items:center"><span style="font-size:11px;font-weight:600;color:var(--green)">High traction</span><span style="font-size:9px;background:rgba(16,185,129,0.1);color:var(--green);padding:2px 8px;border-radius:100px;font-weight:600">Top 5%</span></div>
+              <span style="font-size:9px;color:var(--text3)">7 signals · 2d ago</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Dashboard ranking -->
+      <div class="fade-up s2">
+        <div class="win">
+          <div style="padding:12px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px;background:var(--bg3)">
+            <span style="font-size:15px;font-weight:700">Traction</span><span style="font-size:11px;color:var(--text3)">8 roadmap items</span>
+            <div style="margin-left:auto;font-size:10px;color:var(--text2);background:var(--surface);border:1px solid var(--border);padding:3px 8px;border-radius:6px">Overall Score ▾</div>
+          </div>
+          <div style="display:flex;padding:5px 18px;font-size:7px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:1px;border-bottom:1px solid var(--border);background:rgba(26,27,37,0.5);align-items:center">
+            <span style="width:24px;text-align:center">#</span><span style="width:34px;text-align:center">SC</span><span style="flex:1;padding-left:6px">ITEM</span>
+            <span style="width:32px;text-align:center"><span style="display:inline-block;width:4px;height:4px;border-radius:50%;background:var(--blue)"></span></span>
+            <span style="width:32px;text-align:center"><span style="display:inline-block;width:4px;height:4px;border-radius:50%;background:var(--red)"></span></span>
+            <span style="width:32px;text-align:center"><span style="display:inline-block;width:4px;height:4px;border-radius:50%;background:var(--amber)"></span></span>
+            <span style="width:32px;text-align:center"><span style="display:inline-block;width:4px;height:4px;border-radius:50%;background:#8b5cf6"></span></span>
+            <span style="width:28px;text-align:center">SIG</span>
+          </div>
+          <!-- Rows -->
+          <div class="traction-row"><div style="display:flex;align-items:center;padding:9px 18px;border-bottom:1px solid var(--border);background:rgba(16,185,129,0.02)"><span style="width:24px;text-align:center;font-size:11px;font-weight:700;color:var(--text3)">1</span><div style="width:34px;display:flex;justify-content:center"><div style="width:26px;height:26px;border-radius:50%;border:2px solid var(--green);display:flex;align-items:center;justify-content:center"><span style="font-size:9px;font-weight:700;color:var(--green)">82</span></div></div><div style="flex:1;padding-left:6px;display:flex;align-items:center;gap:5px"><div style="width:6px;height:6px;border-radius:50%;background:var(--blue)"></div><span style="font-size:11px;font-weight:600">Bulk Import</span><span style="font-size:8px;background:rgba(16,185,129,0.1);color:var(--green);padding:1px 5px;border-radius:100px;font-weight:600">Top 5%</span></div><div style="width:32px;display:flex;justify-content:center"><div style="width:20px;height:3px;background:var(--surface2);border-radius:100px;overflow:hidden"><div style="width:85%;height:100%;background:var(--blue);border-radius:100px"></div></div></div><div style="width:32px;display:flex;justify-content:center"><div style="width:20px;height:3px;background:var(--surface2);border-radius:100px;overflow:hidden"><div style="width:75%;height:100%;background:var(--red);border-radius:100px"></div></div></div><div style="width:32px;display:flex;justify-content:center"><div style="width:20px;height:3px;background:var(--surface2);border-radius:100px;overflow:hidden"><div style="width:90%;height:100%;background:var(--amber);border-radius:100px"></div></div></div><div style="width:32px;display:flex;justify-content:center"><div style="width:20px;height:3px;background:var(--surface2);border-radius:100px;overflow:hidden"><div style="width:60%;height:100%;background:#8b5cf6;border-radius:100px"></div></div></div><span style="width:28px;text-align:center;font-size:9px;color:var(--text3)">7</span></div></div>
+          <div class="traction-row"><div style="display:flex;align-items:center;padding:9px 18px;border-bottom:1px solid var(--border)"><span style="width:24px;text-align:center;font-size:11px;font-weight:700;color:var(--text3)">2</span><div style="width:34px;display:flex;justify-content:center"><div style="width:26px;height:26px;border-radius:50%;border:2px solid var(--green);display:flex;align-items:center;justify-content:center"><span style="font-size:9px;font-weight:700;color:var(--green)">71</span></div></div><div style="flex:1;padding-left:6px;display:flex;align-items:center;gap:5px"><div style="width:6px;height:6px;border-radius:50%;background:var(--blue)"></div><span style="font-size:11px;font-weight:600">API Webhooks</span></div><div style="width:32px;display:flex;justify-content:center"><div style="width:20px;height:3px;background:var(--surface2);border-radius:100px;overflow:hidden"><div style="width:70%;height:100%;background:var(--blue);border-radius:100px"></div></div></div><div style="width:32px;display:flex;justify-content:center"><div style="width:20px;height:3px;background:var(--surface2);border-radius:100px;overflow:hidden"><div style="width:40%;height:100%;background:var(--red);border-radius:100px"></div></div></div><div style="width:32px;display:flex;justify-content:center"><div style="width:20px;height:3px;background:var(--surface2);border-radius:100px;overflow:hidden"><div style="width:80%;height:100%;background:var(--amber);border-radius:100px"></div></div></div><div style="width:32px;display:flex;justify-content:center"><div style="width:20px;height:3px;background:var(--surface2);border-radius:100px;overflow:hidden"><div style="width:45%;height:100%;background:#8b5cf6;border-radius:100px"></div></div></div><span style="width:28px;text-align:center;font-size:9px;color:var(--text3)">5</span></div></div>
+          <div class="traction-row"><div style="display:flex;align-items:center;padding:9px 18px;border-bottom:1px solid var(--border)"><span style="width:24px;text-align:center;font-size:11px;font-weight:700;color:var(--text3)">3</span><div style="width:34px;display:flex;justify-content:center"><div style="width:26px;height:26px;border-radius:50%;border:2px solid var(--amber);display:flex;align-items:center;justify-content:center"><span style="font-size:9px;font-weight:700;color:var(--amber)">54</span></div></div><div style="flex:1;padding-left:6px;display:flex;align-items:center;gap:5px"><div style="width:6px;height:6px;border-radius:50%;background:var(--purple)"></div><span style="font-size:11px;font-weight:600">Enterprise SSO</span></div><div style="width:32px;display:flex;justify-content:center"><div style="width:20px;height:3px;background:var(--surface2);border-radius:100px;overflow:hidden"><div style="width:30%;height:100%;background:var(--blue);border-radius:100px"></div></div></div><div style="width:32px;display:flex;justify-content:center"><div style="width:20px;height:3px;background:var(--surface2);border-radius:100px;overflow:hidden"><div style="width:60%;height:100%;background:var(--red);border-radius:100px"></div></div></div><div style="width:32px;display:flex;justify-content:center"><div style="width:20px;height:3px;background:var(--surface2);border-radius:100px;overflow:hidden"><div style="width:55%;height:100%;background:var(--amber);border-radius:100px"></div></div></div><div style="width:32px;display:flex;justify-content:center"><div style="width:20px;height:3px;background:var(--surface2);border-radius:100px;overflow:hidden"><div style="width:80%;height:100%;background:#8b5cf6;border-radius:100px"></div></div></div><span style="width:28px;text-align:center;font-size:9px;color:var(--text3)">4</span></div></div>
+          <div class="traction-row"><div style="display:flex;align-items:center;padding:9px 18px;border-bottom:1px solid var(--border)"><span style="width:24px;text-align:center;font-size:11px;font-weight:700;color:var(--text3)">4</span><div style="width:34px;display:flex;justify-content:center"><div style="width:26px;height:26px;border-radius:50%;border:2px solid var(--amber);display:flex;align-items:center;justify-content:center"><span style="font-size:9px;font-weight:700;color:var(--amber)">43</span></div></div><div style="flex:1;padding-left:6px;display:flex;align-items:center;gap:5px"><div style="width:6px;height:6px;border-radius:50%;background:var(--blue)"></div><span style="font-size:11px;font-weight:600">Custom Reports</span></div><div style="width:32px;display:flex;justify-content:center"><div style="width:20px;height:3px;background:var(--surface2);border-radius:100px;overflow:hidden"><div style="width:50%;height:100%;background:var(--blue);border-radius:100px"></div></div></div><div style="width:32px;display:flex;justify-content:center"><div style="width:20px;height:3px;background:var(--surface2);border-radius:100px;overflow:hidden"><div style="width:15%;height:100%;background:var(--red);border-radius:100px"></div></div></div><div style="width:32px;display:flex;justify-content:center"><div style="width:20px;height:3px;background:var(--surface2);border-radius:100px;overflow:hidden"><div style="width:45%;height:100%;background:var(--amber);border-radius:100px"></div></div></div><div style="width:32px;display:flex;justify-content:center"><div style="width:20px;height:3px;background:var(--surface2);border-radius:100px;overflow:hidden"><div style="width:30%;height:100%;background:#8b5cf6;border-radius:100px"></div></div></div><span style="width:28px;text-align:center;font-size:9px;color:var(--text3)">3</span></div></div>
+          <div class="traction-row"><div style="display:flex;align-items:center;padding:9px 18px"><span style="width:24px;text-align:center;font-size:11px;font-weight:700;color:var(--text3)">5</span><div style="width:34px;display:flex;justify-content:center"><div style="width:26px;height:26px;border-radius:50%;border:2px solid var(--text3);display:flex;align-items:center;justify-content:center"><span style="font-size:9px;font-weight:700;color:var(--text3)">28</span></div></div><div style="flex:1;padding-left:6px;display:flex;align-items:center;gap:5px"><div style="width:6px;height:6px;border-radius:50%;background:var(--green)"></div><span style="font-size:11px;font-weight:600">Mobile App</span></div><div style="width:32px;display:flex;justify-content:center"><div style="width:20px;height:3px;background:var(--surface2);border-radius:100px;overflow:hidden"><div style="width:35%;height:100%;background:var(--blue);border-radius:100px"></div></div></div><div style="width:32px;display:flex;justify-content:center"><div style="width:20px;height:3px;background:var(--surface2);border-radius:100px;overflow:hidden"><div style="width:0%;height:100%;background:var(--red);border-radius:100px"></div></div></div><div style="width:32px;display:flex;justify-content:center"><div style="width:20px;height:3px;background:var(--surface2);border-radius:100px;overflow:hidden"><div style="width:25%;height:100%;background:var(--amber);border-radius:100px"></div></div></div><div style="width:32px;display:flex;justify-content:center"><div style="width:20px;height:3px;background:var(--surface2);border-radius:100px;overflow:hidden"><div style="width:20%;height:100%;background:#8b5cf6;border-radius:100px"></div></div></div><span style="width:28px;text-align:center;font-size:9px;color:var(--text3)">2</span></div></div>
+          <div style="padding:10px 18px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;background:rgba(26,27,37,0.4)">
+            <span style="font-size:9px;color:var(--text3)">Scores update with every capture</span>
+            <div style="display:flex;align-items:center;gap:4px;font-size:10px;color:var(--accent2);font-weight:600;background:var(--surface);border:1px solid var(--border);padding:4px 10px;border-radius:6px">✨ Configure with AI</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Callouts -->
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:32px;max-width:1000px;margin-left:auto;margin-right:auto" class="traction-callouts">
+      <div class="fade-up s3" style="background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:20px;text-align:center"><img src="/images/icon-callout-evidence.png" style="width:48px;height:48px;margin-bottom:6px" alt="Evidence"/><div style="font-size:13px;font-weight:700;margin-bottom:4px">Evidence, not opinions</div><div style="font-size:11px;color:var(--text2);line-height:1.5">Every point traces back to a real quote from a real meeting.</div></div>
+      <div class="fade-up s4" style="background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:20px;text-align:center"><img src="/images/icon-callout-configurable.png" style="width:48px;height:48px;margin-bottom:6px" alt="Configurable"/><div style="font-size:13px;font-weight:700;margin-bottom:4px">Fully configurable</div><div style="font-size:11px;color:var(--text2);line-height:1.5">Define signal types. Adjust weights. AI wizard adapts scoring to your business.</div></div>
+      <div class="fade-up s5" style="background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:20px;text-align:center"><img src="/images/icon-callout-compound.png" style="width:48px;height:48px;margin-bottom:6px" alt="Compound"/><div style="font-size:13px;font-weight:700;margin-bottom:4px">Signals compound</div><div style="font-size:11px;color:var(--text2);line-height:1.5">Duplicates strengthen existing evidence. Recency decay keeps scores current.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ 5. GRAPH ═══════════ -->
+<section style="padding:100px 0">
+  <div class="container">
+    <div class="showcase-split" style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center">
+      <div>
+        <div class="section-label fade-up">Intelligence Graph</div>
+        <div class="section-title fade-up s1" style="font-size:32px">See how everything<br>connects</div>
+        <p class="fade-up s2" style="font-size:15px;color:var(--text2);line-height:1.7;margin-bottom:24px">Every entity — features, clients, teams, competitors — connected in a force-directed graph. Hover to highlight relationships. Node size scales with signal strength.</p>
+      </div>
+      <div class="fade-up s2">
+        <div class="win">
+          <div class="win-bar"><span class="win-dot" style="background:#ff5f57"></span><span class="win-dot" style="background:#febc2e"></span><span class="win-dot" style="background:#28c840"></span><span class="mono" style="font-size:11px;color:var(--text3);margin-left:6px">Graph View</span></div>
+          <svg viewBox="0 0 520 380" style="width:100%;display:block;background:var(--bg2)">
+            <line class="graph-edge" x1="260" y1="190" x2="150" y2="100" stroke="#2a2b3d" stroke-width="1.5"/>
+            <line class="graph-edge" x1="260" y1="190" x2="380" y2="110" stroke="#2a2b3d" stroke-width="1.5"/>
+            <line class="graph-edge" x1="260" y1="190" x2="130" y2="260" stroke="#2a2b3d" stroke-width="1.5"/>
+            <line class="graph-edge" x1="260" y1="190" x2="390" y2="270" stroke="#2a2b3d" stroke-width="1.5"/>
+            <line class="graph-edge" x1="260" y1="190" x2="260" y2="320" stroke="#2a2b3d" stroke-width="1.5"/>
+            <line class="graph-edge" x1="150" y1="100" x2="80" y2="55" stroke="#2a2b3d" stroke-width="1"/>
+            <line class="graph-edge" x1="150" y1="100" x2="200" y2="45" stroke="#2a2b3d" stroke-width="1"/>
+            <line class="graph-edge" x1="380" y1="110" x2="440" y2="55" stroke="#2a2b3d" stroke-width="1"/>
+            <line class="graph-edge" x1="380" y1="110" x2="460" y2="160" stroke="#2a2b3d" stroke-width="1"/>
+            <line class="graph-edge" x1="130" y1="260" x2="60" y2="300" stroke="#2a2b3d" stroke-width="1"/>
+            <line class="graph-edge" x1="130" y1="260" x2="80" y2="200" stroke="#2a2b3d" stroke-width="1"/>
+            <line class="graph-edge" x1="390" y1="270" x2="450" y2="320" stroke="#2a2b3d" stroke-width="1"/>
+            <line class="graph-edge" x1="200" y1="45" x2="380" y2="110" stroke="#f59e0b" stroke-width="1" stroke-dasharray="4,3" opacity="0.5"/>
+            <defs><radialGradient id="cg" cx="40%" cy="35%"><stop offset="0%" stop-color="#818cf8"/><stop offset="100%" stop-color="#4f46e5"/></radialGradient></defs>
+            <circle cx="260" cy="190" r="32" fill="url(#cg)" class="graph-node" style="animation-delay:0s"/>
+            <text x="260" y="186" text-anchor="middle" fill="white" font-size="8" font-weight="700" font-family="Plus Jakarta Sans">ACME</text><text x="260" y="198" text-anchor="middle" fill="rgba(255,255,255,0.6)" font-size="7" font-family="Plus Jakarta Sans">CORP</text>
+            <circle cx="150" cy="100" r="22" fill="#3b82f6" class="graph-node" style="animation-delay:0.15s" opacity="0.85"/><text x="150" y="97" text-anchor="middle" fill="white" font-size="7" font-weight="600" font-family="Plus Jakarta Sans">Product</text><text x="150" y="107" text-anchor="middle" fill="rgba(255,255,255,0.6)" font-size="6" font-family="Plus Jakarta Sans">Core</text>
+            <circle cx="380" cy="110" r="20" fill="#3b82f6" class="graph-node" style="animation-delay:0.2s" opacity="0.85"/><text x="380" y="97" text-anchor="middle" fill="white" font-size="7" font-weight="600" font-family="Plus Jakarta Sans">Product</text><text x="380" y="107" text-anchor="middle" fill="rgba(255,255,255,0.6)" font-size="6" font-family="Plus Jakarta Sans">API</text>
+            <circle cx="130" cy="260" r="18" fill="#10b981" class="graph-node" style="animation-delay:0.3s" opacity="0.85"/><text x="130" y="257" text-anchor="middle" fill="white" font-size="6.5" font-weight="600" font-family="Plus Jakarta Sans">DataFlow</text><text x="130" y="267" text-anchor="middle" fill="rgba(255,255,255,0.6)" font-size="5.5" font-family="Plus Jakarta Sans">€120K</text>
+            <circle cx="390" cy="270" r="18" fill="#10b981" class="graph-node" style="animation-delay:0.35s" opacity="0.85"/><text x="390" y="267" text-anchor="middle" fill="white" font-size="6.5" font-weight="600" font-family="Plus Jakarta Sans">TechPulse</text>
+            <circle cx="260" cy="320" r="16" fill="#8b5cf6" class="graph-node" style="animation-delay:0.4s" opacity="0.85"/><text x="260" y="317" text-anchor="middle" fill="white" font-size="6" font-weight="600" font-family="Plus Jakarta Sans">Enterprise</text><text x="260" y="327" text-anchor="middle" fill="rgba(255,255,255,0.6)" font-size="5.5" font-family="Plus Jakarta Sans">Expansion</text>
+            <circle cx="80" cy="55" r="13" fill="#6366f1" class="graph-node" style="animation-delay:0.5s" opacity="0.7"/><text x="80" y="55" text-anchor="middle" fill="white" font-size="5.5" font-weight="600" font-family="Plus Jakarta Sans" dy="1">Bulk Import</text>
+            <circle cx="200" cy="45" r="14" fill="#6366f1" class="graph-node" style="animation-delay:0.55s" opacity="0.7"/><text x="200" y="42" text-anchor="middle" fill="white" font-size="5.5" font-weight="600" font-family="Plus Jakarta Sans">Webhooks</text><text x="200" y="51" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="5" font-family="Plus Jakarta Sans">🔥 82</text>
+            <circle cx="440" cy="55" r="12" fill="#6366f1" class="graph-node" style="animation-delay:0.6s" opacity="0.7"/><text x="440" y="56" text-anchor="middle" fill="white" font-size="5.5" font-weight="600" font-family="Plus Jakarta Sans" dy="1">SSO</text>
+            <circle cx="460" cy="160" r="11" fill="#6366f1" class="graph-node" style="animation-delay:0.65s" opacity="0.7"/><text x="460" y="161" text-anchor="middle" fill="white" font-size="5" font-weight="600" font-family="Plus Jakarta Sans" dy="1">Rate Limit</text>
+            <circle cx="60" cy="300" r="9" fill="#475569" class="graph-node" style="animation-delay:0.7s" opacity="0.6"/><text x="60" y="301" text-anchor="middle" fill="white" font-size="5" font-weight="700" font-family="Plus Jakarta Sans" dy="1">SC</text>
+            <circle cx="80" cy="200" r="9" fill="#475569" class="graph-node" style="animation-delay:0.75s" opacity="0.6"/><text x="80" y="201" text-anchor="middle" fill="white" font-size="5" font-weight="700" font-family="Plus Jakarta Sans" dy="1">JM</text>
+            <circle cx="450" cy="320" r="9" fill="#475569" class="graph-node" style="animation-delay:0.8s" opacity="0.6"/><text x="450" y="321" text-anchor="middle" fill="white" font-size="5" font-weight="700" font-family="Plus Jakarta Sans" dy="1">AL</text>
+            <circle cx="30" cy="360" r="4" fill="#3b82f6"/><text x="40" y="363" fill="#6b6c82" font-size="7" font-family="Plus Jakarta Sans">Products</text>
+            <circle cx="100" cy="360" r="4" fill="#10b981"/><text x="110" y="363" fill="#6b6c82" font-size="7" font-family="Plus Jakarta Sans">Clients</text>
+            <circle cx="165" cy="360" r="4" fill="#6366f1"/><text x="175" y="363" fill="#6b6c82" font-size="7" font-family="Plus Jakarta Sans">Features</text>
+            <circle cx="240" cy="360" r="4" fill="#475569"/><text x="250" y="363" fill="#6b6c82" font-size="7" font-family="Plus Jakarta Sans">People</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ 6. ROADMAP ═══════════ -->
+<section style="padding:100px 0">
+  <div class="container">
+    <div class="showcase-split" style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center">
+      <div class="fade-up" style="order:1">
+        <div class="win">
+          <div class="win-bar"><span class="win-dot" style="background:#ff5f57"></span><span class="win-dot" style="background:#febc2e"></span><span class="win-dot" style="background:#28c840"></span><span class="mono" style="font-size:11px;color:var(--text3);margin-left:6px">Roadmap</span>
+            <div style="margin-left:auto;display:flex;gap:2px;background:var(--bg);border-radius:6px;padding:2px;border:1px solid var(--border)"><span style="font-size:9px;color:var(--text3);padding:2px 6px;border-radius:4px">1M</span><span style="font-size:9px;color:white;padding:2px 6px;border-radius:4px;background:var(--accent)">3M</span><span style="font-size:9px;color:var(--text3);padding:2px 6px;border-radius:4px">6M</span><span style="font-size:9px;color:var(--text3);padding:2px 6px;border-radius:4px">1Y</span></div>
+          </div>
+          <svg viewBox="0 0 520 280" style="width:100%;display:block;background:var(--bg2)">
+            <rect x="0" y="0" width="520" height="32" fill="#1a1b25"/>
+            <line x1="0" y1="32" x2="520" y2="32" stroke="#2a2b3d"/>
+            <text x="30" y="14" fill="#e8e9f0" font-size="9" font-weight="600" font-family="Plus Jakarta Sans">Mar</text><text x="30" y="26" fill="#6b6c82" font-size="7" font-family="Plus Jakarta Sans">2026</text>
+            <line x1="130" y1="0" x2="130" y2="280" stroke="#2a2b3d" stroke-width="0.5"/><text x="160" y="14" fill="#e8e9f0" font-size="9" font-weight="600" font-family="Plus Jakarta Sans">Apr</text><text x="160" y="26" fill="#6b6c82" font-size="7" font-family="Plus Jakarta Sans">2026</text>
+            <line x1="260" y1="0" x2="260" y2="280" stroke="#2a2b3d" stroke-width="0.5"/><text x="290" y="14" fill="#e8e9f0" font-size="9" font-weight="600" font-family="Plus Jakarta Sans">May</text><text x="290" y="26" fill="#6b6c82" font-size="7" font-family="Plus Jakarta Sans">2026</text>
+            <line x1="390" y1="0" x2="390" y2="280" stroke="#2a2b3d" stroke-width="0.5"/><text x="420" y="14" fill="#e8e9f0" font-size="9" font-weight="600" font-family="Plus Jakarta Sans">Jun</text><text x="420" y="26" fill="#6b6c82" font-size="7" font-family="Plus Jakarta Sans">2026</text>
+            <line x1="88" y1="32" x2="88" y2="280" stroke="#ef4444" stroke-width="1.5" opacity="0.6"/><rect x="78" y="33" width="20" height="12" rx="3" fill="#ef4444"/><text x="88" y="42" text-anchor="middle" fill="white" font-size="6" font-weight="600" font-family="Plus Jakarta Sans">Today</text>
+            <rect x="0" y="48" width="520" height="20" fill="#1a1b25" opacity="0.6"/><text x="12" y="62" fill="#6b6c82" font-size="8" font-weight="600" font-family="Plus Jakarta Sans" letter-spacing="1">CORE PRODUCT</text>
+            <circle cx="38" cy="82" r="9" fill="none" stroke="#10b981" stroke-width="1.5"/><text x="38" y="85" text-anchor="middle" fill="#10b981" font-size="7" font-weight="700" font-family="Plus Jakarta Sans">82</text>
+            <rect class="gantt-bar" x="50" y="72" width="180" height="20" rx="5" fill="#3b82f6" opacity="0.85" style="animation-delay:0.2s"/><rect x="50" y="72" width="108" height="20" rx="5" fill="rgba(0,0,0,0.15)"/><text x="62" y="85" fill="white" font-size="8" font-weight="600" font-family="Plus Jakarta Sans">Bulk Import</text><text x="218" y="85" fill="rgba(255,255,255,0.6)" font-size="7" font-family="Plus Jakarta Sans" text-anchor="end">60%</text>
+            <circle cx="138" cy="106" r="9" fill="none" stroke="#10b981" stroke-width="1.5"/><text x="138" y="109" text-anchor="middle" fill="#10b981" font-size="7" font-weight="700" font-family="Plus Jakarta Sans">71</text>
+            <rect class="gantt-bar" x="150" y="96" width="160" height="20" rx="5" fill="#3b82f6" opacity="0.75" style="animation-delay:0.35s"/><text x="162" y="109" fill="white" font-size="8" font-weight="600" font-family="Plus Jakarta Sans">API Webhooks</text>
+            <path d="M230,82 C250,82 250,106 270,106" fill="none" stroke="#f59e0b" stroke-width="1.2" stroke-dasharray="3,3" opacity="0.5" marker-end="url(#ga)"/>
+            <rect x="0" y="124" width="520" height="20" fill="#1a1b25" opacity="0.6"/><text x="12" y="138" fill="#6b6c82" font-size="8" font-weight="600" font-family="Plus Jakarta Sans" letter-spacing="1">INFRASTRUCTURE</text>
+            <circle cx="188" cy="158" r="9" fill="none" stroke="#f59e0b" stroke-width="1.5"/><text x="188" y="161" text-anchor="middle" fill="#f59e0b" font-size="7" font-weight="700" font-family="Plus Jakarta Sans">54</text>
+            <rect class="gantt-bar" x="200" y="148" width="200" height="20" rx="5" fill="#8b5cf6" opacity="0.7" style="animation-delay:0.5s"/><text x="212" y="161" fill="white" font-size="8" font-weight="600" font-family="Plus Jakarta Sans">Enterprise SSO</text>
+            <rect x="0" y="178" width="520" height="20" fill="#1a1b25" opacity="0.6"/><text x="12" y="192" fill="#6b6c82" font-size="8" font-weight="600" font-family="Plus Jakarta Sans" letter-spacing="1">GROWTH</text>
+            <circle cx="298" cy="212" r="9" fill="none" stroke="#6b6c82" stroke-width="1.5"/><text x="298" y="215" text-anchor="middle" fill="#6b6c82" font-size="7" font-weight="700" font-family="Plus Jakarta Sans">28</text>
+            <rect class="gantt-bar" x="310" y="202" width="120" height="20" rx="5" fill="#10b981" opacity="0.55" style="animation-delay:0.65s"/><text x="322" y="215" fill="white" font-size="8" font-weight="600" font-family="Plus Jakarta Sans">Mobile App</text>
+            <circle cx="338" cy="236" r="9" fill="none" stroke="#6b6c82" stroke-width="1.5"/><text x="338" y="239" text-anchor="middle" fill="#6b6c82" font-size="7" font-weight="700" font-family="Plus Jakarta Sans">15</text>
+            <rect class="gantt-bar" x="350" y="226" width="150" height="20" rx="5" fill="#10b981" opacity="0.5" style="animation-delay:0.8s"/><text x="362" y="239" fill="white" font-size="8" font-weight="600" font-family="Plus Jakarta Sans">Marketplace</text>
+            <defs><marker id="ga" viewBox="0 -4 8 8" refX="6" refY="0" markerWidth="5" markerHeight="5" orient="auto"><path d="M0,-3L6,0L0,3" fill="#f59e0b"/></marker></defs>
+          </svg>
+        </div>
+      </div>
+      <div style="order:2">
+        <div class="section-label fade-up">Roadmap</div>
+        <div class="section-title fade-up s1" style="font-size:32px">Plan with evidence,<br>not gut feel</div>
+        <p class="fade-up s2" style="font-size:15px;color:var(--text2);line-height:1.7;margin-bottom:24px">Drag to move, resize to adjust dates. Dependency arrows show what blocks what. Traction scores visible on every bar — the hotter the item, the more justified it is.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ 7. FEATURES ═══════════ -->
+<section style="padding:100px 0" id="features">
+  <div class="container">
+    <div class="section-label fade-up">Features</div>
+    <div class="section-title fade-up s1">Everything product teams need.<br>Nothing they don't.</div>
+    <div class="section-desc fade-up s2">No feature bloat. No per-seat pricing. Just signal, clarity, and evidence-backed decisions.</div>
+    <div class="feature-grid">
+      <div class="feature-card fade-up s1"><img src="/images/icon-feat-capture.png" style="width:40px;height:40px;margin-bottom:16px" alt="AI Capture"/><h3>AI Capture</h3><p>Paste any text — meeting transcripts, call notes, Slack threads. AI extracts entities, signals, decisions, and relationships in seconds.</p></div>
+      <div class="feature-card fade-up s2"><img src="/images/icon-feat-traction.png" style="width:40px;height:40px;margin-bottom:16px" alt="Traction"/><h3>Traction Scoring</h3><p>Every roadmap item gets a 0-100 score based on accumulated evidence. Configurable dimensions. AI wizard to tune scoring to your business.</p></div>
+      <div class="feature-card fade-up s3"><img src="/images/icon-feat-roadmap.png" style="width:40px;height:40px;margin-bottom:16px" alt="Roadmap"/><h3>Roadmap</h3><p>Gantt chart with drag-to-move, resize, dependency arrows. Group by category, type, status, or parent. Traction scores on every bar.</p></div>
+      <div class="feature-card fade-up s4"><img src="/images/icon-feat-graph.png" style="width:40px;height:40px;margin-bottom:16px" alt="Graph"/><h3>Intelligence Graph</h3><p>Every entity connected in a force-directed graph. See how signals flow across your entire organization.</p></div>
+      <div class="feature-card fade-up s5"><img src="/images/icon-feat-dedup.png" style="width:40px;height:40px;margin-bottom:16px" alt="Dedup"/><h3>Signal Deduplication</h3><p>Same customer mentions it three times? Strengthens the existing signal. "Mentioned 4×" not 4 separate cards.</p></div>
+      <div class="feature-card fade-up s6"><img src="/images/icon-feat-signals.png" style="width:40px;height:40px;margin-bottom:16px" alt="Signals"/><h3>Custom Signal Types</h3><p>Define your own signal vocabulary. A consulting firm scores differently than a marketplace. The AI adapts.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ 8. SECURITY ═══════════ -->
+<section style="padding:100px 0" id="security">
+  <div class="container">
+    <div class="section-label fade-up">Security & Privacy</div>
+    <div class="section-title fade-up s1">Your data stays yours</div>
+    <div class="section-desc fade-up s2">Built for companies with real security policies.</div>
+    <div class="security-grid">
+      <div class="sec-card fade-up s1"><img src="/images/icon-sec-eu.png" style="width:56px;height:56px;margin-bottom:12px" alt="EU"/><h3 style="font-size:15px;font-weight:700;margin-bottom:6px">EU Data Hosting</h3><p style="font-size:13px;color:var(--text2);line-height:1.5">Database in Frankfurt. Encrypted at rest and in transit. GDPR compliant.</p></div>
+      <div class="sec-card fade-up s2"><img src="/images/icon-sec-byok.png" style="width:56px;height:56px;margin-bottom:12px" alt="BYOK"/><h3 style="font-size:15px;font-weight:700;margin-bottom:6px">Bring Your Own Key</h3><p style="font-size:13px;color:var(--text2);line-height:1.5">Use your own Anthropic API key. Your transcripts go directly to Anthropic under their zero data retention policy.</p></div>
+      <div class="sec-card fade-up s3"><img src="/images/icon-sec-rls.png" style="width:56px;height:56px;margin-bottom:12px" alt="RLS"/><h3 style="font-size:15px;font-weight:700;margin-bottom:6px">Row-Level Security</h3><p style="font-size:13px;color:var(--text2);line-height:1.5">Complete tenant isolation. Every query enforces organization boundaries.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ 9. PRICING ═══════════ -->
+<section style="padding:100px 0" id="pricing">
+  <div class="container" style="text-align:center">
+    <div class="section-label fade-up">Pricing</div>
+    <div class="section-title fade-up s1">Unlimited users.<br>One flat price.</div>
+    <p class="fade-up s2" style="font-size:16px;color:var(--text2);max-width:460px;margin:0 auto 48px">Every other tool charges per seat. We don't.</p>
+    <div class="pricing-grid">
+      <div class="price-card fade-up s1"><div style="font-size:14px;font-weight:600;color:var(--text2);margin-bottom:4px">Starter</div><div class="price-amount">€399<span>/mo</span></div><div style="font-size:13px;color:var(--text3);margin-bottom:24px">For product teams getting started</div><ul class="price-features"><li>Unlimited users</li><li>50 captures / month</li><li>Capture + Explorer + Graph</li><li>AI entity extraction</li><li>Signal classification</li><li>BYOK API key</li></ul><a href="https://gravii-iota.vercel.app" class="btn btn-secondary" style="width:100%;justify-content:center">Start trial</a></div>
+      <div class="price-card featured fade-up s2"><div style="font-size:14px;font-weight:600;color:var(--text2);margin-bottom:4px">Pro</div><div class="price-amount">€799<span>/mo</span></div><div style="font-size:13px;color:var(--text3);margin-bottom:24px">Full intelligence platform</div><ul class="price-features"><li>Everything in Starter</li><li>200 captures / month</li><li>Roadmap + Gantt chart</li><li>Traction scoring</li><li>AI scoring wizard</li><li>Custom signal types</li><li>Signal deduplication</li></ul><a href="https://gravii-iota.vercel.app" class="btn btn-primary" style="width:100%;justify-content:center">Start trial</a></div>
+      <div class="price-card fade-up s3"><div style="font-size:14px;font-weight:600;color:var(--text2);margin-bottom:4px">Enterprise</div><div class="price-amount">€1,499<span>/mo</span></div><div style="font-size:13px;color:var(--text3);margin-bottom:24px">For security-conscious teams</div><ul class="price-features"><li>Everything in Pro</li><li>Unlimited captures</li><li>SSO / SAML</li><li>Audit logs</li><li>Sovereign mode</li><li>Priority support</li><li>DPA included</li></ul><a href="mailto:tommy@gravii.app" style="color:var(--text2)">tommy@gravii.app</a></div>
+    </div>
+    <p style="margin-top:24px;font-size:13px;color:var(--text3)" class="fade-up">All plans include a 14-day free trial. No credit card required.</p>
+  </div>
+</section>
+
+<!-- ═══════════ 10. CTA ═══════════ -->
+<section style="padding:100px 0;text-align:center;position:relative">
+  <div style="position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:600px;height:400px;background:radial-gradient(circle,var(--accent-glow) 0%,transparent 70%);pointer-events:none"></div>
+  <div class="container" style="position:relative;z-index:1">
+    <h2 class="fade-up" style="font-size:clamp(28px,4vw,44px);font-weight:800;letter-spacing:-1px;margin-bottom:16px">Stop guessing.<br>Start knowing.</h2>
+    <p class="fade-up s1" style="font-size:16px;color:var(--text2);margin-bottom:32px">Your next product decision should be backed by evidence from every meeting, every customer, every signal.</p>
+    <a href="https://gravii-iota.vercel.app" class="btn btn-primary btn-large fade-up s2">Start your 14-day free trial</a>
+    <p class="hero-sub fade-up s3" style="margin-top:16px">No credit card · Full features · Unlimited users</p>
+  </div>
+</section>
+
+<footer style="border-top:1px solid var(--border);padding:40px 0;text-align:center">
+  <div class="container">
+    <p style="font-size:13px;color:var(--text3);margin-bottom:8px"><strong style="color:var(--text2)">Gravii</strong> — Company Intelligence Graph</p>
+    <p style="font-size:13px;color:var(--text3)">EU hosted · GDPR compliant · <a href="mailto:tommy@gravii.app" style="color:var(--text2)">tommy@gravii.app</a></p>
+  </div>
+</footer>
+
+<script>
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>20));
+const obs=new IntersectionObserver(e=>e.forEach(el=>{if(el.isIntersecting)el.target.classList.add('visible')}),{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
