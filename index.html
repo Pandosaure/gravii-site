@@ -57,6 +57,13 @@ nav .container{display:flex;align-items:center;justify-content:space-between}
 
 /* Email capture form */
 .capture-form{display:flex;gap:8px;max-width:420px;margin:0 auto;width:100%}
+
+/* Sample buttons */
+.sample-btn{padding:5px 12px;border-radius:8px;border:1px solid var(--border);background:var(--surface);color:var(--text2);font-size:11px;font-weight:500;cursor:pointer;font-family:inherit;transition:all 0.2s}
+.sample-btn:hover{border-color:var(--accent);color:var(--accent2)}
+
+/* Snapshot responsive */
+@media(max-width:600px){#snapshot-card [style*="grid-template-columns:1fr 1fr 1fr"]{grid-template-columns:1fr !important}}
 .capture-form input{flex:1;height:48px;padding:0 16px;border-radius:var(--radius-sm);border:1px solid var(--border);background:var(--surface);color:var(--text);font-size:14px;font-family:inherit;outline:none;transition:border-color 0.2s}
 .capture-form input:focus{border-color:var(--accent)}
 .capture-form input::placeholder{color:var(--text3)}
@@ -158,10 +165,12 @@ nav .container{display:flex;align-items:center;justify-content:space-between}
     <div class="nav-logo"><span class="dot"></span> Gravii</div>
     <div class="nav-links">
       <a href="#flow">How it works</a>
+      <a href="#try">Try it</a>
       <a href="#features">Features</a>
       <a href="#pricing">Pricing</a>
       <a href="#security">Security</a>
       <a href="#pricing" class="btn btn-primary">Get early access</a>
+      <a href="#try" class="btn btn-secondary">Try it now</a>
     </div>
   </div>
 </nav>
@@ -315,87 +324,123 @@ nav .container{display:flex;align-items:center;justify-content:space-between}
   </div>
 </section>
 
-<!-- ═══════════ 3. CAPTURE IN ACTION ═══════════ -->
-<section style="padding:80px 0">
+<!-- ═══════════ 3. LIVE INTELLIGENCE DEMO ═══════════ -->
+<section style="padding:80px 0" id="try">
   <div class="container">
-    <div style="text-align:center;margin-bottom:48px">
-      <div class="section-label fade-up">Capture From Anywhere</div>
-      <div class="section-title fade-up s1">Any team, any source.<br>Instant intelligence.</div>
+    <div style="text-align:center;margin-bottom:40px">
+      <div class="section-label fade-up">Try It Now</div>
+      <div class="section-title fade-up s1">Paste anything. See the intelligence.</div>
+      <p class="fade-up s2" style="font-size:15px;color:var(--text2);max-width:480px;margin:0 auto">Meeting transcript, customer call notes, Slack thread, product review — paste it below and watch Gravii extract the intelligence in seconds.</p>
     </div>
 
-    <div class="fade-up s2 win" style="max-width:1000px;margin:0 auto;box-shadow:0 40px 100px rgba(0,0,0,0.5)">
-      <div class="win-bar">
-        <span class="win-dot" style="background:#ff5f57"></span><span class="win-dot" style="background:#febc2e"></span><span class="win-dot" style="background:#28c840"></span>
-        <span class="mono" style="font-size:11px;color:var(--text3);margin-left:6px">Capture Results</span>
+    <div style="max-width:800px;margin:0 auto">
+      <!-- ═══ INPUT STATE ═══ -->
+      <div id="demo-input" class="fade-up s3">
+        <textarea id="demo-text" placeholder="Paste your meeting transcript or notes here...
+
+Example: &quot;Sarah from DataFlow called again about bulk import. She said they're processing 50K records manually each week. Tom mentioned that if we don't ship it by June, DataFlow might churn — that's €120K ARR at risk. TechPulse also asked about it. Decision: we prioritize bulk import for Q2. Alex will lead. Rival Inc just shipped CSV import, we need to go beyond that. The API webhooks feature depends on this being done first.&quot;" style="width:100%;min-height:180px;padding:16px;border-radius:12px;border:1px solid var(--border);background:var(--bg2);color:var(--text);font-size:13px;font-family:'Plus Jakarta Sans',sans-serif;line-height:1.6;resize:vertical;outline:none;transition:border-color 0.2s" onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'"></textarea>
+
+        <!-- Sample transcripts -->
+        <div style="display:flex;gap:8px;margin:12px 0;flex-wrap:wrap">
+          <span style="font-size:11px;color:var(--text3);padding-top:4px">Try a sample:</span>
+          <button onclick="loadSample(0)" class="sample-btn">Product Review</button>
+          <button onclick="loadSample(1)" class="sample-btn">Customer Call</button>
+          <button onclick="loadSample(2)" class="sample-btn">Strategy Discussion</button>
+        </div>
+
+        <button id="demo-analyze-btn" onclick="analyzeText()" style="width:100%;height:48px;border-radius:10px;background:var(--accent);color:white;font-size:15px;font-weight:700;border:none;cursor:pointer;font-family:inherit;transition:all 0.2s;display:flex;align-items:center;justify-content:center;gap:8px" onmouseover="this.style.background='var(--accent2)'" onmouseout="this.style.background='var(--accent)'">
+          Analyze
+        </button>
+        <p id="demo-counter" style="text-align:center;font-size:11px;color:var(--text3);margin-top:8px"></p>
       </div>
-      <div class="capture-split" style="display:flex;min-height:420px">
-        <!-- LEFT: Transcript -->
-        <div style="width:38%;border-right:1px solid var(--border);padding:20px;background:rgba(18,19,26,0.5)">
-          <div style="font-size:9px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px">Source</div>
-          <div class="mono" style="font-size:10px;line-height:1.8;color:var(--text2)">
-            <div style="color:var(--text3);margin-bottom:8px">— Cross-Team Product Review —</div>
-            <div>Sarah from <span class="capture-hl" style="background:rgba(59,130,246,0.2);border-radius:3px;padding:0 3px;color:var(--blue)">DataFlow</span> called again about <span class="capture-hl" style="background:rgba(99,102,241,0.2);border-radius:3px;padding:0 3px;color:var(--accent2)">bulk import</span>. She said they're processing 50K records manually each week.</div>
-            <div style="margin-top:8px">Tom mentioned that if we don't ship <span class="capture-hl" style="background:rgba(99,102,241,0.2);border-radius:3px;padding:0 3px;color:var(--accent2)">bulk import</span> by June, <span class="capture-hl" style="background:rgba(59,130,246,0.2);border-radius:3px;padding:0 3px;color:var(--blue)">DataFlow</span> might churn — that's <span class="capture-hl" style="background:rgba(239,68,68,0.2);border-radius:3px;padding:0 3px;color:var(--red)">€120K ARR</span> at risk.</div>
-            <div style="margin-top:8px"><span class="capture-hl" style="background:rgba(16,185,129,0.2);border-radius:3px;padding:0 3px;color:var(--green)">TechPulse</span> also asked about it last week.</div>
-            <div style="margin-top:8px"><span style="color:var(--text3)">Decision:</span> We prioritize <span class="capture-hl" style="background:rgba(99,102,241,0.2);border-radius:3px;padding:0 3px;color:var(--accent2)">bulk import</span> for Q2. Alex will lead.</div>
-            <div style="margin-top:8px"><span class="capture-hl" style="background:rgba(139,92,246,0.2);border-radius:3px;padding:0 3px;color:var(--purple)">Rival Inc</span> just shipped CSV import. We need to go beyond — full API pipeline.</div>
-            <div style="margin-top:8px">The <span class="capture-hl" style="background:rgba(99,102,241,0.2);border-radius:3px;padding:0 3px;color:var(--accent2)">API webhooks</span> depends on this.</div>
+
+      <!-- ═══ PROCESSING STATE ═══ -->
+      <div id="demo-processing" style="display:none">
+        <div style="background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:24px;font-family:'JetBrains Mono',monospace;font-size:12px;line-height:2">
+          <div id="proc-stream" style="color:var(--text3)"></div>
+        </div>
+      </div>
+
+      <!-- ═══ RESULT STATE: INTELLIGENCE SNAPSHOT ═══ -->
+      <div id="demo-result" style="display:none">
+        <div id="snapshot-card" style="background:var(--bg2);border:1px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.4)">
+          <!-- Header -->
+          <div style="padding:14px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;background:var(--bg3)">
+            <div>
+              <div style="font-size:9px;font-weight:600;color:var(--accent2);text-transform:uppercase;letter-spacing:1.5px">Gravii Intelligence Snapshot</div>
+              <div id="snap-title" style="font-size:16px;font-weight:700;margin-top:2px"></div>
+            </div>
+            <div id="snap-stats" style="font-size:10px;color:var(--text3);text-align:right"></div>
+          </div>
+
+          <!-- Strategic Insight -->
+          <div style="padding:14px 20px;border-bottom:1px solid var(--border);background:rgba(99,102,241,0.04)">
+            <div id="snap-insight" style="font-size:13px;color:var(--text2);line-height:1.6;font-style:italic"></div>
+          </div>
+
+          <!-- Three Columns -->
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;min-height:200px">
+            <!-- BUILD -->
+            <div style="padding:14px 16px;border-right:1px solid var(--border)">
+              <div style="font-size:10px;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;display:flex;align-items:center;gap:5px"><span style="width:6px;height:6px;border-radius:50%;background:var(--green)"></span> Build</div>
+              <div id="snap-build"></div>
+            </div>
+            <!-- WATCH -->
+            <div style="padding:14px 16px;border-right:1px solid var(--border)">
+              <div style="font-size:10px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;display:flex;align-items:center;gap:5px"><span style="width:6px;height:6px;border-radius:50%;background:var(--amber)"></span> Watch</div>
+              <div id="snap-watch"></div>
+            </div>
+            <!-- CONNECTED -->
+            <div style="padding:14px 16px">
+              <div style="font-size:10px;font-weight:700;color:var(--accent2);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;display:flex;align-items:center;gap:5px"><span style="width:6px;height:6px;border-radius:50%;background:var(--accent2)"></span> Connected</div>
+              <div id="snap-connected"></div>
+            </div>
+          </div>
+
+          <!-- Traction Preview -->
+          <div style="padding:12px 20px;border-top:1px solid var(--border);display:flex;align-items:center;gap:12px;background:rgba(16,185,129,0.04)">
+            <span style="font-size:10px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:0.5px;flex-shrink:0">Traction Preview</span>
+            <span id="snap-traction-name" style="font-size:12px;font-weight:700;color:var(--text);flex-shrink:0"></span>
+            <div style="flex:1;height:6px;background:var(--surface2);border-radius:100px;overflow:hidden">
+              <div id="snap-traction-bar" style="height:100%;border-radius:100px;background:var(--green);transition:width 1.5s ease;width:0%"></div>
+            </div>
+            <span id="snap-traction-score" style="font-size:13px;font-weight:800;color:var(--green);flex-shrink:0"></span>
+          </div>
+
+          <!-- Footer -->
+          <div style="padding:10px 20px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;background:var(--bg3)">
+            <span style="font-size:11px;color:var(--text3)">This was one conversation. Imagine 50.</span>
+            <span style="font-size:10px;color:var(--text3)">gravii.app</span>
           </div>
         </div>
-        <!-- RIGHT: Results -->
-        <div style="width:62%;padding:20px;overflow-y:auto">
-          <div style="font-size:16px;font-weight:700;margin-bottom:2px">Product Review — Q2 Planning</div>
-          <div style="display:flex;gap:4px;margin-bottom:12px">
-            <span style="font-size:9px;background:var(--surface2);color:var(--text3);padding:2px 8px;border-radius:100px">roadmap</span>
-            <span style="font-size:9px;background:var(--surface2);color:var(--text3);padding:2px 8px;border-radius:100px">churn-risk</span>
+
+        <!-- Actions below snapshot -->
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-top:16px">
+          <button onclick="resetDemo()" style="padding:8px 16px;border-radius:8px;background:var(--surface);border:1px solid var(--border);color:var(--text2);font-size:12px;font-weight:600;cursor:pointer;font-family:inherit">Analyze another</button>
+          <div id="result-cta">
+            <form class="capture-form" action="https://script.google.com/macros/s/AKfycby03fRaOg0FpWJJvWnnUhZLH5JTidBObQAW0hNuLhJsPZk38z7tVJ5B8hO_fykPUfcU/exec" method="POST" style="max-width:320px">
+              <input type="email" name="email" placeholder="Get early access" required style="height:38px;font-size:12px">
+              <input type="hidden" name="source" value="demo">
+              <input type="hidden" name="plan" value="tried-demo">
+              <button type="submit" style="height:38px;font-size:12px;padding:0 16px">Join</button>
+            </form>
+            <div class="capture-success" style="font-size:12px">You're on the list.</div>
           </div>
-          <div style="background:rgba(99,102,241,0.08);border-radius:8px;padding:10px 12px;margin-bottom:12px">
-            <div style="font-size:10px;font-weight:600;color:var(--accent2);margin-bottom:2px">Summary</div>
-            <div style="font-size:11px;color:var(--text2);line-height:1.5">Team prioritized bulk import for Q2 after multiple customer requests and €120K churn risk. API webhooks depends on completion.</div>
-          </div>
-          <!-- Entity: Bulk Import -->
-          <div style="border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:8px">
-            <div style="display:flex;align-items:center;gap:6px;padding:7px 10px;background:var(--surface)">
-              <span style="color:var(--green);font-size:11px">✓</span>
-              <div style="width:7px;height:7px;border-radius:50%;background:var(--accent)"></div>
-              <span style="font-size:12px;font-weight:600;flex:1">Bulk Import</span>
-              <span style="font-size:9px;color:var(--text3);background:var(--surface2);padding:2px 6px;border-radius:4px">Feature</span>
-              <span style="font-size:9px;color:var(--accent2);font-weight:600">3 signals</span>
-            </div>
-            <div style="padding:8px 10px;border-top:1px solid var(--border)">
-              <div style="font-size:10px;color:var(--text2);font-style:italic;margin-bottom:5px">"Processing 50K records manually each week"</div>
-              <div style="display:flex;gap:4px;margin-bottom:4px"><span style="font-size:9px;color:var(--text3)">DataFlow</span><span style="font-size:8px;background:rgba(245,158,11,0.15);color:var(--amber);padding:1px 5px;border-radius:3px;font-weight:600">high</span></div>
-              <div style="display:flex;gap:3px;flex-wrap:wrap">
-                <span style="font-size:8px;padding:2px 7px;border-radius:100px;font-weight:600;background:rgba(59,130,246,0.12);color:var(--blue);border:1px solid rgba(59,130,246,0.25)">✓ Customer Request</span>
-                <span style="font-size:8px;padding:2px 7px;border-radius:100px;color:var(--text3);border:1px solid var(--border)">Revenue Risk</span>
-                <span style="font-size:8px;padding:2px 7px;border-radius:100px;color:var(--text3);border:1px solid var(--border)">Competitive</span>
-              </div>
-            </div>
-            <div style="padding:8px 10px;border-top:1px solid var(--border)">
-              <div style="font-size:10px;color:var(--text2);font-style:italic;margin-bottom:5px">"DataFlow might churn — €120K ARR at risk"</div>
-              <div style="display:flex;gap:3px;flex-wrap:wrap">
-                <span style="font-size:8px;padding:2px 7px;border-radius:100px;color:var(--text3);border:1px solid var(--border)">Customer Request</span>
-                <span style="font-size:8px;padding:2px 7px;border-radius:100px;font-weight:600;background:rgba(239,68,68,0.12);color:var(--red);border:1px solid rgba(239,68,68,0.25)">✓ Revenue Risk</span>
-              </div>
-            </div>
-          </div>
-          <!-- Compact entities -->
-          <div style="display:flex;gap:6px;margin-bottom:8px;flex-wrap:wrap">
-            <div style="display:flex;align-items:center;gap:4px;padding:5px 10px;border:1px solid var(--border);border-radius:8px;background:var(--surface);font-size:11px"><span style="color:var(--green)">✓</span><span style="width:6px;height:6px;border-radius:50%;background:var(--green)"></span><span style="font-weight:600">DataFlow</span><span style="color:var(--text3)">Client</span></div>
-            <div style="display:flex;align-items:center;gap:4px;padding:5px 10px;border:1px solid var(--accent);border-radius:8px;background:var(--surface);font-size:11px"><span style="color:var(--accent2)">✓</span><span style="color:var(--accent2);font-size:9px">+</span><span style="font-weight:600">TechPulse</span><span style="color:var(--accent2);font-size:9px">new</span></div>
-            <div style="display:flex;align-items:center;gap:4px;padding:5px 10px;border:1px solid var(--border);border-radius:8px;background:var(--surface);font-size:11px"><span style="color:var(--green)">✓</span><span style="width:6px;height:6px;border-radius:50%;background:var(--red)"></span><span style="font-weight:600">Rival Inc</span><span style="color:var(--text3)">Competitor</span></div>
-          </div>
-          <!-- Decision -->
-          <div style="border:1px solid var(--border);border-radius:8px;padding:8px 10px;background:var(--surface);margin-bottom:8px;display:flex;align-items:center;gap:6px">
-            <span style="color:var(--green);font-size:10px">✓</span>
-            <div style="flex:1"><span style="font-size:11px;font-weight:600">Prioritize bulk import for Q2</span><span style="font-size:9px;color:var(--accent2);margin-left:6px">→ Bulk Import</span></div>
-            <span style="font-size:9px;color:var(--text3)">✏️ Edit</span>
-          </div>
-          <!-- Confirm bar -->
-          <div style="display:flex;align-items:center;justify-content:space-between;padding-top:10px;border-top:1px solid var(--border)">
-            <span style="font-size:9px;color:var(--text3)">4 entities | 3 signals | 1 decision | 2 relationships</span>
-            <div style="background:var(--accent);color:white;padding:5px 14px;border-radius:8px;font-size:10px;font-weight:600">Confirm & Add to Graph</div>
-          </div>
+        </div>
+      </div>
+
+      <!-- ═══ EMAIL GATE (after 3 uses) ═══ -->
+      <div id="demo-gate" style="display:none">
+        <div style="background:var(--bg2);border:1px solid var(--accent);border-radius:16px;padding:40px;text-align:center">
+          <div style="font-size:24px;margin-bottom:12px">You've seen what Gravii can do.</div>
+          <p style="font-size:14px;color:var(--text2);margin-bottom:24px;max-width:400px;margin-left:auto;margin-right:auto">Enter your email to unlock more analyses — or request early access to the full platform.</p>
+          <form class="capture-form" action="https://script.google.com/macros/s/AKfycby03fRaOg0FpWJJvWnnUhZLH5JTidBObQAW0hNuLhJsPZk38z7tVJ5B8hO_fykPUfcU/exec" method="POST" id="gate-form" style="max-width:400px">
+            <input type="email" name="email" placeholder="Enter your work email" required>
+            <input type="hidden" name="source" value="demo-gate">
+            <input type="hidden" name="plan" value="hit-limit">
+            <button type="submit">Unlock</button>
+          </form>
+          <div class="capture-success">Unlocked! You have 3 more analyses.</div>
         </div>
       </div>
     </div>
@@ -687,22 +732,175 @@ document.querySelectorAll('.fade-up').forEach(function(el){obs.observe(el)});
 document.querySelectorAll('.capture-form').forEach(function(form){
   form.addEventListener('submit',function(e){
     e.preventDefault();
-    var email=form.querySelector('input[name=email]').value;
-    var plan=form.querySelector('input[name=plan]');
-    var source=form.querySelector('input[name=source]');
-    fetch(form.action,{
-      method:'POST',
-      mode:'no-cors',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({
-        email:email,
-        plan:plan?plan.value:'',
-        source:source?source.value:''
-      })
-    }).then(function(){form.classList.add('submitted')})
-    .catch(function(){form.classList.add('submitted')});
+    var data=new FormData(form);
+    fetch(form.action,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({email:form.querySelector('input[name=email]').value,plan:(form.querySelector('input[name=plan]')||{}).value||'',source:(form.querySelector('input[name=source]')||{}).value||''})
+    }).then(function(){form.classList.add('submitted')}).catch(function(){form.classList.add('submitted')});
   });
 });
+
+// ═══ DEMO FUNCTIONALITY ═══
+var SAMPLES=[
+  "Sarah from DataFlow called again about bulk import. She said they're processing 50K records manually each week and it's becoming a major pain point.\n\nTom mentioned that if we don't ship bulk import by June, DataFlow might churn - that's \u20AC120K ARR at risk. He's been hearing the same from their CSM.\n\nTechPulse also asked about it last week through their account manager. They need it for their Q3 migration.\n\nDecision: We prioritize bulk import for Q2 delivery. Alex will lead the technical design.\n\nRival Inc just shipped a CSV import feature last week. We need to go beyond CSV - full API-based pipeline with validation and error handling.\n\nThe API webhooks feature depends on bulk import being done first. We can't notify external systems about imports if the import pipeline doesn't exist yet.\n\nMaria from Engineering flagged that the current database schema can handle bulk operations but we'll need to add a job queue for async processing.",
+
+  "Call with James Chen, VP Product at NovaTech (Enterprise, \u20AC85K ARR)\n\nJames is frustrated with the reporting module. Says his team spends 3 hours every Monday building manual reports that should be automated. Quote: 'If you had custom dashboards, we'd upgrade to your premium tier tomorrow.'\n\nThey're evaluating Competitor X specifically because of their reporting. James said they have a decision deadline of end of April.\n\nHe also mentioned they love our API but need webhook support for their internal data pipeline. Without it they're running cron jobs to poll our API every 5 minutes.\n\nPositive: He called our onboarding 'the best he's ever seen in a SaaS tool.' His team of 12 is fully adopted.\n\nAction item: Send James a preview mockup of the dashboard feature by next Friday.\n\nHe asked about SOC 2 compliance - they need it for their enterprise security review. Currently blocking their expansion to 3 more teams internally.",
+
+  "Quarterly strategy review - Product Leadership\n\nMarket analysis: The product analytics space is consolidating. Three mid-tier competitors acquired in the last 6 months. Remaining players are either going enterprise (like us) or going PLG freemium.\n\nOur enterprise pipeline has grown 40% QoQ but conversion rate dropped from 22% to 15%. Main blocker: security compliance. 6 out of 8 lost deals cited lack of SOC 2 as the primary reason.\n\nDecision: Fast-track SOC 2 certification. Budget approved for Vanta (\u20AC15K). Target: certified by end of Q3.\n\nThe AI features we shipped last quarter are driving 60% of new trial signups. But only 20% of those convert because the value isn't clear in the first 5 minutes.\n\nDecision: Build a guided first-run experience. Show users their first insight within 2 minutes of signing up.\n\nCompetitor watch: Rival Inc raised \u20AC20M Series B. They're hiring aggressively in our target market (EU mid-market). Their product is weaker but their sales team is 10x our size.\n\nWe need to compete on product quality and speed of innovation, not on sales volume. Our moat is the intelligence graph - no competitor has this architecture."
+];
+
+function loadSample(i){document.getElementById('demo-text').value=SAMPLES[i]}
+
+function getUsageCount(){try{return parseInt(localStorage.getItem('gravii_demo_count')||'0')}catch(e){return 0}}
+function incrementUsage(){try{localStorage.setItem('gravii_demo_count',String(getUsageCount()+1))}catch(e){}}
+function isGated(){return getUsageCount()>=3&&!localStorage.getItem('gravii_demo_unlocked')}
+
+function updateCounter(){
+  var c=document.getElementById('demo-counter');
+  var used=getUsageCount();
+  if(used>0&&used<3)c.textContent=(3-used)+' free analyses remaining';
+  else c.textContent='';
+}
+updateCounter();
+
+var procMessages=[
+  ['Scanning text...','300'],
+  ['Detecting entities...','400'],
+  ['\u2192 Found entities','200'],
+  ['Classifying signals...','500'],
+  ['\u2192 Customer requests detected','200'],
+  ['\u2192 Risk signals detected','200'],
+  ['Mapping relationships...','400'],
+  ['\u2192 Dependencies found','200'],
+  ['Extracting decisions...','300'],
+  ['Calculating traction preview...','400'],
+  ['Building intelligence snapshot...','300']
+];
+
+function showProcessing(){
+  document.getElementById('demo-input').style.display='none';
+  document.getElementById('demo-processing').style.display='block';
+  var stream=document.getElementById('proc-stream');
+  stream.innerHTML='';
+  var i=0;
+  function next(){
+    if(i>=procMessages.length)return;
+    var msg=procMessages[i];
+    var line=document.createElement('div');
+    line.style.color=msg[0].charAt(0)==='\u2192'?'var(--accent2)':'var(--text3)';
+    line.style.opacity='0';
+    line.style.transform='translateY(5px)';
+    line.style.transition='all 0.3s ease';
+    line.textContent=msg[0];
+    stream.appendChild(line);
+    setTimeout(function(){line.style.opacity='1';line.style.transform='translateY(0)'},50);
+    i++;
+    setTimeout(next,parseInt(msg[1]));
+  }
+  next();
+}
+
+function renderSnapshot(data){
+  document.getElementById('demo-processing').style.display='none';
+  document.getElementById('demo-result').style.display='block';
+
+  document.getElementById('snap-title').textContent=data.title||'Intelligence Snapshot';
+  var bLen=(data.build||[]).length;
+  var wLen=(data.watch||[]).length;
+  var cLen=(data.connected||[]).length;
+  var dLen=(data.decisions||[]).length;
+  document.getElementById('snap-stats').innerHTML=
+    '<div>'+(bLen+wLen)+' signals \u00B7 '+cLen+' connections \u00B7 '+dLen+' decision'+(dLen!==1?'s':'')+'</div>';
+  document.getElementById('snap-insight').textContent=data.insight||'';
+
+  // Build column
+  var buildHtml='';
+  (data.build||[]).forEach(function(s){
+    buildHtml+='<div style="margin-bottom:10px"><div style="font-size:11px;color:var(--text2);font-style:italic;margin-bottom:3px">\u201C'+s.quote+'\u201D</div><div style="display:flex;align-items:center;gap:6px"><span style="font-size:10px;color:var(--text3)">'+s.source+'</span><span style="font-size:9px;padding:1px 6px;border-radius:100px;background:rgba(16,185,129,0.1);color:var(--green);font-weight:600">'+(s.type_label||s.type)+'</span></div></div>';
+  });
+  if(dLen>0){
+    (data.decisions||[]).forEach(function(d){
+      buildHtml+='<div style="margin-bottom:8px;padding:6px 8px;background:var(--surface);border-radius:6px;border-left:2px solid var(--accent)"><div style="font-size:10px;color:var(--text)">'+d.text+'</div>'+(d.owner?'<div style="font-size:9px;color:var(--text3);margin-top:2px">\u2192 '+d.owner+'</div>':'')+'</div>';
+    });
+  }
+  document.getElementById('snap-build').innerHTML=buildHtml||'<div style="font-size:11px;color:var(--text3)">No build signals detected</div>';
+
+  // Watch column
+  var watchHtml='';
+  (data.watch||[]).forEach(function(s){
+    watchHtml+='<div style="margin-bottom:10px"><div style="font-size:11px;color:var(--text2);font-style:italic;margin-bottom:3px">\u201C'+s.quote+'\u201D</div><div style="display:flex;align-items:center;gap:6px"><span style="font-size:10px;color:var(--text3)">'+s.source+'</span>'+(s.amount?'<span style="font-size:9px;color:var(--red);font-weight:600">'+s.amount+'</span>':'')+'<span style="font-size:9px;padding:1px 6px;border-radius:100px;background:rgba(245,158,11,0.1);color:var(--amber);font-weight:600">'+(s.type_label||s.type)+'</span></div></div>';
+  });
+  document.getElementById('snap-watch').innerHTML=watchHtml||'<div style="font-size:11px;color:var(--text3)">No risk signals detected</div>';
+
+  // Connected column
+  var connHtml='';
+  (data.connected||[]).forEach(function(c){
+    connHtml+='<div style="display:flex;align-items:center;gap:4px;margin-bottom:8px;flex-wrap:wrap"><span style="font-size:11px;font-weight:600;color:var(--text)">'+c.from+'</span><span style="font-size:9px;color:var(--text3)">\u2192</span><span style="font-size:11px;font-weight:600;color:var(--text)">'+c.to+'</span><span style="font-size:8px;padding:1px 5px;border-radius:4px;background:var(--surface2);color:var(--text3)">'+(c.label||c.relationship)+'</span></div>';
+  });
+  document.getElementById('snap-connected').innerHTML=connHtml||'<div style="font-size:11px;color:var(--text3)">No connections detected</div>';
+
+  // Traction
+  var tName=data.traction_entity||'Top Entity';
+  var tScore=data.traction_score||0;
+  document.getElementById('snap-traction-name').textContent=tName;
+  document.getElementById('snap-traction-score').textContent=tScore+'/100';
+  setTimeout(function(){document.getElementById('snap-traction-bar').style.width=tScore+'%'},100);
+}
+
+function resetDemo(){
+  document.getElementById('demo-result').style.display='none';
+  document.getElementById('demo-input').style.display='block';
+  document.getElementById('demo-text').value='';
+  updateCounter();
+}
+
+function analyzeText(){
+  if(isGated()){
+    document.getElementById('demo-input').style.display='none';
+    document.getElementById('demo-gate').style.display='block';
+    return;
+  }
+  var text=document.getElementById('demo-text').value.trim();
+  if(text.length<50){alert('Please paste at least a few paragraphs of text.');return}
+
+  showProcessing();
+  incrementUsage();
+  updateCounter();
+
+  fetch('/api/analyze',{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({text:text})
+  })
+  .then(function(r){return r.json()})
+  .then(function(data){
+    if(data.error){alert(data.error);resetDemo();return}
+    setTimeout(function(){renderSnapshot(data)},1500);
+  })
+  .catch(function(err){
+    alert('Analysis failed. Please try again.');
+    resetDemo();
+  });
+}
+
+// Gate form unlock handler
+var gateForm=document.getElementById('gate-form');
+if(gateForm){
+  gateForm.addEventListener('submit',function(e){
+    e.preventDefault();
+    var data=new FormData(gateForm);
+    fetch(gateForm.action,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({email:gateForm.querySelector('input[name=email]').value,source:'demo-gate',plan:'hit-limit'})
+    }).then(function(){
+      try{localStorage.setItem('gravii_demo_unlocked','1');localStorage.setItem('gravii_demo_count','0')}catch(x){}
+      gateForm.classList.add('submitted');
+      setTimeout(function(){
+        document.getElementById('demo-gate').style.display='none';
+        document.getElementById('demo-input').style.display='block';
+        updateCounter();
+      },1500);
+    }).catch(function(){gateForm.classList.add('submitted')});
+  });
+}
 </script>
 </body>
 </html>
