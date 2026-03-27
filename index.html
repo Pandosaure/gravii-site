@@ -157,6 +157,7 @@ nav .container{display:flex;align-items:center;justify-content:space-between}
   .showcase-split>div{order:unset !important}
   .capture-split{flex-direction:column !important}
   .capture-split>div{width:100% !important}
+  .pain-grid{grid-template-columns:1fr !important}
 }
 </style>
 </head>
@@ -167,13 +168,10 @@ nav .container{display:flex;align-items:center;justify-content:space-between}
   <div class="container">
     <div class="nav-logo"><span class="dot"></span> Gravii</div>
     <div class="nav-links">
-      <a href="#flow">How it works</a>
       <a href="#try">Try it</a>
-      <a href="#features">Features</a>
+      <a href="#flow">How it works</a>
       <a href="#pricing">Pricing</a>
-      <a href="#security">Security</a>
-      <a href="#pricing" class="btn btn-primary">Get early access</a>
-      <a href="#try" class="btn btn-secondary">Try it now</a>
+      <a href="#try" class="btn btn-primary">Try it free</a>
     </div>
   </div>
 </nav>
@@ -181,148 +179,34 @@ nav .container{display:flex;align-items:center;justify-content:space-between}
 <!-- ═══════════ 1. HERO ═══════════ -->
 <section class="hero">
   <div class="container hero-content">
-    <div class="hero-badge fade-up"><span class="pulse"></span> Company intelligence for product teams</div>
-    <h1 class="fade-up s1">Every team sees a piece.<br><em>Gravii sees all of it.</em></h1>
-    <p class="fade-up s2">Product, Sales, CS, Engineering — every team generates signals about what to build. Gravii captures them all into one intelligence graph, so your roadmap is driven by evidence across every silo, not by whoever shouts loudest.</p>
-    <div class="fade-up s3">
-      <form class="capture-form" id="hero-form" action="https://script.google.com/macros/s/AKfycby03fRaOg0FpWJJvWnnUhZLH5JTidBObQAW0hNuLhJsPZk38z7tVJ5B8hO_fykPUfcU/exec" method="POST">
-        <input type="email" name="email" placeholder="Enter your work email" required>
-        <input type="hidden" name="source" value="hero">
-        <button type="submit">Get early access</button>
-      </form>
-      <div class="capture-success">You're on the list. We'll reach out soon.</div>
+    <div class="hero-badge fade-up"><span class="pulse"></span> For Heads of Product at scaling companies</div>
+    <h1 class="fade-up s1">Your roadmap is a<br>guessing game. <em>Fix it.</em></h1>
+    <p class="fade-up s2">Customer signals live in Sales. Technical constraints live in Engineering. Competitive intel lives in Product. Your roadmap sees none of it. Gravii connects every team's intelligence into one system — so you prioritize with evidence, not opinions.</p>
+    <div class="hero-buttons fade-up s3">
+      <a href="#try" class="btn btn-primary btn-large">Try it now — paste any meeting</a>
+      <a href="#flow" class="btn btn-secondary btn-large">See how it works</a>
     </div>
-    <p class="hero-sub fade-up s4">Launching soon · Be first in line</p>
+    <p class="hero-sub fade-up s4">Free to try · No signup required</p>
   </div>
 </section>
 
-<!-- ═══════════ 2. SYNERGY DIAGRAM ═══════════ -->
-<section style="padding:80px 0 100px" id="flow">
-  <div class="container" style="text-align:center">
-    <div class="section-label fade-up">One System, Every Team</div>
-    <div class="section-title fade-up s1" style="margin-left:auto;margin-right:auto">Break the silos.<br>Connect the intelligence.</div>
-    <p class="fade-up s2" style="font-size:15px;color:var(--text2);max-width:520px;margin:0 auto 56px">Sales hears a feature request. CS flags a churn risk. Engineering spots a dependency. Product makes a competitive call. Today these signals live in separate tools, separate meetings, separate heads. Gravii connects them all — so nothing falls through the cracks.</p>
 
-    <div class="fade-up s3" style="max-width:720px;margin:0 auto;position:relative">
-      <svg id="synergy" viewBox="0 0 720 520" style="width:100%;display:block">
-        <defs>
-          <!-- Animated flowing particles -->
-          <filter id="glow"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-          <linearGradient id="edgeGrad1" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#6366f1" stop-opacity="0.1"/><stop offset="50%" stop-color="#6366f1" stop-opacity="0.4"/><stop offset="100%" stop-color="#6366f1" stop-opacity="0.1"/></linearGradient>
-          <linearGradient id="edgeGrad2" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#10b981" stop-opacity="0.1"/><stop offset="50%" stop-color="#10b981" stop-opacity="0.35"/><stop offset="100%" stop-color="#10b981" stop-opacity="0.1"/></linearGradient>
-          <linearGradient id="edgeGrad3" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#f59e0b" stop-opacity="0.1"/><stop offset="50%" stop-color="#f59e0b" stop-opacity="0.35"/><stop offset="100%" stop-color="#f59e0b" stop-opacity="0.1"/></linearGradient>
-          <!-- Particle that travels along paths -->
-          <circle id="particle" r="2.5" fill="#818cf8" filter="url(#glow)"/>
-        </defs>
-
-        <!-- ═══ CONNECTION LINES (drawn first, behind nodes) ═══ -->
-        <!-- Capture → AI Engine (center) -->
-        <path class="syn-edge" d="M145,135 C200,170 260,200 360,260" stroke="url(#edgeGrad1)" stroke-width="1.5" fill="none"/>
-        <!-- AI Engine → Signals -->
-        <path class="syn-edge" d="M360,260 C430,220 500,170 575,135" stroke="url(#edgeGrad1)" stroke-width="1.5" fill="none"/>
-        <!-- Signals → Traction -->
-        <path class="syn-edge" d="M575,135 C590,200 590,300 575,385" stroke="url(#edgeGrad2)" stroke-width="1.5" fill="none"/>
-        <!-- AI Engine → Graph -->
-        <path class="syn-edge" d="M360,260 C300,300 200,350 145,385" stroke="url(#edgeGrad1)" stroke-width="1.5" fill="none"/>
-        <!-- Traction → Roadmap -->
-        <path class="syn-edge" d="M575,385 C500,420 420,440 360,450" stroke="url(#edgeGrad3)" stroke-width="1.5" fill="none"/>
-        <!-- Graph → Roadmap -->
-        <path class="syn-edge" d="M145,385 C220,420 280,440 360,450" stroke="url(#edgeGrad2)" stroke-width="1.5" fill="none"/>
-        <!-- Capture → Graph (direct) -->
-        <path class="syn-edge" d="M145,135 C120,200 120,300 145,385" stroke="#2a2b3d" stroke-width="1" fill="none" stroke-dasharray="4,4"/>
-        <!-- Signals → AI Engine (feedback) -->
-        <path class="syn-edge" d="M575,135 C500,180 430,230 360,260" stroke="#2a2b3d" stroke-width="1" fill="none" stroke-dasharray="4,4"/>
-        <!-- Roadmap → Capture (loop) -->
-        <path class="syn-edge" d="M360,450 C250,480 100,440 80,300 C60,180 90,140 145,135" stroke="#2a2b3d" stroke-width="1" fill="none" stroke-dasharray="6,4" opacity="0.5"/>
-        <!-- AI Engine → Traction (direct) -->
-        <path class="syn-edge" d="M360,260 C420,290 500,340 575,385" stroke="url(#edgeGrad3)" stroke-width="1" fill="none"/>
-
-        <!-- Animated particles traveling along key paths -->
-        <circle r="3" fill="#818cf8" opacity="0.8" filter="url(#glow)">
-          <animateMotion dur="3s" repeatCount="indefinite" path="M145,135 C200,170 260,200 360,260"/>
-        </circle>
-        <circle r="3" fill="#818cf8" opacity="0.8" filter="url(#glow)">
-          <animateMotion dur="3s" repeatCount="indefinite" begin="1s" path="M360,260 C430,220 500,170 575,135"/>
-        </circle>
-        <circle r="2.5" fill="#10b981" opacity="0.7" filter="url(#glow)">
-          <animateMotion dur="4s" repeatCount="indefinite" begin="0.5s" path="M575,135 C590,200 590,300 575,385"/>
-        </circle>
-        <circle r="2.5" fill="#f59e0b" opacity="0.7" filter="url(#glow)">
-          <animateMotion dur="3.5s" repeatCount="indefinite" begin="1.5s" path="M575,385 C500,420 420,440 360,450"/>
-        </circle>
-        <circle r="2.5" fill="#818cf8" opacity="0.6" filter="url(#glow)">
-          <animateMotion dur="5s" repeatCount="indefinite" begin="2s" path="M360,260 C300,300 200,350 145,385"/>
-        </circle>
-        <circle r="2" fill="#6b6c82" opacity="0.5">
-          <animateMotion dur="8s" repeatCount="indefinite" path="M360,450 C250,480 100,440 80,300 C60,180 90,140 145,135"/>
-        </circle>
-
-        <!-- ═══ NODES ═══ -->
-
-        <!-- CAPTURE (top-left) -->
-        <g class="syn-node" data-idx="0" style="cursor:pointer">
-          <rect x="85" y="85" width="120" height="100" rx="16" fill="#12131a" stroke="#2a2b3d" stroke-width="1.5" class="syn-rect"/>
-          <rect x="85" y="85" width="120" height="3" rx="1.5" fill="#3b82f6" class="syn-accent"/>
-          <image href="/images/icon-capture.png" x="115" y="96" width="60" height="60"/>
-          <text x="145" y="150" text-anchor="middle" fill="white" font-size="13" font-weight="700" font-family="Plus Jakarta Sans">Capture</text>
-          <text x="145" y="166" text-anchor="middle" fill="#6b6c82" font-size="9" font-family="Plus Jakarta Sans">Any team · Any source</text>
-        </g>
-
-        <!-- SIGNALS (top-right) -->
-        <g class="syn-node" data-idx="1" style="cursor:pointer">
-          <rect x="515" y="85" width="120" height="100" rx="16" fill="#12131a" stroke="#2a2b3d" stroke-width="1.5" class="syn-rect"/>
-          <rect x="515" y="85" width="120" height="3" rx="1.5" fill="#f59e0b" class="syn-accent"/>
-          <image href="/images/icon-signals.png" x="545" y="96" width="60" height="60"/>
-          <text x="575" y="150" text-anchor="middle" fill="white" font-size="13" font-weight="700" font-family="Plus Jakarta Sans">Signals</text>
-          <text x="575" y="166" text-anchor="middle" fill="#6b6c82" font-size="9" font-family="Plus Jakarta Sans">Requests · Risks · Priorities</text>
-        </g>
-
-        <!-- AI ENGINE (center) -->
-        <g class="syn-node" data-idx="2" style="cursor:pointer">
-          <rect x="295" y="210" width="130" height="100" rx="20" fill="#1a1b25" stroke="#6366f1" stroke-width="2" class="syn-rect" filter="url(#glow)"/>
-          <rect x="295" y="210" width="130" height="3" rx="1.5" fill="#6366f1" class="syn-accent"/>
-          <image href="/images/icon-ai-engine.png" x="330" y="218" width="60" height="60"/>
-          <text x="360" y="275" text-anchor="middle" fill="white" font-size="13" font-weight="700" font-family="Plus Jakarta Sans">AI Engine</text>
-          <text x="360" y="291" text-anchor="middle" fill="#818cf8" font-size="9" font-family="Plus Jakarta Sans">Extract · Classify · Link</text>
-        </g>
-
-        <!-- GRAPH (bottom-left) -->
-        <g class="syn-node" data-idx="3" style="cursor:pointer">
-          <rect x="85" y="335" width="120" height="100" rx="16" fill="#12131a" stroke="#2a2b3d" stroke-width="1.5" class="syn-rect"/>
-          <rect x="85" y="335" width="120" height="3" rx="1.5" fill="#8b5cf6" class="syn-accent"/>
-          <image href="/images/icon-graph.png" x="115" y="346" width="60" height="60"/>
-          <text x="145" y="400" text-anchor="middle" fill="white" font-size="13" font-weight="700" font-family="Plus Jakarta Sans">Graph</text>
-          <text x="145" y="416" text-anchor="middle" fill="#6b6c82" font-size="9" font-family="Plus Jakarta Sans">Entities · Relationships</text>
-        </g>
-
-        <!-- TRACTION (bottom-right) -->
-        <g class="syn-node" data-idx="4" style="cursor:pointer">
-          <rect x="515" y="335" width="120" height="100" rx="16" fill="#12131a" stroke="#2a2b3d" stroke-width="1.5" class="syn-rect"/>
-          <rect x="515" y="335" width="120" height="3" rx="1.5" fill="#10b981" class="syn-accent"/>
-          <image href="/images/icon-traction.png" x="545" y="346" width="60" height="60"/>
-          <text x="575" y="400" text-anchor="middle" fill="white" font-size="13" font-weight="700" font-family="Plus Jakarta Sans">Traction</text>
-          <text x="575" y="416" text-anchor="middle" fill="#6b6c82" font-size="9" font-family="Plus Jakarta Sans">Score 0-100 · Evidence</text>
-        </g>
-
-        <!-- ROADMAP (bottom-center) -->
-        <g class="syn-node" data-idx="5" style="cursor:pointer">
-          <rect x="295" y="400" width="130" height="100" rx="16" fill="#12131a" stroke="#2a2b3d" stroke-width="1.5" class="syn-rect"/>
-          <rect x="295" y="400" width="130" height="3" rx="1.5" fill="#ef4444" class="syn-accent"/>
-          <image href="/images/icon-roadmap.png" x="330" y="408" width="60" height="60"/>
-          <text x="360" y="465" text-anchor="middle" fill="white" font-size="13" font-weight="700" font-family="Plus Jakarta Sans">Roadmap</text>
-          <text x="360" y="481" text-anchor="middle" fill="#6b6c82" font-size="9" font-family="Plus Jakarta Sans">Prioritized by evidence</text>
-        </g>
-
-        <!-- Edge labels -->
-        <text x="240" y="195" text-anchor="middle" fill="#4a4b60" font-size="8" font-family="Plus Jakarta Sans" transform="rotate(-20 240 195)">raw text</text>
-        <text x="480" y="195" text-anchor="middle" fill="#4a4b60" font-size="8" font-family="Plus Jakarta Sans" transform="rotate(20 480 195)">classified</text>
-        <text x="600" y="260" text-anchor="middle" fill="#4a4b60" font-size="8" font-family="Plus Jakarta Sans" transform="rotate(90 600 260)">accumulates</text>
-        <text x="240" y="330" text-anchor="middle" fill="#4a4b60" font-size="8" font-family="Plus Jakarta Sans" transform="rotate(20 240 330)">entities</text>
-        <text x="480" y="430" text-anchor="middle" fill="#4a4b60" font-size="8" font-family="Plus Jakarta Sans" transform="rotate(-15 480 430)">informs</text>
-        <text x="240" y="430" text-anchor="middle" fill="#4a4b60" font-size="8" font-family="Plus Jakarta Sans" transform="rotate(15 240 430)">connects</text>
-        <text x="55" y="260" text-anchor="middle" fill="#3a3b50" font-size="7" font-family="Plus Jakarta Sans" transform="rotate(-90 55 260)">compounds ↻</text>
-
-      </svg>
+<!-- ═══════════ 1B. THE PROBLEM ═══════════ -->
+<section style="padding:40px 0 60px">
+  <div class="container" style="max-width:800px">
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;text-align:center" class="pain-grid">
+      <div class="fade-up s1" style="padding:24px 16px">
+        <div style="font-size:36px;font-weight:800;color:var(--red);margin-bottom:4px">70%</div>
+        <div style="font-size:13px;color:var(--text2);line-height:1.5">of product signals never<br>reach the roadmap</div>
+      </div>
+      <div class="fade-up s2" style="padding:24px 16px">
+        <div style="font-size:36px;font-weight:800;color:var(--amber);margin-bottom:4px">5h</div>
+        <div style="font-size:13px;color:var(--text2);line-height:1.5">per week spent manually<br>synthesizing meeting notes</div>
+      </div>
+      <div class="fade-up s3" style="padding:24px 16px">
+        <div style="font-size:36px;font-weight:800;color:var(--accent2);margin-bottom:4px">#1</div>
+        <div style="font-size:13px;color:var(--text2);line-height:1.5">reason features ship: the loudest<br>stakeholder, not the strongest signal</div>
+      </div>
     </div>
   </div>
 </section>
@@ -496,14 +380,146 @@ Example: &quot;Sarah from DataFlow called again about bulk import. She said they
   </div>
 </section>
 
+
+<!-- ═══════════ 2. SYNERGY DIAGRAM ═══════════ -->
+<section style="padding:80px 0 100px" id="flow">
+  <div class="container" style="text-align:center">
+    <div class="section-label fade-up">How It All Connects</div>
+    <div class="section-title fade-up s1" style="margin-left:auto;margin-right:auto">That snapshot was one meeting.<br>Here's the full system.</div>
+    <p class="fade-up s2" style="font-size:15px;color:var(--text2);max-width:520px;margin:0 auto 56px">Every capture feeds the graph. Every signal strengthens the score. Every decision traces back to evidence. The more your teams use Gravii, the smarter it gets about your business.</p>
+
+    <div class="fade-up s3" style="max-width:720px;margin:0 auto;position:relative">
+      <svg id="synergy" viewBox="0 0 720 520" style="width:100%;display:block">
+        <defs>
+          <!-- Animated flowing particles -->
+          <filter id="glow"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          <linearGradient id="edgeGrad1" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#6366f1" stop-opacity="0.1"/><stop offset="50%" stop-color="#6366f1" stop-opacity="0.4"/><stop offset="100%" stop-color="#6366f1" stop-opacity="0.1"/></linearGradient>
+          <linearGradient id="edgeGrad2" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#10b981" stop-opacity="0.1"/><stop offset="50%" stop-color="#10b981" stop-opacity="0.35"/><stop offset="100%" stop-color="#10b981" stop-opacity="0.1"/></linearGradient>
+          <linearGradient id="edgeGrad3" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#f59e0b" stop-opacity="0.1"/><stop offset="50%" stop-color="#f59e0b" stop-opacity="0.35"/><stop offset="100%" stop-color="#f59e0b" stop-opacity="0.1"/></linearGradient>
+          <!-- Particle that travels along paths -->
+          <circle id="particle" r="2.5" fill="#818cf8" filter="url(#glow)"/>
+        </defs>
+
+        <!-- ═══ CONNECTION LINES (drawn first, behind nodes) ═══ -->
+        <!-- Capture → AI Engine (center) -->
+        <path class="syn-edge" d="M145,135 C200,170 260,200 360,260" stroke="url(#edgeGrad1)" stroke-width="1.5" fill="none"/>
+        <!-- AI Engine → Signals -->
+        <path class="syn-edge" d="M360,260 C430,220 500,170 575,135" stroke="url(#edgeGrad1)" stroke-width="1.5" fill="none"/>
+        <!-- Signals → Traction -->
+        <path class="syn-edge" d="M575,135 C590,200 590,300 575,385" stroke="url(#edgeGrad2)" stroke-width="1.5" fill="none"/>
+        <!-- AI Engine → Graph -->
+        <path class="syn-edge" d="M360,260 C300,300 200,350 145,385" stroke="url(#edgeGrad1)" stroke-width="1.5" fill="none"/>
+        <!-- Traction → Roadmap -->
+        <path class="syn-edge" d="M575,385 C500,420 420,440 360,450" stroke="url(#edgeGrad3)" stroke-width="1.5" fill="none"/>
+        <!-- Graph → Roadmap -->
+        <path class="syn-edge" d="M145,385 C220,420 280,440 360,450" stroke="url(#edgeGrad2)" stroke-width="1.5" fill="none"/>
+        <!-- Capture → Graph (direct) -->
+        <path class="syn-edge" d="M145,135 C120,200 120,300 145,385" stroke="#2a2b3d" stroke-width="1" fill="none" stroke-dasharray="4,4"/>
+        <!-- Signals → AI Engine (feedback) -->
+        <path class="syn-edge" d="M575,135 C500,180 430,230 360,260" stroke="#2a2b3d" stroke-width="1" fill="none" stroke-dasharray="4,4"/>
+        <!-- Roadmap → Capture (loop) -->
+        <path class="syn-edge" d="M360,450 C250,480 100,440 80,300 C60,180 90,140 145,135" stroke="#2a2b3d" stroke-width="1" fill="none" stroke-dasharray="6,4" opacity="0.5"/>
+        <!-- AI Engine → Traction (direct) -->
+        <path class="syn-edge" d="M360,260 C420,290 500,340 575,385" stroke="url(#edgeGrad3)" stroke-width="1" fill="none"/>
+
+        <!-- Animated particles traveling along key paths -->
+        <circle r="3" fill="#818cf8" opacity="0.8" filter="url(#glow)">
+          <animateMotion dur="3s" repeatCount="indefinite" path="M145,135 C200,170 260,200 360,260"/>
+        </circle>
+        <circle r="3" fill="#818cf8" opacity="0.8" filter="url(#glow)">
+          <animateMotion dur="3s" repeatCount="indefinite" begin="1s" path="M360,260 C430,220 500,170 575,135"/>
+        </circle>
+        <circle r="2.5" fill="#10b981" opacity="0.7" filter="url(#glow)">
+          <animateMotion dur="4s" repeatCount="indefinite" begin="0.5s" path="M575,135 C590,200 590,300 575,385"/>
+        </circle>
+        <circle r="2.5" fill="#f59e0b" opacity="0.7" filter="url(#glow)">
+          <animateMotion dur="3.5s" repeatCount="indefinite" begin="1.5s" path="M575,385 C500,420 420,440 360,450"/>
+        </circle>
+        <circle r="2.5" fill="#818cf8" opacity="0.6" filter="url(#glow)">
+          <animateMotion dur="5s" repeatCount="indefinite" begin="2s" path="M360,260 C300,300 200,350 145,385"/>
+        </circle>
+        <circle r="2" fill="#6b6c82" opacity="0.5">
+          <animateMotion dur="8s" repeatCount="indefinite" path="M360,450 C250,480 100,440 80,300 C60,180 90,140 145,135"/>
+        </circle>
+
+        <!-- ═══ NODES ═══ -->
+
+        <!-- CAPTURE (top-left) -->
+        <g class="syn-node" data-idx="0" style="cursor:pointer">
+          <rect x="85" y="85" width="120" height="100" rx="16" fill="#12131a" stroke="#2a2b3d" stroke-width="1.5" class="syn-rect"/>
+          <rect x="85" y="85" width="120" height="3" rx="1.5" fill="#3b82f6" class="syn-accent"/>
+          <image href="/images/icon-capture.png" x="115" y="96" width="60" height="60"/>
+          <text x="145" y="150" text-anchor="middle" fill="white" font-size="13" font-weight="700" font-family="Plus Jakarta Sans">Capture</text>
+          <text x="145" y="166" text-anchor="middle" fill="#6b6c82" font-size="9" font-family="Plus Jakarta Sans">Any team · Any source</text>
+        </g>
+
+        <!-- SIGNALS (top-right) -->
+        <g class="syn-node" data-idx="1" style="cursor:pointer">
+          <rect x="515" y="85" width="120" height="100" rx="16" fill="#12131a" stroke="#2a2b3d" stroke-width="1.5" class="syn-rect"/>
+          <rect x="515" y="85" width="120" height="3" rx="1.5" fill="#f59e0b" class="syn-accent"/>
+          <image href="/images/icon-signals.png" x="545" y="96" width="60" height="60"/>
+          <text x="575" y="150" text-anchor="middle" fill="white" font-size="13" font-weight="700" font-family="Plus Jakarta Sans">Signals</text>
+          <text x="575" y="166" text-anchor="middle" fill="#6b6c82" font-size="9" font-family="Plus Jakarta Sans">Requests · Risks · Priorities</text>
+        </g>
+
+        <!-- AI ENGINE (center) -->
+        <g class="syn-node" data-idx="2" style="cursor:pointer">
+          <rect x="295" y="210" width="130" height="100" rx="20" fill="#1a1b25" stroke="#6366f1" stroke-width="2" class="syn-rect" filter="url(#glow)"/>
+          <rect x="295" y="210" width="130" height="3" rx="1.5" fill="#6366f1" class="syn-accent"/>
+          <image href="/images/icon-ai-engine.png" x="330" y="218" width="60" height="60"/>
+          <text x="360" y="275" text-anchor="middle" fill="white" font-size="13" font-weight="700" font-family="Plus Jakarta Sans">AI Engine</text>
+          <text x="360" y="291" text-anchor="middle" fill="#818cf8" font-size="9" font-family="Plus Jakarta Sans">Extract · Classify · Link</text>
+        </g>
+
+        <!-- GRAPH (bottom-left) -->
+        <g class="syn-node" data-idx="3" style="cursor:pointer">
+          <rect x="85" y="335" width="120" height="100" rx="16" fill="#12131a" stroke="#2a2b3d" stroke-width="1.5" class="syn-rect"/>
+          <rect x="85" y="335" width="120" height="3" rx="1.5" fill="#8b5cf6" class="syn-accent"/>
+          <image href="/images/icon-graph.png" x="115" y="346" width="60" height="60"/>
+          <text x="145" y="400" text-anchor="middle" fill="white" font-size="13" font-weight="700" font-family="Plus Jakarta Sans">Graph</text>
+          <text x="145" y="416" text-anchor="middle" fill="#6b6c82" font-size="9" font-family="Plus Jakarta Sans">Entities · Relationships</text>
+        </g>
+
+        <!-- TRACTION (bottom-right) -->
+        <g class="syn-node" data-idx="4" style="cursor:pointer">
+          <rect x="515" y="335" width="120" height="100" rx="16" fill="#12131a" stroke="#2a2b3d" stroke-width="1.5" class="syn-rect"/>
+          <rect x="515" y="335" width="120" height="3" rx="1.5" fill="#10b981" class="syn-accent"/>
+          <image href="/images/icon-traction.png" x="545" y="346" width="60" height="60"/>
+          <text x="575" y="400" text-anchor="middle" fill="white" font-size="13" font-weight="700" font-family="Plus Jakarta Sans">Traction</text>
+          <text x="575" y="416" text-anchor="middle" fill="#6b6c82" font-size="9" font-family="Plus Jakarta Sans">Score 0-100 · Evidence</text>
+        </g>
+
+        <!-- ROADMAP (bottom-center) -->
+        <g class="syn-node" data-idx="5" style="cursor:pointer">
+          <rect x="295" y="400" width="130" height="100" rx="16" fill="#12131a" stroke="#2a2b3d" stroke-width="1.5" class="syn-rect"/>
+          <rect x="295" y="400" width="130" height="3" rx="1.5" fill="#ef4444" class="syn-accent"/>
+          <image href="/images/icon-roadmap.png" x="330" y="408" width="60" height="60"/>
+          <text x="360" y="465" text-anchor="middle" fill="white" font-size="13" font-weight="700" font-family="Plus Jakarta Sans">Roadmap</text>
+          <text x="360" y="481" text-anchor="middle" fill="#6b6c82" font-size="9" font-family="Plus Jakarta Sans">Prioritized by evidence</text>
+        </g>
+
+        <!-- Edge labels -->
+        <text x="240" y="195" text-anchor="middle" fill="#4a4b60" font-size="8" font-family="Plus Jakarta Sans" transform="rotate(-20 240 195)">raw text</text>
+        <text x="480" y="195" text-anchor="middle" fill="#4a4b60" font-size="8" font-family="Plus Jakarta Sans" transform="rotate(20 480 195)">classified</text>
+        <text x="600" y="260" text-anchor="middle" fill="#4a4b60" font-size="8" font-family="Plus Jakarta Sans" transform="rotate(90 600 260)">accumulates</text>
+        <text x="240" y="330" text-anchor="middle" fill="#4a4b60" font-size="8" font-family="Plus Jakarta Sans" transform="rotate(20 240 330)">entities</text>
+        <text x="480" y="430" text-anchor="middle" fill="#4a4b60" font-size="8" font-family="Plus Jakarta Sans" transform="rotate(-15 480 430)">informs</text>
+        <text x="240" y="430" text-anchor="middle" fill="#4a4b60" font-size="8" font-family="Plus Jakarta Sans" transform="rotate(15 240 430)">connects</text>
+        <text x="55" y="260" text-anchor="middle" fill="#3a3b50" font-size="7" font-family="Plus Jakarta Sans" transform="rotate(-90 55 260)">compounds ↻</text>
+
+      </svg>
+    </div>
+  </div>
+</section>
+
 <!-- ═══════════ 4. TRACTION SCORING ═══════════ -->
 <section style="padding:100px 0;position:relative;overflow:hidden">
   <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:900px;height:900px;background:radial-gradient(circle,rgba(16,185,129,0.06) 0%,transparent 60%);pointer-events:none"></div>
   <div class="container" style="position:relative;z-index:1">
     <div style="text-align:center;margin-bottom:56px">
       <div class="section-label fade-up">Traction Scoring</div>
-      <div class="section-title fade-up s1" style="font-size:clamp(28px,4vw,42px)">Prioritize with evidence,<br>not politics</div>
-      <p class="fade-up s2" style="font-size:16px;color:var(--text2);max-width:540px;margin:0 auto">Every roadmap item earns a 0-100 score from signals across every team. Customer requests from Sales. Churn risks from CS. Technical constraints from Engineering. Competitive intel from Product. All weighted, all traceable.</p>
+      <div class="section-title fade-up s1" style="font-size:clamp(28px,4vw,42px)">One meeting gives you a snapshot.<br>Fifty give you the truth.</div>
+      <p class="fade-up s2" style="font-size:16px;color:var(--text2);max-width:540px;margin:0 auto">Every roadmap item earns a 0-100 score from signals across every team. Customer requests from Sales. Churn risks from CS. Technical constraints from Engineering. All weighted, all traceable, all compounding.</p>
     </div>
 
     <div style="display:grid;grid-template-columns:380px 1fr;gap:24px;max-width:1000px;margin:0 auto" class="traction-grid">
