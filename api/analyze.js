@@ -27,6 +27,8 @@ export default async function handler(req, res) {
           role: "user",
           content: `You are a sharp, senior product strategy advisor. A product leader just handed you notes from a discussion. Give them the strategic snapshot they need — NOT a data dump. Be opinionated. Be concise. Only surface what MATTERS.
 
+Your #1 priority is RELEVANCE. Every section you include must earn its place. If something isn't genuinely useful for this specific content, omit it.
+
 TEXT:
 ${text}
 
@@ -34,11 +36,11 @@ Return ONLY valid JSON (no markdown, no backticks):
 
 {
   "title": "5-8 word title",
-  "content_type_label": "e.g. 'Customer Call Analysis' or 'Strategy Review' or 'Competitive Brief'",
+  "content_type_label": "e.g. 'Customer Call Analysis', 'Strategy Review', 'Competitive Brief'",
   "urgency": "high | medium | low",
-  "urgency_reason": "Very short: '€120K churn risk' or 'competitor shipped first' or 'no deadline pressure'",
+  "urgency_reason": "Very short: '€120K churn risk' or 'no deadline pressure'",
 
-  "headline": "ONE bold sentence (max 100 chars). This is your OPINION as an advisor — the single most important takeaway. Not a summary. A strategic judgment. E.g. 'Ship bulk import this quarter or lose your biggest account.' or 'Your onboarding is killing conversion — fix it before adding features.'",
+  "headline": "ONE bold sentence (max 100 chars). Your STRATEGIC OPINION — the single most important takeaway. Take a position. E.g. 'Ship bulk import this quarter or lose your biggest account.'",
 
   "columns": [
     {
@@ -46,9 +48,9 @@ Return ONLY valid JSON (no markdown, no backticks):
       "color": "#hex",
       "items": [
         {
-          "text": "The key point in YOUR words as an advisor (not a quote). Max 12 words. Be direct.",
-          "detail": "One supporting detail — who said it, or why it matters. Max 15 words.",
-          "amount": "€120K or null — ONLY for financial figures"
+          "text": "Key point in YOUR words as advisor (max 12 words). Be direct.",
+          "detail": "Supporting detail — who, why it matters. Max 15 words.",
+          "amount": "€120K or null — ONLY for actual financial figures mentioned"
         }
       ]
     },
@@ -64,15 +66,20 @@ Return ONLY valid JSON (no markdown, no backticks):
   ],
 
   "next_moves": [
-    "The 1-3 specific actions this team should take NEXT. Be concrete: 'Send DataFlow a bulk import timeline by Friday' not 'Follow up with customer'. These should feel like a senior advisor telling you exactly what to do Monday morning."
+    "1-3 specific actions for Monday morning. Be concrete: 'Send DataFlow a timeline by Friday' not 'Follow up with customer'."
   ],
 
   "blind_spots": [
-    "1-2 genuinely missing perspectives. Be specific: 'No engineering input — has anyone scoped the effort?' Only include if truly absent. If the discussion was thorough, return empty array []."
+    "1-2 genuinely missing perspectives. Be specific. Empty array [] if the discussion was thorough."
   ],
 
-  "traction_entity": "The feature/entity with the strongest signal — only if one clearly emerges, otherwise null",
-  "traction_score": "20-45 if entity exists, 0 if null"
+  "traction": [
+    {
+      "entity": "Feature or initiative name",
+      "score": 20-45,
+      "reason": "Very short: why this score — e.g. '2 customer requests + churn risk' or '1 mention, no urgency'"
+    }
+  ]
 }
 
 COLUMN RULES — adapt to content:
@@ -84,15 +91,23 @@ COLUMN RULES — adapt to content:
 - Sales: "Hot Deals" (#10B981) + "Slipping" (#EF4444)
 - General: "Key Signals" (#10B981) + "Watch Out" (#F59E0B)
 
-CRITICAL RULES:
-- MAX 3 items per column. Only the most important. Less is more.
+TRACTION RULES — this is critical:
+- Traction scores represent how much evidence supports building/prioritizing something
+- ONLY include traction for clear features, initiatives, or projects that emerged as priorities
+- Return EMPTY ARRAY [] if no clear feature/initiative was discussed, or if the text is exploratory/informational with no prioritization signals
+- Max 3 entities. Each must have real signal evidence from the text.
+- Score range 15-45 for a single discussion. Higher = more signals, urgency, revenue impact, multiple sources.
+- A casual mention = don't include. Multiple signals from multiple sources = include.
+- Sort by score descending.
+
+GENERAL RULES:
+- MAX 3 items per column. Only the most important.
 - MAX 2 decisions. Skip if none were made.
-- MAX 3 next_moves. Be specific and actionable.
-- MAX 2 blind_spots. Empty array if discussion was thorough.
-- The headline is NOT a summary. It's your STRATEGIC OPINION. Take a position.
-- Column items use YOUR words as an advisor, not direct quotes.
-- If the text is short or light on substance, still give your best analysis but be honest about confidence.
-- traction_score: 20-45 for a clear signal entity. 0 if nothing stands out enough.`
+- MAX 3 next_moves. Concrete and actionable.
+- MAX 2 blind_spots. Empty array if thorough.
+- The headline is NOT a summary. It's your STRATEGIC OPINION.
+- Column items use YOUR words, not direct quotes.
+- Every section must earn its place. Omit empty or low-value sections.`
         }],
       }),
     });
@@ -100,7 +115,7 @@ CRITICAL RULES:
     if (!response.ok) {
       const err = await response.text();
       console.error("Anthropic error:", err);
-      return res.status(500).json({ error: "AI error: " + err.substring(0, 200) });
+      return res.status(500).json({ error: "AI processing failed. Please try again." });
     }
 
     const data = await response.json();

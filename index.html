@@ -447,22 +447,13 @@ Example: &quot;Sarah from DataFlow called again about bulk import. She said they
             <div id="snap-blindspots-list"></div>
           </div>
 
-          <!-- Traction ring (only if entity detected) -->
-          <div id="snap-traction-section" style="padding:10px 20px;border-top:1px solid var(--border);display:flex;align-items:center;gap:14px;background:rgba(16,185,129,0.03);display:none">
-            <div style="position:relative;flex-shrink:0">
-              <svg width="50" height="50" viewBox="0 0 50 50">
-                <circle cx="25" cy="25" r="19" fill="none" stroke="var(--surface2)" stroke-width="4"/>
-                <circle id="snap-ring" cx="25" cy="25" r="19" fill="none" stroke="var(--green)" stroke-width="4" stroke-dasharray="119" stroke-dashoffset="119" stroke-linecap="round" transform="rotate(-90 25 25)" style="transition:stroke-dashoffset 1.5s ease"/>
-              </svg>
-              <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center">
-                <span id="snap-traction-score" style="font-size:14px;font-weight:800;color:var(--green)"></span>
-              </div>
+          <!-- Traction rings (only if entities detected) -->
+          <div id="snap-traction-section" style="padding:10px 20px;border-top:1px solid var(--border);background:rgba(16,185,129,0.03);display:none">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+              <div style="font-size:9px;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:1.2px;display:flex;align-items:center;gap:5px"><span style="font-size:11px">&#9678;</span> Traction Signals</div>
+              <span style="font-size:9px;color:var(--text3);font-style:italic">Score compounds with every capture</span>
             </div>
-            <div style="flex:1">
-              <div style="font-size:9px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:0.5px">Traction Signal</div>
-              <div id="snap-traction-name" style="font-size:13px;font-weight:700;color:var(--text)"></div>
-            </div>
-            <div style="font-size:10px;color:var(--text3);text-align:right;max-width:180px">With Gravii, this score compounds with every meeting across every team</div>
+            <div id="snap-traction-rings" style="display:flex;gap:16px;flex-wrap:wrap"></div>
           </div>
 
           <!-- Footer -->
@@ -930,17 +921,42 @@ function renderSnapshot(data){
     }).join('');
   }else{bsEl.style.display='none'}
 
-  // Traction ring (only if entity detected)
-  var tName=data.traction_entity;
-  var tScore=data.traction_score||0;
+  // Traction rings (0-3, only when relevant)
+  var traction=data.traction||[];
   var tractionEl=document.getElementById('snap-traction-section');
-  if(tName&&tScore>0){
-    tractionEl.style.display='flex';
-    var circumference=119; // 2*PI*19
-    var offset=circumference-(tScore/100)*circumference;
-    document.getElementById('snap-traction-name').textContent=tName;
-    document.getElementById('snap-traction-score').textContent=tScore;
-    setTimeout(function(){document.getElementById('snap-ring').style.strokeDashoffset=offset},100);
+  var ringsEl=document.getElementById('snap-traction-rings');
+  if(traction.length>0){
+    tractionEl.style.display='block';
+    ringsEl.innerHTML=traction.map(function(t,i){
+      var score=t.score||0;
+      var circumference=100; // 2*PI*16
+      var offset=circumference-(score/100)*circumference;
+      var color=score>=35?'var(--green)':score>=20?'var(--amber)':'var(--text3)';
+      var ringId='traction-ring-'+i;
+      return '<div style="display:flex;align-items:center;gap:10px;flex:1;min-width:200px;padding:6px 10px;background:var(--surface);border-radius:8px">'
+        +'<div style="position:relative;flex-shrink:0">'
+        +'<svg width="44" height="44" viewBox="0 0 44 44">'
+        +'<circle cx="22" cy="22" r="16" fill="none" stroke="var(--surface2)" stroke-width="3.5"/>'
+        +'<circle id="'+ringId+'" cx="22" cy="22" r="16" fill="none" stroke="'+color+'" stroke-width="3.5" stroke-dasharray="'+circumference+'" stroke-dashoffset="'+circumference+'" stroke-linecap="round" transform="rotate(-90 22 22)" style="transition:stroke-dashoffset 1.5s ease"/>'
+        +'</svg>'
+        +'<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center"><span style="font-size:13px;font-weight:800;color:'+color+'">'+score+'</span></div>'
+        +'</div>'
+        +'<div style="flex:1;min-width:0">'
+        +'<div style="font-size:12px;font-weight:700;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+t.entity+'</div>'
+        +'<div style="font-size:9px;color:var(--text3);line-height:1.3;margin-top:1px">'+t.reason+'</div>'
+        +'</div></div>';
+    }).join('');
+    // Animate rings after render
+    setTimeout(function(){
+      traction.forEach(function(t,i){
+        var el=document.getElementById('traction-ring-'+i);
+        if(el){
+          var score=t.score||0;
+          var offset=100-(score/100)*100;
+          el.style.strokeDashoffset=offset;
+        }
+      });
+    },100);
   }else{tractionEl.style.display='none'}
 }
 
