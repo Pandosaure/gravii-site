@@ -100,7 +100,7 @@ CRITICAL RULES:
     if (!response.ok) {
       const err = await response.text();
       console.error("Anthropic error:", err);
-      return res.status(500).json({ error: "AI processing failed. Please try again." });
+      return res.status(500).json({ error: "AI error: " + err.substring(0, 200) });
     }
 
     const data = await response.json();
