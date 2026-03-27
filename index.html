@@ -393,90 +393,83 @@ Example: &quot;Sarah from DataFlow called again about bulk import. She said they
         </div>
       </div>
 
-      <!-- ═══ RESULT STATE: INTELLIGENCE SNAPSHOT V3 ═══ -->
+      <!-- ═══ RESULT STATE: INTELLIGENCE SNAPSHOT V4 ═══ -->
       <div id="demo-result" style="display:none">
         <div id="snapshot-card" style="background:var(--bg2);border:1px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.4)">
 
           <!-- Header -->
-          <div style="padding:16px 20px;border-bottom:1px solid var(--border);background:var(--bg3)">
-            <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px">
-              <div>
-                <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
-                  <span style="font-size:9px;font-weight:600;color:var(--accent2);text-transform:uppercase;letter-spacing:1.5px">Gravii Intelligence Snapshot</span>
-                  <span id="snap-type-badge" style="font-size:8px;padding:2px 8px;border-radius:100px;font-weight:600"></span>
-                </div>
-                <div id="snap-title" style="font-size:17px;font-weight:800;letter-spacing:-0.3px"></div>
+          <div style="padding:14px 20px;border-bottom:1px solid var(--border);background:var(--bg3)">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+              <div style="display:flex;align-items:center;gap:8px">
+                <span style="font-size:9px;font-weight:600;color:var(--accent2);text-transform:uppercase;letter-spacing:1.5px">Gravii Intelligence Snapshot</span>
+                <span id="snap-type-badge" style="font-size:8px;padding:2px 8px;border-radius:100px;font-weight:600"></span>
               </div>
-              <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px">
-                <div id="snap-urgency" style="font-size:9px;padding:3px 10px;border-radius:100px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px"></div>
-                <div style="font-size:10px;color:var(--text3)">gravii.app</div>
-              </div>
+              <div id="snap-urgency" style="font-size:9px;padding:3px 10px;border-radius:100px;font-weight:700;letter-spacing:0.3px"></div>
             </div>
-            <div id="snap-stats" style="display:flex;gap:6px"></div>
+            <div id="snap-title" style="font-size:17px;font-weight:800;letter-spacing:-0.3px"></div>
           </div>
 
-          <!-- Insight -->
-          <div style="padding:12px 20px;border-bottom:1px solid var(--border);background:rgba(99,102,241,0.04)">
-            <div id="snap-insight" style="font-size:13px;color:var(--text);line-height:1.5;font-weight:600"></div>
+          <!-- Strategic Headline — the bold opinion -->
+          <div style="padding:14px 20px;border-bottom:1px solid var(--border);background:linear-gradient(135deg,rgba(99,102,241,0.06) 0%,rgba(16,185,129,0.04) 100%)">
+            <div id="snap-headline" style="font-size:16px;color:var(--text);line-height:1.4;font-weight:800;letter-spacing:-0.2px"></div>
           </div>
 
-          <!-- Dynamic columns + mini graph -->
-          <div style="display:grid;grid-template-columns:1fr 1fr 160px;min-height:170px" id="snap-columns">
-            <div id="snap-col-0" style="padding:12px 14px;border-right:1px solid var(--border)">
+          <!-- Two columns only — no graph -->
+          <div style="display:grid;grid-template-columns:1fr 1fr" id="snap-columns">
+            <div id="snap-col-0" style="padding:12px 16px;border-right:1px solid var(--border)">
               <div id="snap-col-0-header" style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;margin-bottom:8px;display:flex;align-items:center;gap:5px"></div>
               <div id="snap-col-0-items"></div>
             </div>
-            <div id="snap-col-1" style="padding:12px 14px;border-right:1px solid var(--border)">
+            <div id="snap-col-1" style="padding:12px 16px">
               <div id="snap-col-1-header" style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;margin-bottom:8px;display:flex;align-items:center;gap:5px"></div>
               <div id="snap-col-1-items"></div>
             </div>
-            <div style="padding:12px 10px;display:flex;flex-direction:column;align-items:center">
-              <div style="font-size:9px;font-weight:700;color:var(--accent2);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:8px;display:flex;align-items:center;gap:5px;align-self:flex-start"><span style="width:6px;height:6px;border-radius:50%;background:var(--accent2)"></span> Graph</div>
-              <svg id="snap-graph" viewBox="0 0 140 140" style="width:130px;height:130px;flex-shrink:0"></svg>
-            </div>
           </div>
 
-          <!-- Decisions -->
+          <!-- Decisions (if any) -->
           <div id="snap-decisions" style="padding:10px 20px;border-top:1px solid var(--border);background:rgba(99,102,241,0.03);display:none">
-            <div style="font-size:9px;font-weight:700;color:var(--accent2);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:6px">Decisions</div>
+            <div style="font-size:9px;font-weight:700;color:var(--accent2);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:6px">Decisions Made</div>
             <div id="snap-decisions-list"></div>
           </div>
 
-          <!-- Blind Spots -->
-          <div id="snap-blindspots" style="padding:12px 20px;border-top:1px solid var(--border);background:rgba(245,158,11,0.03);display:none">
-            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
-              <div style="font-size:9px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:1.2px;display:flex;align-items:center;gap:5px"><span style="font-size:12px">&#9888;</span> Blind Spots</div>
-              <span style="font-size:9px;color:var(--text3);font-style:italic">What this discussion missed</span>
-            </div>
-            <div id="snap-blindspots-list"></div>
-            <div style="margin-top:8px;padding:8px 12px;background:var(--surface);border-radius:8px;border:1px solid var(--border);display:flex;align-items:center;gap:8px">
-              <span style="font-size:10px;color:var(--text2);flex:1">With Gravii, signals from Sales, CS, and Engineering would automatically fill these gaps.</span>
-              <span style="font-size:10px;color:var(--accent2);font-weight:600;flex-shrink:0;white-space:nowrap">Learn more &#8594;</span>
-            </div>
+          <!-- Next Moves — replaces the graph, earns its space -->
+          <div id="snap-nextmoves" style="padding:12px 20px;border-top:1px solid var(--border);background:rgba(16,185,129,0.03);display:none">
+            <div style="font-size:9px;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:8px;display:flex;align-items:center;gap:5px"><span style="font-size:11px">&#10140;</span> What To Do Next</div>
+            <div id="snap-nextmoves-list"></div>
           </div>
 
-          <!-- Traction ring -->
-          <div style="padding:14px 20px;border-top:1px solid var(--border);display:flex;align-items:center;gap:16px;background:rgba(16,185,129,0.03)">
+          <!-- Blind Spots (only if relevant) -->
+          <div id="snap-blindspots" style="padding:10px 20px;border-top:1px solid var(--border);background:rgba(245,158,11,0.03);display:none">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+              <div style="font-size:9px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:1.2px;display:flex;align-items:center;gap:5px"><span style="font-size:11px">&#9888;</span> Blind Spots</div>
+              <span style="font-size:9px;color:var(--text3);font-style:italic">Missing from this discussion</span>
+            </div>
+            <div id="snap-blindspots-list"></div>
+          </div>
+
+          <!-- Traction ring (only if entity detected) -->
+          <div id="snap-traction-section" style="padding:12px 20px;border-top:1px solid var(--border);display:flex;align-items:center;gap:14px;background:rgba(16,185,129,0.03);display:none">
             <div style="position:relative;flex-shrink:0">
-              <svg width="56" height="56" viewBox="0 0 56 56">
-                <circle cx="28" cy="28" r="22" fill="none" stroke="var(--surface2)" stroke-width="4"/>
-                <circle id="snap-ring" cx="28" cy="28" r="22" fill="none" stroke="var(--green)" stroke-width="4" stroke-dasharray="138" stroke-dashoffset="138" stroke-linecap="round" transform="rotate(-90 28 28)" style="transition:stroke-dashoffset 1.5s ease"/>
+              <svg width="50" height="50" viewBox="0 0 50 50">
+                <circle cx="25" cy="25" r="19" fill="none" stroke="var(--surface2)" stroke-width="4"/>
+                <circle id="snap-ring" cx="25" cy="25" r="19" fill="none" stroke="var(--green)" stroke-width="4" stroke-dasharray="119" stroke-dashoffset="119" stroke-linecap="round" transform="rotate(-90 25 25)" style="transition:stroke-dashoffset 1.5s ease"/>
               </svg>
               <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center">
-                <span id="snap-traction-score" style="font-size:15px;font-weight:800;color:var(--green)"></span>
+                <span id="snap-traction-score" style="font-size:14px;font-weight:800;color:var(--green)"></span>
               </div>
             </div>
             <div style="flex:1">
-              <div style="font-size:9px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:0.5px">Traction Preview</div>
-              <div id="snap-traction-name" style="font-size:14px;font-weight:700;color:var(--text)"></div>
-              <div style="font-size:10px;color:var(--text3);margin-top:1px">Based on this single conversation</div>
+              <div style="font-size:9px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:0.5px">Traction Signal</div>
+              <div id="snap-traction-name" style="font-size:13px;font-weight:700;color:var(--text)"></div>
             </div>
-            <div style="text-align:right;flex-shrink:0">
-              <div style="font-size:11px;color:var(--text3)">After 50 captures</div>
-              <div style="font-size:11px;color:var(--accent2);font-weight:600">this becomes your source of truth</div>
-            </div>
+            <div style="font-size:10px;color:var(--text3);text-align:right;max-width:180px">With Gravii, this score compounds with every meeting across every team</div>
           </div>
 
+          <!-- Footer -->
+          <div style="padding:8px 20px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;background:var(--bg3)">
+            <span style="font-size:10px;color:var(--text3)">One conversation. Imagine what 50 would reveal.</span>
+            <span style="font-size:10px;color:var(--text3);font-weight:600">gravii.app</span>
+          </div>
         </div>
 
         <!-- Actions -->
@@ -877,7 +870,7 @@ function renderSnapshot(data){
   typeBadge.style.background='rgba(99,102,241,0.15)';
   typeBadge.style.color='var(--accent2)';
 
-  // Urgency badge
+  // Urgency
   var urgEl=document.getElementById('snap-urgency');
   var urgColors={high:['#EF4444','rgba(239,68,68,0.15)'],medium:['#F59E0B','rgba(245,158,11,0.15)'],low:['#6B7280','rgba(107,108,130,0.15)']};
   var urg=data.urgency||'medium';
@@ -885,129 +878,68 @@ function renderSnapshot(data){
   urgEl.style.color=urgColors[urg][0];
   urgEl.style.background=urgColors[urg][1];
 
-  // KPI stat blocks
+  // Headline — the bold strategic opinion
+  document.getElementById('snap-headline').textContent=data.headline||data.insight||'';
+
+  // Dynamic columns
   var cols=data.columns||[];
-  var sigCount=0;
-  cols.forEach(function(c){sigCount+=(c.items||[]).length});
-  var cLen=(data.connected||[]).length;
-  var dLen=(data.decisions||[]).length;
-  var bsLen=(data.blind_spots||[]).length;
-  var stats=[
-    {n:sigCount,l:'Signals',c:cols[0]?cols[0].color:'var(--green)'},
-    {n:cLen,l:'Connections',c:'var(--accent2)'},
-    {n:dLen,l:'Decision'+(dLen!==1?'s':''),c:'var(--accent)'}
-  ];
-  if(bsLen>0)stats.push({n:bsLen,l:'Blind Spot'+(bsLen!==1?'s':''),c:'var(--amber)'});
-  document.getElementById('snap-stats').innerHTML=stats.map(function(s){
-    return '<div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:5px 12px;text-align:center;min-width:65px"><div style="font-size:18px;font-weight:800;color:'+s.c+'">'+s.n+'</div><div style="font-size:8px;color:var(--text3);text-transform:uppercase;letter-spacing:0.5px">'+s.l+'</div></div>';
-  }).join('');
-
-  // Insight (truncate for screenshot)
-  var insight=data.insight||'';
-  if(insight.length>160){
-    var dot=insight.indexOf('.',60);
-    if(dot>0&&dot<160)insight=insight.substring(0,dot+1);
-    else insight=insight.substring(0,155)+'\u2026';
-  }
-  document.getElementById('snap-insight').textContent=insight;
-
-  // Dynamic columns (2 columns from API)
   for(var ci=0;ci<2;ci++){
     var col=cols[ci];
     var headerEl=document.getElementById('snap-col-'+ci+'-header');
     var itemsEl=document.getElementById('snap-col-'+ci+'-items');
     if(!col){headerEl.innerHTML='';itemsEl.innerHTML='';continue}
-
     headerEl.innerHTML='<span style="width:6px;height:6px;border-radius:50%;background:'+col.color+'"></span> '+col.label;
     headerEl.style.color=col.color;
-
     var html='';
     (col.items||[]).forEach(function(s){
-      var amountHtml=(s.amount&&s.amount!=='null')?'<div style="font-size:12px;color:#EF4444;font-weight:800;margin-bottom:2px">'+s.amount+'</div>':'';
-      html+='<div style="margin-bottom:6px;padding:7px 8px;background:var(--surface);border-radius:6px">'+amountHtml+'<div style="font-size:11px;color:var(--text2);margin-bottom:3px">\u201C'+s.quote+'\u201D</div><div style="display:flex;align-items:center;gap:5px;flex-wrap:wrap"><span style="font-size:9px;color:var(--text3)">'+s.source+'</span><span style="font-size:8px;padding:2px 7px;border-radius:100px;font-weight:600;border:1px solid '+col.color+'22;color:'+col.color+';background:'+col.color+'18">'+s.tag+'</span></div></div>';
+      var amountHtml=(s.amount&&s.amount!=='null'&&s.amount!==null)?'<div style="font-size:13px;color:#EF4444;font-weight:800;margin-bottom:2px">'+s.amount+'</div>':'';
+      html+='<div style="margin-bottom:6px;padding:8px 10px;background:var(--surface);border-radius:8px;border-left:2px solid '+col.color+'">'+amountHtml+'<div style="font-size:12px;color:var(--text);font-weight:600;margin-bottom:2px">'+s.text+'</div><div style="font-size:10px;color:var(--text3)">'+s.detail+'</div></div>';
     });
-    itemsEl.innerHTML=html||'<div style="font-size:11px;color:var(--text3);padding:8px">No signals</div>';
-  }
-
-  // Mini graph
-  var connected=data.connected||[];
-  var svg=document.getElementById('snap-graph');
-  svg.innerHTML='';
-  if(connected.length>0){
-    var entities={};
-    connected.forEach(function(c){entities[c.from]=true;entities[c.to]=true});
-    var names=Object.keys(entities);
-    var positions=[];
-    var cx=70,cy=65,r=45;
-    names.forEach(function(name,i){
-      var angle=(i/names.length)*Math.PI*2-Math.PI/2;
-      positions.push({name:name,x:cx+r*Math.cos(angle),y:cy+r*Math.sin(angle)});
-    });
-    connected.forEach(function(c){
-      var from=positions.find(function(p){return p.name===c.from});
-      var to=positions.find(function(p){return p.name===c.to});
-      if(from&&to){
-        var line=document.createElementNS('http://www.w3.org/2000/svg','line');
-        line.setAttribute('x1',from.x);line.setAttribute('y1',from.y);
-        line.setAttribute('x2',to.x);line.setAttribute('y2',to.y);
-        line.setAttribute('stroke','#6366f1');line.setAttribute('stroke-width','1.5');line.setAttribute('opacity','0.4');
-        svg.appendChild(line);
-      }
-    });
-    positions.forEach(function(p,i){
-      var circle=document.createElementNS('http://www.w3.org/2000/svg','circle');
-      circle.setAttribute('cx',p.x);circle.setAttribute('cy',p.y);
-      circle.setAttribute('r',i===0?10:7);
-      circle.setAttribute('fill',i===0?'#6366f1':i<3?'#3b82f6':'#8b5cf6');
-      circle.setAttribute('opacity','0.8');
-      circle.style.animation='nodeAppear 0.5s ease forwards';
-      circle.style.animationDelay=(i*0.15)+'s';
-      svg.appendChild(circle);
-      var text=document.createElementNS('http://www.w3.org/2000/svg','text');
-      text.setAttribute('x',p.x);text.setAttribute('y',p.y+(i===0?18:14));
-      text.setAttribute('text-anchor','middle');text.setAttribute('fill','#a0a1b5');
-      text.setAttribute('font-size','7');text.setAttribute('font-family','Plus Jakarta Sans');
-      text.textContent=p.name.length>12?p.name.substring(0,11)+'\u2026':p.name;
-      svg.appendChild(text);
-    });
-  }else{
-    var t=document.createElementNS('http://www.w3.org/2000/svg','text');
-    t.setAttribute('x','70');t.setAttribute('y','70');t.setAttribute('text-anchor','middle');
-    t.setAttribute('fill','#6b6c82');t.setAttribute('font-size','9');t.setAttribute('font-family','Plus Jakarta Sans');
-    t.textContent='No connections';svg.appendChild(t);
+    itemsEl.innerHTML=html||'<div style="font-size:11px;color:var(--text3);padding:8px">Nothing flagged</div>';
   }
 
   // Decisions
+  var dLen=(data.decisions||[]).length;
   var decisionsEl=document.getElementById('snap-decisions');
-  var decListEl=document.getElementById('snap-decisions-list');
   if(dLen>0){
     decisionsEl.style.display='block';
-    var decHtml='';
-    (data.decisions||[]).forEach(function(d){
-      decHtml+='<div style="display:flex;align-items:center;gap:8px;padding:6px 10px;background:var(--surface);border-radius:6px;border-left:3px solid var(--accent);margin-bottom:4px"><div style="flex:1;font-size:12px;font-weight:600;color:var(--text)">'+d.text+'</div>'+(d.owner?'<span style="font-size:10px;padding:2px 8px;border-radius:6px;background:var(--surface2);color:var(--accent2);font-weight:600;flex-shrink:0">\u2192 '+d.owner+'</span>':'')+'</div>';
-    });
-    decListEl.innerHTML=decHtml;
+    document.getElementById('snap-decisions-list').innerHTML=(data.decisions||[]).map(function(d){
+      return '<div style="display:flex;align-items:center;gap:8px;padding:6px 10px;background:var(--surface);border-radius:6px;border-left:3px solid var(--accent);margin-bottom:4px"><div style="flex:1;font-size:12px;font-weight:600;color:var(--text)">'+d.text+'</div>'+(d.owner?'<span style="font-size:10px;padding:2px 8px;border-radius:6px;background:var(--surface2);color:var(--accent2);font-weight:600;flex-shrink:0">\u2192 '+d.owner+'</span>':'')+'</div>';
+    }).join('');
   }else{decisionsEl.style.display='none'}
 
+  // Next Moves — the actionable advisor output
+  var nextMoves=data.next_moves||[];
+  var nmEl=document.getElementById('snap-nextmoves');
+  if(nextMoves.length>0){
+    nmEl.style.display='block';
+    document.getElementById('snap-nextmoves-list').innerHTML=nextMoves.map(function(nm,i){
+      return '<div style="display:flex;align-items:flex-start;gap:8px;margin-bottom:5px"><span style="width:18px;height:18px;border-radius:50%;background:var(--green);color:white;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0">'+(i+1)+'</span><span style="font-size:12px;color:var(--text);line-height:1.4;font-weight:500">'+nm+'</span></div>';
+    }).join('');
+  }else{nmEl.style.display='none'}
+
   // Blind spots
-  var bsEl=document.getElementById('snap-blindspots');
-  var bsListEl=document.getElementById('snap-blindspots-list');
   var blindSpots=data.blind_spots||[];
+  var bsEl=document.getElementById('snap-blindspots');
   if(blindSpots.length>0){
     bsEl.style.display='block';
-    bsListEl.innerHTML=blindSpots.map(function(bs){
-      return '<div style="display:flex;align-items:flex-start;gap:6px;margin-bottom:5px"><span style="color:var(--amber);flex-shrink:0;font-size:10px;margin-top:1px">\u25CF</span><span style="font-size:11px;color:var(--text2);line-height:1.4">'+bs+'</span></div>';
+    document.getElementById('snap-blindspots-list').innerHTML=blindSpots.map(function(bs){
+      return '<div style="display:flex;align-items:flex-start;gap:6px;margin-bottom:4px"><span style="color:var(--amber);flex-shrink:0;font-size:9px;margin-top:2px">\u25CF</span><span style="font-size:11px;color:var(--text2);line-height:1.4">'+bs+'</span></div>';
     }).join('');
   }else{bsEl.style.display='none'}
 
-  // Traction ring
-  var tName=data.traction_entity||'Top Entity';
+  // Traction ring (only if entity detected)
+  var tName=data.traction_entity;
   var tScore=data.traction_score||0;
-  var circumference=138;
-  var offset=circumference-(tScore/100)*circumference;
-  document.getElementById('snap-traction-name').textContent=tName;
-  document.getElementById('snap-traction-score').textContent=tScore;
-  setTimeout(function(){document.getElementById('snap-ring').style.strokeDashoffset=offset},100);
+  var tractionEl=document.getElementById('snap-traction-section');
+  if(tName&&tScore>0){
+    tractionEl.style.display='flex';
+    var circumference=119; // 2*PI*19
+    var offset=circumference-(tScore/100)*circumference;
+    document.getElementById('snap-traction-name').textContent=tName;
+    document.getElementById('snap-traction-score').textContent=tScore;
+    setTimeout(function(){document.getElementById('snap-ring').style.strokeDashoffset=offset},100);
+  }else{tractionEl.style.display='none'}
 }
 
 function resetDemo(){

@@ -22,33 +22,33 @@ export default async function handler(req, res) {
       },
       body: JSON.stringify({
         model: "claude-sonnet-4-20250514",
-        max_tokens: 3000,
+        max_tokens: 2500,
         messages: [{
           role: "user",
-          content: `You are a product intelligence analyst. Analyze this text and extract structured intelligence. CRITICALLY: adapt your analysis structure to the TYPE of content.
+          content: `You are a sharp, senior product strategy advisor. A product leader just handed you notes from a discussion. Give them the strategic snapshot they need — NOT a data dump. Be opinionated. Be concise. Only surface what MATTERS.
 
-TEXT TO ANALYZE:
+TEXT:
 ${text}
 
-Return ONLY valid JSON (no markdown, no backticks, no explanation):
+Return ONLY valid JSON (no markdown, no backticks):
 
 {
-  "title": "Short descriptive title (5-8 words)",
-  "content_type": "customer_call | product_review | strategy | competitive | engineering | sales | general",
-  "content_type_label": "Human label, e.g. 'Customer Call Analysis' or 'Strategy Review'",
+  "title": "5-8 word title",
+  "content_type_label": "e.g. 'Customer Call Analysis' or 'Strategy Review' or 'Competitive Brief'",
   "urgency": "high | medium | low",
-  "urgency_reason": "One short phrase, e.g. 'churn risk on €120K ARR'",
-  "insight": "One punchy strategic sentence (max 120 chars). Not a summary — an INTERPRETATION.",
+  "urgency_reason": "Very short: '€120K churn risk' or 'competitor shipped first' or 'no deadline pressure'",
+
+  "headline": "ONE bold sentence (max 100 chars). This is your OPINION as an advisor — the single most important takeaway. Not a summary. A strategic judgment. E.g. 'Ship bulk import this quarter or lose your biggest account.' or 'Your onboarding is killing conversion — fix it before adding features.'",
+
   "columns": [
     {
-      "label": "Column header — adapt to content type",
+      "label": "Adapt to content type (see rules)",
       "color": "#hex",
       "items": [
         {
-          "quote": "Direct quote or key point (max 15 words)",
-          "source": "Who / which entity",
-          "tag": "Short label",
-          "amount": "€120K or null"
+          "text": "The key point in YOUR words as an advisor (not a quote). Max 12 words. Be direct.",
+          "detail": "One supporting detail — who said it, or why it matters. Max 15 words.",
+          "amount": "€120K or null — ONLY for financial figures"
         }
       ]
     },
@@ -58,34 +58,41 @@ Return ONLY valid JSON (no markdown, no backticks, no explanation):
       "items": [...]
     }
   ],
-  "connected": [
-    { "from": "Entity", "to": "Entity", "label": "relationship type" }
-  ],
+
   "decisions": [
-    { "text": "What was decided", "owner": "Who owns it or null" }
+    { "text": "What was decided (max 12 words)", "owner": "Who owns it, or null" }
   ],
+
+  "next_moves": [
+    "The 1-3 specific actions this team should take NEXT. Be concrete: 'Send DataFlow a bulk import timeline by Friday' not 'Follow up with customer'. These should feel like a senior advisor telling you exactly what to do Monday morning."
+  ],
+
   "blind_spots": [
-    "What is MISSING from this discussion that a smart product leader would notice. Be specific: 'No customer voice — are end users being consulted?', 'No revenue impact quantified', 'No competitive context', 'Engineering feasibility not discussed', 'No timeline mentioned', 'No success metrics defined'. Only genuinely missing perspectives."
+    "1-2 genuinely missing perspectives. Be specific: 'No engineering input — has anyone scoped the effort?' Only include if truly absent. If the discussion was thorough, return empty array []."
   ],
-  "traction_entity": "Entity with most signal strength",
-  "traction_score": 20-45
+
+  "traction_entity": "The feature/entity with the strongest signal — only if one clearly emerges, otherwise null",
+  "traction_score": "20-45 if entity exists, 0 if null"
 }
 
-COLUMN RULES — adapt to content type:
-- Customer call/feedback: "Needs" (#10B981) + "Risks" (#EF4444)
-- Product review/planning: "Build" (#10B981) + "Watch" (#F59E0B)
-- Strategy/leadership: "Decisions" (#6366F1) + "Open Questions" (#F59E0B)
-- Competitive: "Threats" (#EF4444) + "Advantages" (#10B981)
-- Engineering/sprint: "Progress" (#10B981) + "Blocked" (#EF4444)
-- Sales/pipeline: "Opportunities" (#10B981) + "At Risk" (#EF4444)
-- General: "Signals" (#10B981) + "Risks" (#F59E0B)
+COLUMN RULES — adapt to content:
+- Customer call: "What They Need" (#10B981) + "What's at Risk" (#EF4444)
+- Product review: "Prioritize" (#10B981) + "Monitor" (#F59E0B)
+- Strategy: "Decided" (#6366F1) + "Unresolved" (#F59E0B)
+- Competitive: "Their Moves" (#EF4444) + "Our Edge" (#10B981)
+- Engineering: "Shipped" (#10B981) + "Stuck" (#EF4444)
+- Sales: "Hot Deals" (#10B981) + "Slipping" (#EF4444)
+- General: "Key Signals" (#10B981) + "Watch Out" (#F59E0B)
 
-RULES:
-- ALWAYS exactly 2 columns, max 4 items each
-- Max 4 connected, max 2 decisions
-- 2-4 blind spots — genuinely missing perspectives, not what IS in the text
-- traction_score 20-45 for single meeting, never above 50
-- urgency: high = revenue/deadline/competitive; medium = important; low = exploratory`
+CRITICAL RULES:
+- MAX 3 items per column. Only the most important. Less is more.
+- MAX 2 decisions. Skip if none were made.
+- MAX 3 next_moves. Be specific and actionable.
+- MAX 2 blind_spots. Empty array if discussion was thorough.
+- The headline is NOT a summary. It's your STRATEGIC OPINION. Take a position.
+- Column items use YOUR words as an advisor, not direct quotes.
+- If the text is short or light on substance, still give your best analysis but be honest about confidence.
+- traction_score: 20-45 for a clear signal entity. 0 if nothing stands out enough.`
         }],
       }),
     });
