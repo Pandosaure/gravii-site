@@ -45,7 +45,7 @@ nav .container{display:flex;align-items:center;justify-content:space-between}
 .hero-badge{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:100px;background:var(--surface);border:1px solid var(--border);font-size:12px;color:var(--text2);font-weight:500;margin-bottom:24px}
 .hero-badge .pulse{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
-.hero h1{font-size:clamp(40px,6vw,72px);font-weight:800;letter-spacing:-2px;line-height:1.05;margin-bottom:20px;background:linear-gradient(135deg,var(--text) 0%,var(--text2) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero h1{font-size:clamp(40px,6vw,72px);font-weight:800;letter-spacing:-2px;line-height:1.15;margin-bottom:20px;background:linear-gradient(135deg,var(--text) 0%,var(--text2) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 .hero h1 em{font-style:normal;-webkit-text-fill-color:var(--accent2)}
 .hero p{font-size:18px;color:var(--text2);max-width:560px;margin:0 auto 36px;line-height:1.7}
 .hero-buttons{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
@@ -192,20 +192,20 @@ nav .container{display:flex;align-items:center;justify-content:space-between}
 
 
 <!-- ═══════════ 1B. THE PROBLEM ═══════════ -->
-<section style="padding:40px 0 60px">
-  <div class="container" style="max-width:800px">
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;text-align:center" class="pain-grid">
-      <div class="fade-up s1" style="padding:20px 16px">
-        <div style="font-size:13px;color:var(--text);line-height:1.6;font-weight:600;margin-bottom:8px">"Customer signals are trapped in Salesforce. Engineering constraints live in Jira. Competitive intel sits in someone's head."</div>
-        <div style="font-size:11px;color:var(--text3)">Every team has a piece of the puzzle. Nobody sees the full picture.</div>
+<section style="padding:20px 0 40px">
+  <div class="container" style="max-width:640px">
+    <div style="display:flex;flex-direction:column;gap:10px;align-items:center">
+      <div class="fade-up s1" style="display:flex;align-items:center;gap:12px;padding:10px 20px;border-radius:10px;border:1px solid var(--border);background:var(--bg2)">
+        <span style="font-size:18px;flex-shrink:0">&#128202;</span>
+        <span style="font-size:14px;color:var(--text2)">Signals scattered across <strong style="color:var(--text)">5+ tools</strong> — nobody sees the full picture</span>
       </div>
-      <div class="fade-up s2" style="padding:20px 16px">
-        <div style="font-size:13px;color:var(--text);line-height:1.6;font-weight:600;margin-bottom:8px">"After every meeting, decisions and context evaporate within 48 hours."</div>
-        <div style="font-size:11px;color:var(--text3)">No audit trail. No signal accumulation. Just fading memory.</div>
+      <div class="fade-up s2" style="display:flex;align-items:center;gap:12px;padding:10px 20px;border-radius:10px;border:1px solid var(--border);background:var(--bg2)">
+        <span style="font-size:18px;flex-shrink:0">&#9200;</span>
+        <span style="font-size:14px;color:var(--text2)">Decisions and context <strong style="color:var(--text)">evaporate in 48 hours</strong> — no audit trail</span>
       </div>
-      <div class="fade-up s3" style="padding:20px 16px">
-        <div style="font-size:13px;color:var(--text);line-height:1.6;font-weight:600;margin-bottom:8px">"When two features compete, the loudest stakeholder wins — not the strongest evidence."</div>
-        <div style="font-size:11px;color:var(--text3)">Sound familiar? You're not alone.</div>
+      <div class="fade-up s3" style="display:flex;align-items:center;gap:12px;padding:10px 20px;border-radius:10px;border:1px solid var(--border);background:var(--bg2)">
+        <span style="font-size:18px;flex-shrink:0">&#128227;</span>
+        <span style="font-size:14px;color:var(--text2)">Roadmap shaped by the <strong style="color:var(--text)">loudest voice</strong> — not the strongest signal</span>
       </div>
     </div>
   </div>
