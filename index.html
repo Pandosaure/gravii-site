@@ -740,9 +740,12 @@ Example: &quot;Sarah from DataFlow called again about bulk import. She said they
       <div class="sec-card fade-up s3"><img src="/images/icon-sec-rls.png" style="width:56px;height:56px;margin-bottom:12px" alt="RLS"/><h3 style="font-size:15px;font-weight:700;margin-bottom:6px">Row-Level Security</h3><p style="font-size:13px;color:var(--text2);line-height:1.5">Every database query enforces organization-level isolation via Supabase RLS policies. No tenant can access another tenant's data.</p></div>
     </div>
 
-    <!-- Detailed security breakdown -->
-    <div class="fade-up s4" style="max-width:800px;margin:0 auto">
-      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:16px;overflow:hidden">
+    <!-- Detailed security breakdown — collapsible -->
+    <div class="fade-up s4" style="max-width:800px;margin:0 auto;text-align:center">
+      <button onclick="var d=document.getElementById('sec-detail');var a=this.querySelector('span');if(d.style.display==='none'){d.style.display='block';a.textContent='\u25BE'}else{d.style.display='none';a.textContent='\u25B8'}" style="background:var(--surface);border:1px solid var(--border);color:var(--text2);font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;padding:10px 24px;border-radius:10px;transition:all 0.2s;display:inline-flex;align-items:center;gap:8px" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--border)'">
+        Full security architecture <span style="font-size:10px">\u25B8</span>
+      </button>
+      <div id="sec-detail" style="display:none;margin-top:16px;text-align:left">
         <div style="padding:20px 24px;border-bottom:1px solid var(--border);background:var(--bg3)">
           <div style="font-size:14px;font-weight:700;color:var(--text)">Security Architecture</div>
           <div style="font-size:12px;color:var(--text3);margin-top:2px">What's true today — no future promises</div>
@@ -801,7 +804,7 @@ Example: &quot;Sarah from DataFlow called again about bulk import. She said they
           </div>
         </div>
       </div>
-    </div>
+    </div><!-- close sec-detail + wrapper -->
   </div>
 </section>
 
@@ -810,201 +813,80 @@ Example: &quot;Sarah from DataFlow called again about bulk import. She said they
   <div class="container" style="text-align:center">
     <div class="section-label fade-up">Pricing</div>
     <div class="section-title fade-up s1">Simple pricing.<br>No per-seat fees.</div>
-    <p class="fade-up s2" style="font-size:16px;color:var(--text2);max-width:460px;margin:0 auto 48px">Every tier includes the full intelligence loop. Upgrade when you need scale, customization, or compliance.</p>
+    <p class="fade-up s2" style="font-size:15px;color:var(--text2);max-width:460px;margin:0 auto 48px">Every plan includes the full intelligence loop. Upgrade when you need more power.</p>
 
-    <div class="fade-up s3" style="max-width:900px;margin:0 auto;overflow-x:auto;overflow-y:visible;padding-top:16px">
-      <table style="width:100%;border-collapse:collapse;text-align:left;font-size:13px">
-        <!-- HEADER ROW: Tier names + prices -->
+    <div class="fade-up s3" style="max-width:700px;margin:0 auto;overflow-x:auto;padding-top:16px">
+      <table style="width:100%;border-collapse:collapse;text-align:left">
         <thead>
           <tr>
-            <th style="padding:16px 14px;border-bottom:2px solid var(--border);width:40%;font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:1px;font-weight:600"></th>
-            <th style="padding:16px 14px;border-bottom:2px solid var(--border);text-align:center;width:20%">
-              <div style="font-size:15px;font-weight:700;color:var(--text);margin-bottom:2px">Starter</div>
-              <div style="display:flex;align-items:baseline;gap:6px;justify-content:center"><span style="font-size:28px;font-weight:800;color:var(--text);letter-spacing:-1px">€99</span><span style="font-size:12px;color:var(--text3)">/mo</span><span style="font-size:12px;color:var(--text3);text-decoration:line-through">€199</span></div>
-              <div style="font-size:10px;color:var(--accent2);font-weight:600">Launch price</div>
+            <th style="padding:14px;border-bottom:2px solid var(--border);width:50%"></th>
+            <th style="padding:14px;border-bottom:2px solid var(--border);text-align:center;width:25%">
+              <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:2px">Starter</div>
+              <div style="display:flex;align-items:baseline;gap:5px;justify-content:center"><span style="font-size:26px;font-weight:800;color:var(--text);letter-spacing:-1px">€99</span><span style="font-size:11px;color:var(--text3)">/mo</span><span style="font-size:11px;color:var(--text3);text-decoration:line-through">€199</span></div>
+              <div style="font-size:9px;color:var(--accent2);font-weight:600">Launch price</div>
             </th>
-            <th style="padding:16px 14px;border-bottom:2px solid var(--accent);text-align:center;width:20%;background:rgba(99,102,241,0.05);position:relative">
-              <div style="position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--accent);color:white;font-size:10px;font-weight:600;padding:3px 12px;border-radius:100px;white-space:nowrap">Most popular</div>
-              <div style="font-size:15px;font-weight:700;color:var(--text);margin-bottom:2px">Pro</div>
-              <div style="display:flex;align-items:baseline;gap:6px;justify-content:center"><span style="font-size:28px;font-weight:800;color:var(--text);letter-spacing:-1px">€199</span><span style="font-size:12px;color:var(--text3)">/mo</span><span style="font-size:12px;color:var(--text3);text-decoration:line-through">€399</span></div>
-              <div style="font-size:10px;color:var(--accent2);font-weight:600">Launch price</div>
-            </th>
-            <th style="padding:16px 14px;border-bottom:2px solid var(--border);text-align:center;width:20%">
-              <div style="font-size:15px;font-weight:700;color:var(--text);margin-bottom:2px">Enterprise</div>
-              <div style="display:flex;align-items:baseline;gap:6px;justify-content:center"><span style="font-size:28px;font-weight:800;color:var(--text);letter-spacing:-1px">€499</span><span style="font-size:12px;color:var(--text3)">/mo</span><span style="font-size:12px;color:var(--text3);text-decoration:line-through">€999</span></div>
-              <div style="font-size:10px;color:var(--accent2);font-weight:600">Launch price</div>
+            <th style="padding:14px;border-bottom:2px solid var(--accent);text-align:center;width:25%;background:rgba(99,102,241,0.04);position:relative">
+              <div style="position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--accent);color:white;font-size:9px;font-weight:600;padding:3px 12px;border-radius:100px;white-space:nowrap">Recommended</div>
+              <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:2px">Pro</div>
+              <div style="display:flex;align-items:baseline;gap:5px;justify-content:center"><span style="font-size:26px;font-weight:800;color:var(--text);letter-spacing:-1px">€199</span><span style="font-size:11px;color:var(--text3)">/mo</span><span style="font-size:11px;color:var(--text3);text-decoration:line-through">€399</span></div>
+              <div style="font-size:9px;color:var(--accent2);font-weight:600">Launch price</div>
             </th>
           </tr>
         </thead>
         <tbody>
-          <!-- SECTION: Usage -->
-          <tr><td colspan="4" style="padding:12px 14px 6px;font-size:10px;font-weight:700;color:var(--accent2);text-transform:uppercase;letter-spacing:1.5px;border-bottom:1px solid var(--border)">Usage</td></tr>
-          <tr style="border-bottom:1px solid rgba(42,43,61,0.5)">
-            <td style="padding:10px 14px;color:var(--text2)">Users</td>
-            <td style="padding:10px 14px;text-align:center;color:var(--text)">Up to 5</td>
-            <td style="padding:10px 14px;text-align:center;color:var(--text);background:rgba(99,102,241,0.03);font-weight:600">Unlimited</td>
-            <td style="padding:10px 14px;text-align:center;color:var(--text);font-weight:600">Unlimited</td>
-          </tr>
-          <tr style="border-bottom:1px solid rgba(42,43,61,0.5)">
-            <td style="padding:10px 14px;color:var(--text2)">Captures per month</td>
-            <td style="padding:10px 14px;text-align:center;color:var(--text)">50</td>
-            <td style="padding:10px 14px;text-align:center;color:var(--text);background:rgba(99,102,241,0.03)">200</td>
-            <td style="padding:10px 14px;text-align:center;color:var(--text)">Unlimited</td>
-          </tr>
+          <tr><td colspan="3" style="padding:10px 14px 5px;font-size:10px;font-weight:700;color:var(--accent2);text-transform:uppercase;letter-spacing:1.5px;border-bottom:1px solid var(--border)">Usage</td></tr>
+          <tr style="border-bottom:1px solid rgba(42,43,61,0.4)"><td style="padding:9px 14px;color:var(--text2);font-size:13px">Users</td><td style="padding:9px 14px;text-align:center;color:var(--text);font-size:13px">Up to 5</td><td style="padding:9px 14px;text-align:center;color:var(--text);font-size:13px;font-weight:600;background:rgba(99,102,241,0.04)">Unlimited</td></tr>
+          <tr style="border-bottom:1px solid rgba(42,43,61,0.4)"><td style="padding:9px 14px;color:var(--text2);font-size:13px">Captures / month</td><td style="padding:9px 14px;text-align:center;color:var(--text);font-size:13px">50</td><td style="padding:9px 14px;text-align:center;color:var(--text);font-size:13px;font-weight:600;background:rgba(99,102,241,0.04)">200</td></tr>
 
-          <!-- SECTION: Core Intelligence -->
-          <tr><td colspan="4" style="padding:12px 14px 6px;font-size:10px;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:1.5px;border-bottom:1px solid var(--border)">Core Intelligence</td></tr>
-          <tr style="border-bottom:1px solid rgba(42,43,61,0.5)">
-            <td style="padding:10px 14px;color:var(--text2)">AI Capture & Entity Extraction</td>
-            <td style="padding:10px 14px;text-align:center;"><span style="display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:rgba(16,185,129,0.15);color:#34D399;font-size:14px;font-weight:700">&#10003;</span></td>
-            <td style="padding:10px 14px;text-align:center;color:var(--green);background:rgba(99,102,241,0.03)">&#10003;</td>
-            <td style="padding:10px 14px;text-align:center;"><span style="display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:rgba(16,185,129,0.15);color:#34D399;font-size:14px;font-weight:700">&#10003;</span></td>
-          </tr>
-          <tr style="border-bottom:1px solid rgba(42,43,61,0.5)">
-            <td style="padding:10px 14px;color:var(--text2)">Signal Classification & Deduplication</td>
-            <td style="padding:10px 14px;text-align:center;"><span style="display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:rgba(16,185,129,0.15);color:#34D399;font-size:14px;font-weight:700">&#10003;</span></td>
-            <td style="padding:10px 14px;text-align:center;color:var(--green);background:rgba(99,102,241,0.03)">&#10003;</td>
-            <td style="padding:10px 14px;text-align:center;"><span style="display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:rgba(16,185,129,0.15);color:#34D399;font-size:14px;font-weight:700">&#10003;</span></td>
-          </tr>
-          <tr style="border-bottom:1px solid rgba(42,43,61,0.5)">
-            <td style="padding:10px 14px;color:var(--text2)">Traction Scoring (0-100)</td>
-            <td style="padding:10px 14px;text-align:center;"><span style="display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:rgba(16,185,129,0.15);color:#34D399;font-size:14px;font-weight:700">&#10003;</span></td>
-            <td style="padding:10px 14px;text-align:center;color:var(--green);background:rgba(99,102,241,0.03)">&#10003;</td>
-            <td style="padding:10px 14px;text-align:center;"><span style="display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:rgba(16,185,129,0.15);color:#34D399;font-size:14px;font-weight:700">&#10003;</span></td>
-          </tr>
-          <tr style="border-bottom:1px solid rgba(42,43,61,0.5)">
-            <td style="padding:10px 14px;color:var(--text2)">Explorer & Graph View</td>
-            <td style="padding:10px 14px;text-align:center;"><span style="display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:rgba(16,185,129,0.15);color:#34D399;font-size:14px;font-weight:700">&#10003;</span></td>
-            <td style="padding:10px 14px;text-align:center;color:var(--green);background:rgba(99,102,241,0.03)">&#10003;</td>
-            <td style="padding:10px 14px;text-align:center;"><span style="display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:rgba(16,185,129,0.15);color:#34D399;font-size:14px;font-weight:700">&#10003;</span></td>
-          </tr>
-          <tr style="border-bottom:1px solid rgba(42,43,61,0.5)">
-            <td style="padding:10px 14px;color:var(--text2)">BYOK — Bring Your Own AI Key</td>
-            <td style="padding:10px 14px;text-align:center;"><span style="display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:rgba(16,185,129,0.15);color:#34D399;font-size:14px;font-weight:700">&#10003;</span></td>
-            <td style="padding:10px 14px;text-align:center;color:var(--green);background:rgba(99,102,241,0.03)">&#10003;</td>
-            <td style="padding:10px 14px;text-align:center;"><span style="display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:rgba(16,185,129,0.15);color:#34D399;font-size:14px;font-weight:700">&#10003;</span></td>
-          </tr>
+          <tr><td colspan="3" style="padding:10px 14px 5px;font-size:10px;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:1.5px;border-bottom:1px solid var(--border)">Core Intelligence</td></tr>
+          <tr style="border-bottom:1px solid rgba(42,43,61,0.4)"><td style="padding:9px 14px;color:var(--text2);font-size:13px">AI Capture & Entity Extraction</td><td style="padding:9px 14px;text-align:center"><span style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:rgba(16,185,129,0.15)"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2.5 6L5 8.5L9.5 3.5" stroke="#34D399" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span></td><td style="padding:9px 14px;text-align:center;background:rgba(99,102,241,0.04)"><span style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:rgba(16,185,129,0.15)"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2.5 6L5 8.5L9.5 3.5" stroke="#34D399" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span></td></tr>
+          <tr style="border-bottom:1px solid rgba(42,43,61,0.4)"><td style="padding:9px 14px;color:var(--text2);font-size:13px">Signal Classification & Dedup</td><td style="padding:9px 14px;text-align:center"><span style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:rgba(16,185,129,0.15)"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2.5 6L5 8.5L9.5 3.5" stroke="#34D399" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span></td><td style="padding:9px 14px;text-align:center;background:rgba(99,102,241,0.04)"><span style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:rgba(16,185,129,0.15)"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2.5 6L5 8.5L9.5 3.5" stroke="#34D399" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span></td></tr>
+          <tr style="border-bottom:1px solid rgba(42,43,61,0.4)"><td style="padding:9px 14px;color:var(--text2);font-size:13px">Traction Scoring (0-100)</td><td style="padding:9px 14px;text-align:center"><span style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:rgba(16,185,129,0.15)"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2.5 6L5 8.5L9.5 3.5" stroke="#34D399" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span></td><td style="padding:9px 14px;text-align:center;background:rgba(99,102,241,0.04)"><span style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:rgba(16,185,129,0.15)"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2.5 6L5 8.5L9.5 3.5" stroke="#34D399" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span></td></tr>
+          <tr style="border-bottom:1px solid rgba(42,43,61,0.4)"><td style="padding:9px 14px;color:var(--text2);font-size:13px">Explorer & Graph View</td><td style="padding:9px 14px;text-align:center"><span style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:rgba(16,185,129,0.15)"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2.5 6L5 8.5L9.5 3.5" stroke="#34D399" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span></td><td style="padding:9px 14px;text-align:center;background:rgba(99,102,241,0.04)"><span style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:rgba(16,185,129,0.15)"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2.5 6L5 8.5L9.5 3.5" stroke="#34D399" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span></td></tr>
+          <tr style="border-bottom:1px solid rgba(42,43,61,0.4)"><td style="padding:9px 14px;color:var(--text2);font-size:13px">BYOK — Your Own AI Key</td><td style="padding:9px 14px;text-align:center"><span style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:rgba(16,185,129,0.15)"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2.5 6L5 8.5L9.5 3.5" stroke="#34D399" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span></td><td style="padding:9px 14px;text-align:center;background:rgba(99,102,241,0.04)"><span style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:rgba(16,185,129,0.15)"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2.5 6L5 8.5L9.5 3.5" stroke="#34D399" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span></td></tr>
 
-          <!-- SECTION: Planning & Customization -->
-          <tr><td colspan="4" style="padding:12px 14px 6px;font-size:10px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:1.5px;border-bottom:1px solid var(--border)">Planning & Customization</td></tr>
-          <tr style="border-bottom:1px solid rgba(42,43,61,0.5)">
-            <td style="padding:10px 14px;color:var(--text2)">Roadmap & Gantt Chart</td>
-            <td style="padding:10px 14px;text-align:center;"><span style="display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:rgba(107,108,130,0.1);color:#4B5563;font-size:12px">—</span></td>
-            <td style="padding:10px 14px;text-align:center;color:var(--green);background:rgba(99,102,241,0.03)">&#10003;</td>
-            <td style="padding:10px 14px;text-align:center;"><span style="display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:rgba(16,185,129,0.15);color:#34D399;font-size:14px;font-weight:700">&#10003;</span></td>
-          </tr>
-          <tr style="border-bottom:1px solid rgba(42,43,61,0.5)">
-            <td style="padding:10px 14px;color:var(--text2)">AI Scoring Wizard</td>
-            <td style="padding:10px 14px;text-align:center;"><span style="display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:rgba(107,108,130,0.1);color:#4B5563;font-size:12px">—</span></td>
-            <td style="padding:10px 14px;text-align:center;color:var(--green);background:rgba(99,102,241,0.03)">&#10003;</td>
-            <td style="padding:10px 14px;text-align:center;"><span style="display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:rgba(16,185,129,0.15);color:#34D399;font-size:14px;font-weight:700">&#10003;</span></td>
-          </tr>
-          <tr style="border-bottom:1px solid rgba(42,43,61,0.5)">
-            <td style="padding:10px 14px;color:var(--text2)">Custom Node Types</td>
-            <td style="padding:10px 14px;text-align:center;"><span style="display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:rgba(107,108,130,0.1);color:#4B5563;font-size:12px">—</span></td>
-            <td style="padding:10px 14px;text-align:center;color:var(--green);background:rgba(99,102,241,0.03)">&#10003;</td>
-            <td style="padding:10px 14px;text-align:center;"><span style="display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:rgba(16,185,129,0.15);color:#34D399;font-size:14px;font-weight:700">&#10003;</span></td>
-          </tr>
-          <tr style="border-bottom:1px solid rgba(42,43,61,0.5)">
-            <td style="padding:10px 14px;color:var(--text2)">Custom Signal Types & Status Pipelines</td>
-            <td style="padding:10px 14px;text-align:center;"><span style="display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:rgba(107,108,130,0.1);color:#4B5563;font-size:12px">—</span></td>
-            <td style="padding:10px 14px;text-align:center;color:var(--green);background:rgba(99,102,241,0.03)">&#10003;</td>
-            <td style="padding:10px 14px;text-align:center;"><span style="display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:rgba(16,185,129,0.15);color:#34D399;font-size:14px;font-weight:700">&#10003;</span></td>
-          </tr>
-          <tr style="border-bottom:1px solid rgba(42,43,61,0.5)">
-            <td style="padding:10px 14px;color:var(--text2)">Dependency Tracking</td>
-            <td style="padding:10px 14px;text-align:center;"><span style="display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:rgba(107,108,130,0.1);color:#4B5563;font-size:12px">—</span></td>
-            <td style="padding:10px 14px;text-align:center;color:var(--green);background:rgba(99,102,241,0.03)">&#10003;</td>
-            <td style="padding:10px 14px;text-align:center;"><span style="display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:rgba(16,185,129,0.15);color:#34D399;font-size:14px;font-weight:700">&#10003;</span></td>
-          </tr>
+          <tr><td colspan="3" style="padding:10px 14px 5px;font-size:10px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:1.5px;border-bottom:1px solid var(--border)">Planning & Customization</td></tr>
+          <tr style="border-bottom:1px solid rgba(42,43,61,0.4)"><td style="padding:9px 14px;color:var(--text2);font-size:13px">Roadmap & Gantt Chart</td><td style="padding:9px 14px;text-align:center"><span style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:rgba(107,108,130,0.08);color:#4B5563;font-size:11px;font-weight:600">—</span></td><td style="padding:9px 14px;text-align:center;background:rgba(99,102,241,0.04)"><span style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:rgba(16,185,129,0.15)"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2.5 6L5 8.5L9.5 3.5" stroke="#34D399" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span></td></tr>
+          <tr style="border-bottom:1px solid rgba(42,43,61,0.4)"><td style="padding:9px 14px;color:var(--text2);font-size:13px">AI Scoring Wizard</td><td style="padding:9px 14px;text-align:center"><span style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:rgba(107,108,130,0.08);color:#4B5563;font-size:11px;font-weight:600">—</span></td><td style="padding:9px 14px;text-align:center;background:rgba(99,102,241,0.04)"><span style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:rgba(16,185,129,0.15)"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2.5 6L5 8.5L9.5 3.5" stroke="#34D399" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span></td></tr>
+          <tr style="border-bottom:1px solid rgba(42,43,61,0.4)"><td style="padding:9px 14px;color:var(--text2);font-size:13px">Custom Node & Signal Types</td><td style="padding:9px 14px;text-align:center"><span style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:rgba(107,108,130,0.08);color:#4B5563;font-size:11px;font-weight:600">—</span></td><td style="padding:9px 14px;text-align:center;background:rgba(99,102,241,0.04)"><span style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:rgba(16,185,129,0.15)"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2.5 6L5 8.5L9.5 3.5" stroke="#34D399" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span></td></tr>
+          <tr style="border-bottom:1px solid rgba(42,43,61,0.4)"><td style="padding:9px 14px;color:var(--text2);font-size:13px">Dependency Tracking</td><td style="padding:9px 14px;text-align:center"><span style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:rgba(107,108,130,0.08);color:#4B5563;font-size:11px;font-weight:600">—</span></td><td style="padding:9px 14px;text-align:center;background:rgba(99,102,241,0.04)"><span style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:rgba(16,185,129,0.15)"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2.5 6L5 8.5L9.5 3.5" stroke="#34D399" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span></td></tr>
 
-          <!-- SECTION: Security & Compliance -->
-          <tr><td colspan="4" style="padding:12px 14px 6px;font-size:10px;font-weight:700;color:var(--accent2);text-transform:uppercase;letter-spacing:1.5px;border-bottom:1px solid var(--border)">Security & Compliance</td></tr>
-          <tr style="border-bottom:1px solid rgba(42,43,61,0.5)">
-            <td style="padding:10px 14px;color:var(--text2)">EU Data Hosting (Frankfurt)</td>
-            <td style="padding:10px 14px;text-align:center;"><span style="display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:rgba(16,185,129,0.15);color:#34D399;font-size:14px;font-weight:700">&#10003;</span></td>
-            <td style="padding:10px 14px;text-align:center;color:var(--green);background:rgba(99,102,241,0.03)">&#10003;</td>
-            <td style="padding:10px 14px;text-align:center;"><span style="display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:rgba(16,185,129,0.15);color:#34D399;font-size:14px;font-weight:700">&#10003;</span></td>
-          </tr>
-          <tr style="border-bottom:1px solid rgba(42,43,61,0.5)">
-            <td style="padding:10px 14px;color:var(--text2)">Row-Level Security</td>
-            <td style="padding:10px 14px;text-align:center;"><span style="display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:rgba(16,185,129,0.15);color:#34D399;font-size:14px;font-weight:700">&#10003;</span></td>
-            <td style="padding:10px 14px;text-align:center;color:var(--green);background:rgba(99,102,241,0.03)">&#10003;</td>
-            <td style="padding:10px 14px;text-align:center;"><span style="display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:rgba(16,185,129,0.15);color:#34D399;font-size:14px;font-weight:700">&#10003;</span></td>
-          </tr>
-          <tr style="border-bottom:1px solid rgba(42,43,61,0.5)">
-            <td style="padding:10px 14px;color:var(--text2)">SSO / SAML</td>
-            <td style="padding:10px 14px;text-align:center;"><span style="display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:rgba(107,108,130,0.1);color:#4B5563;font-size:12px">—</span></td>
-            <td style="padding:10px 14px;text-align:center;color:var(--text3);background:rgba(99,102,241,0.03)">&#10007;</td>
-            <td style="padding:10px 14px;text-align:center;"><span style="display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:rgba(16,185,129,0.15);color:#34D399;font-size:14px;font-weight:700">&#10003;</span></td>
-          </tr>
-          <tr style="border-bottom:1px solid rgba(42,43,61,0.5)">
-            <td style="padding:10px 14px;color:var(--text2)">Audit Logs</td>
-            <td style="padding:10px 14px;text-align:center;"><span style="display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:rgba(107,108,130,0.1);color:#4B5563;font-size:12px">—</span></td>
-            <td style="padding:10px 14px;text-align:center;color:var(--text3);background:rgba(99,102,241,0.03)">&#10007;</td>
-            <td style="padding:10px 14px;text-align:center;"><span style="display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:rgba(16,185,129,0.15);color:#34D399;font-size:14px;font-weight:700">&#10003;</span></td>
-          </tr>
-          <tr style="border-bottom:1px solid rgba(42,43,61,0.5)">
-            <td style="padding:10px 14px;color:var(--text2)">Sovereign Mode — your own database</td>
-            <td style="padding:10px 14px;text-align:center;"><span style="display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:rgba(107,108,130,0.1);color:#4B5563;font-size:12px">—</span></td>
-            <td style="padding:10px 14px;text-align:center;color:var(--text3);background:rgba(99,102,241,0.03)">&#10007;</td>
-            <td style="padding:10px 14px;text-align:center;"><span style="display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:rgba(16,185,129,0.15);color:#34D399;font-size:14px;font-weight:700">&#10003;</span></td>
-          </tr>
-          <tr style="border-bottom:1px solid rgba(42,43,61,0.5)">
-            <td style="padding:10px 14px;color:var(--text2)">DPA & Sub-processor List</td>
-            <td style="padding:10px 14px;text-align:center;"><span style="display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:rgba(107,108,130,0.1);color:#4B5563;font-size:12px">—</span></td>
-            <td style="padding:10px 14px;text-align:center;color:var(--text3);background:rgba(99,102,241,0.03)">&#10007;</td>
-            <td style="padding:10px 14px;text-align:center;"><span style="display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:rgba(16,185,129,0.15);color:#34D399;font-size:14px;font-weight:700">&#10003;</span></td>
-          </tr>
+          <tr><td colspan="3" style="padding:10px 14px 5px;font-size:10px;font-weight:700;color:var(--accent2);text-transform:uppercase;letter-spacing:1.5px;border-bottom:1px solid var(--border)">Security</td></tr>
+          <tr style="border-bottom:1px solid rgba(42,43,61,0.4)"><td style="padding:9px 14px;color:var(--text2);font-size:13px">EU Hosting (Frankfurt)</td><td style="padding:9px 14px;text-align:center"><span style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:rgba(16,185,129,0.15)"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2.5 6L5 8.5L9.5 3.5" stroke="#34D399" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span></td><td style="padding:9px 14px;text-align:center;background:rgba(99,102,241,0.04)"><span style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:rgba(16,185,129,0.15)"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2.5 6L5 8.5L9.5 3.5" stroke="#34D399" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span></td></tr>
+          <tr style="border-bottom:1px solid rgba(42,43,61,0.4)"><td style="padding:9px 14px;color:var(--text2);font-size:13px">Row-Level Security</td><td style="padding:9px 14px;text-align:center"><span style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:rgba(16,185,129,0.15)"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2.5 6L5 8.5L9.5 3.5" stroke="#34D399" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span></td><td style="padding:9px 14px;text-align:center;background:rgba(99,102,241,0.04)"><span style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:rgba(16,185,129,0.15)"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2.5 6L5 8.5L9.5 3.5" stroke="#34D399" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span></td></tr>
+          <tr style="border-bottom:1px solid rgba(42,43,61,0.4)"><td style="padding:9px 14px;color:var(--text2);font-size:13px">Encryption at rest & in transit</td><td style="padding:9px 14px;text-align:center"><span style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:rgba(16,185,129,0.15)"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2.5 6L5 8.5L9.5 3.5" stroke="#34D399" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span></td><td style="padding:9px 14px;text-align:center;background:rgba(99,102,241,0.04)"><span style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:rgba(16,185,129,0.15)"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2.5 6L5 8.5L9.5 3.5" stroke="#34D399" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span></td></tr>
 
-          <!-- SECTION: Support -->
-          <tr><td colspan="4" style="padding:12px 14px 6px;font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:1.5px;border-bottom:1px solid var(--border)">Support</td></tr>
-          <tr style="border-bottom:1px solid rgba(42,43,61,0.5)">
-            <td style="padding:10px 14px;color:var(--text2)">Email support</td>
-            <td style="padding:10px 14px;text-align:center;"><span style="display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:rgba(16,185,129,0.15);color:#34D399;font-size:14px;font-weight:700">&#10003;</span></td>
-            <td style="padding:10px 14px;text-align:center;color:var(--green);background:rgba(99,102,241,0.03)">&#10003;</td>
-            <td style="padding:10px 14px;text-align:center;"><span style="display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:rgba(16,185,129,0.15);color:#34D399;font-size:14px;font-weight:700">&#10003;</span></td>
-          </tr>
-          <tr style="border-bottom:1px solid rgba(42,43,61,0.5)">
-            <td style="padding:10px 14px;color:var(--text2)">Priority support & onboarding</td>
-            <td style="padding:10px 14px;text-align:center;"><span style="display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:rgba(107,108,130,0.1);color:#4B5563;font-size:12px">—</span></td>
-            <td style="padding:10px 14px;text-align:center;color:var(--text3);background:rgba(99,102,241,0.03)">&#10007;</td>
-            <td style="padding:10px 14px;text-align:center;"><span style="display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:rgba(16,185,129,0.15);color:#34D399;font-size:14px;font-weight:700">&#10003;</span></td>
-          </tr>
+          <tr><td colspan="3" style="padding:10px 14px 5px;font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:1.5px;border-bottom:1px solid var(--border)">Support</td></tr>
+          <tr style="border-bottom:1px solid rgba(42,43,61,0.4)"><td style="padding:9px 14px;color:var(--text2);font-size:13px">Email support</td><td style="padding:9px 14px;text-align:center"><span style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:rgba(16,185,129,0.15)"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2.5 6L5 8.5L9.5 3.5" stroke="#34D399" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span></td><td style="padding:9px 14px;text-align:center;background:rgba(99,102,241,0.04)"><span style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:rgba(16,185,129,0.15)"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2.5 6L5 8.5L9.5 3.5" stroke="#34D399" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span></td></tr>
+          <tr style="border-bottom:1px solid rgba(42,43,61,0.4)"><td style="padding:9px 14px;color:var(--text2);font-size:13px">Onboarding call</td><td style="padding:9px 14px;text-align:center"><span style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:rgba(107,108,130,0.08);color:#4B5563;font-size:11px;font-weight:600">—</span></td><td style="padding:9px 14px;text-align:center;background:rgba(99,102,241,0.04)"><span style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:rgba(16,185,129,0.15)"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2.5 6L5 8.5L9.5 3.5" stroke="#34D399" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span></td></tr>
 
-          <!-- CTA ROW -->
-          <tr>
-            <td style="padding:20px 14px"></td>
-            <td style="padding:20px 14px;text-align:center">
-              <form class="capture-form" action="https://script.google.com/macros/s/AKfycby03fRaOg0FpWJJvWnnUhZLH5JTidBObQAW0hNuLhJsPZk38z7tVJ5B8hO_fykPUfcU/exec" method="POST" style="max-width:220px;margin:0 auto">
-                <input type="email" name="email" placeholder="Work email" required style="min-width:0;height:36px;font-size:11px">
-                <input type="hidden" name="plan" value="Starter">
-                <button type="submit" style="height:36px;font-size:11px;padding:0 12px;background:var(--surface);border:1px solid var(--border);color:var(--text2)">Join</button>
-              </form>
-              <div class="capture-success" style="font-size:11px">You're in.</div>
-            </td>
-            <td style="padding:20px 14px;text-align:center;background:rgba(99,102,241,0.03)">
-              <form class="capture-form" action="https://script.google.com/macros/s/AKfycby03fRaOg0FpWJJvWnnUhZLH5JTidBObQAW0hNuLhJsPZk38z7tVJ5B8hO_fykPUfcU/exec" method="POST" style="max-width:220px;margin:0 auto">
-                <input type="email" name="email" placeholder="Work email" required style="min-width:0;height:36px;font-size:11px">
-                <input type="hidden" name="plan" value="Pro">
-                <button type="submit" style="height:36px;font-size:11px;padding:0 12px">Join</button>
-              </form>
-              <div class="capture-success" style="font-size:11px">You're in.</div>
-            </td>
-            <td style="padding:20px 14px;text-align:center">
-              <form class="capture-form" action="https://script.google.com/macros/s/AKfycby03fRaOg0FpWJJvWnnUhZLH5JTidBObQAW0hNuLhJsPZk38z7tVJ5B8hO_fykPUfcU/exec" method="POST" style="max-width:220px;margin:0 auto">
-                <input type="email" name="email" placeholder="Work email" required style="min-width:0;height:36px;font-size:11px">
-                <input type="hidden" name="plan" value="Enterprise">
-                <button type="submit" style="height:36px;font-size:11px;padding:0 12px;background:var(--surface);border:1px solid var(--border);color:var(--text2)">Join</button>
-              </form>
-              <div class="capture-success" style="font-size:11px">You're in.</div>
-            </td>
-          </tr>
         </tbody>
       </table>
     </div>
 
-    <p style="margin-top:24px;font-size:13px;color:var(--text3)" class="fade-up">All plans include a 14-day free trial at launch. No credit card required.</p>
+    <!-- Single CTA -->
+    <div style="margin-top:32px">
+      <form class="capture-form" action="https://script.google.com/macros/s/AKfycby03fRaOg0FpWJJvWnnUhZLH5JTidBObQAW0hNuLhJsPZk38z7tVJ5B8hO_fykPUfcU/exec" method="POST" style="max-width:400px">
+        <input type="email" name="email" placeholder="Work email" required>
+        <input type="hidden" name="source" value="pricing">
+        <input type="hidden" name="plan" value="early-access">
+        <button type="submit">Request early access</button>
+      </form>
+      <div class="capture-success">You're on the list. We'll reach out soon.</div>
+    </div>
+
+    <!-- Enterprise teaser -->
+    <div class="fade-up s4" style="margin-top:32px;max-width:700px;margin-left:auto;margin-right:auto">
+      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:20px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
+        <div style="text-align:left">
+          <div style="font-size:14px;font-weight:700;color:var(--text)">Enterprise</div>
+          <div style="font-size:12px;color:var(--text3)">SSO, audit logs, sovereign mode, DPA — coming soon</div>
+        </div>
+        <div style="font-size:12px;color:var(--accent2);font-weight:600;padding:6px 16px;border:1px solid var(--accent);border-radius:8px">Notify me</div>
+      </div>
+    </div>
+
+    <p style="margin-top:20px;font-size:12px;color:var(--text3)" class="fade-up">All plans include a 14-day free trial at launch. No credit card required.</p>
   </div>
 </section>
 
