@@ -5,9 +5,10 @@ import Image from "next/image";
 
 const TOOLS = [
   {
-    id: "email", label: "Email & Transcripts",
-    logos: ["/images/logos/fireflies.webp"],
-    signal: "Meeting transcripts auto-processed", status: "Launching soon",
+    id: "email", label: "Email Forwarding",
+    logos: [],
+    emailIcon: true,
+    signal: "Forward any email to auto-process", status: "Launching soon",
     angle: -90, color: "#3b82f6",
   },
   {
@@ -23,8 +24,8 @@ const TOOLS = [
     angle: 30, color: "#10b981",
   },
   {
-    id: "gong", label: "Gong & Calls",
-    logos: ["/images/logos/gong.webp"],
+    id: "gong", label: "Gong & Fireflies",
+    logos: ["/images/logos/gong.webp", "/images/logos/fireflies.webp"],
     signal: "Customer call intelligence", status: "Via email",
     angle: 90, color: "#8b5cf6",
   },
@@ -137,6 +138,13 @@ export default function ConnectorHub() {
 
               {/* Logos */}
               <div className="flex items-center justify-center gap-2 mb-2 mt-1">
+                {(tool as any).emailIcon && (
+                  <div className="w-7 h-7 rounded-lg bg-white/5 flex items-center justify-center p-1">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#3b82f6" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                      <rect x="2" y="4" width="20" height="16" rx="3" /><path d="M2 7l10 7 10-7" />
+                    </svg>
+                  </div>
+                )}
                 {tool.logos.map((logo, i) => (
                   <div key={i} className="w-7 h-7 rounded-lg bg-white/5 flex items-center justify-center p-1">
                     <Image src={logo} alt="" width={20} height={20} className="object-contain" />
