@@ -83,7 +83,7 @@ export default function HomePage() {
         <div className="max-w-[1100px] mx-auto px-6 text-center relative z-10">
           <div className="reveal inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#12131a] border border-[#252640] text-xs text-[#9698b0] font-medium mb-8">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-            For product teams at B2B SaaS companies
+            For B2B product teams
           </div>
           <h1 className="reveal font-display text-[clamp(40px,6.5vw,72px)] leading-[0.95] tracking-tight mb-6" style={{ animationDelay: "0.1s" }}>
             <span className="gradient-text">Your meetings already</span><br />
