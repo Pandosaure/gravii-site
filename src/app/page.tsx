@@ -5,9 +5,9 @@ import Image from "next/image";
 
 /* ═══ SAMPLES ═══ */
 const SAMPLES = [
-  { label: "Product Review", text: `Weekly product review - March 28, 2026\n\nSarah from DataFlow called again about bulk import. She said they're processing 50K records manually each week and it's becoming a deal-breaker. Tom mentioned that if we don't ship it by June, DataFlow might churn - that's €120K ARR at risk.\n\nTechPulse also asked about bulk import during their QBR last week. They're a smaller account but growing fast.\n\nDecision: we prioritize bulk import for Q2. Alex will lead engineering. We need to scope it by next Friday.\n\nOn the competitive side, Rival Inc just shipped CSV import last month. We need to go beyond basic CSV - think API-based ingestion. The API webhooks feature depends on bulk import being done first.\n\nEnterprise SSO came up again from Meridian Corp. They won't sign the enterprise contract without it. That's a potential €200K deal stuck in pipeline.` },
-  { label: "Customer Call", text: `Call with VP Product @ NovaTech - March 26, 2026\n\nJulia (VP Product) and Marcus (Head of Eng) joined. NovaTech is on our Pro plan, €180K ARR, renewed 3 months ago.\n\nJulia opened with frustration about reporting. "We spend 2 days every sprint compiling metrics from three different tools. Your dashboard is nice but it doesn't pull from Jira or our analytics platform."\n\nMarcus specifically asked about API access. "We need to build internal dashboards that pull your traction scores into our executive reporting tool. Without an API, we're copy-pasting screenshots."\n\nThey also mentioned they're evaluating a competitor for competitive intelligence. Julia said "They showed us automated signal extraction from Gong calls. That's interesting but their pricing is insane - over $20K/year."\n\nAction items: send API roadmap timeline to Julia by EOW. Schedule a follow-up demo of our capture pipeline. Flag to product: custom reporting is now blocking enterprise expansion.` },
-  { label: "Strategy Discussion", text: `Leadership offsite - Product strategy Q2-Q3 2026\n\nCEO opened: we need to double ARR by end of year. Currently at €840K, target €1.6M. Three growth vectors discussed:\n\n1. Enterprise expansion: 12 prospects in pipeline, but SSO and audit logs are blockers. CFO noted that 4 of these are €100K+ deals. Decision: SSO moves to P0, target ship date June 15.\n\n2. Self-serve growth: landing page converts at 2.1%, but activation (first capture within 48h) is only 34%. VP Product argues we need better onboarding.\n\n3. Platform play: CTO presented the connector roadmap. Email forwarding is 80% built. Slack integration estimated 3 weeks. Jira read bridge is the big bet - 6 weeks. Consensus: ship email forwarding by April 15, Slack by May 1. Jira deferred to Q3.\n\nCompetitive note: Cycle.app was acquired by Atlassian in September. Their customers are looking for alternatives. Marketing should target Cycle refugees.` },
+  { label: "Product Review", text: `Weekly product review — March 28, 2026\n\nSarah from DataFlow called again about bulk import. She said they're processing 50K records manually each week and it's becoming a deal-breaker. Tom mentioned that if we don't ship it by June, DataFlow might churn — that's €120K ARR at risk.\n\nTechPulse also asked about bulk import during their QBR last week. They're a smaller account but growing fast.\n\nDecision: we prioritize bulk import for Q2. Alex will lead engineering. We need to scope it by next Friday.\n\nOn the competitive side, Rival Inc just shipped CSV import last month. We need to go beyond basic CSV — think API-based ingestion. The API webhooks feature depends on bulk import being done first.\n\nEnterprise SSO came up again from Meridian Corp. They won't sign the enterprise contract without it. That's a potential €200K deal stuck in pipeline.` },
+  { label: "Customer Call", text: `Call with VP Product @ NovaTech — March 26, 2026\n\nJulia (VP Product) and Marcus (Head of Eng) joined. NovaTech is on our Pro plan, €180K ARR, renewed 3 months ago.\n\nJulia opened with frustration about reporting. "We spend 2 days every sprint compiling metrics from three different tools. Your dashboard is nice but it doesn't pull from Jira or our analytics platform."\n\nMarcus specifically asked about API access. "We need to build internal dashboards that pull your traction scores into our executive reporting tool. Without an API, we're copy-pasting screenshots."\n\nThey also mentioned they're evaluating a competitor for competitive intelligence. Julia said "They showed us automated signal extraction from Gong calls. That's interesting but their pricing is insane — over $20K/year."\n\nAction items: send API roadmap timeline to Julia by EOW. Schedule a follow-up demo of our capture pipeline. Flag to product: custom reporting is now blocking enterprise expansion.` },
+  { label: "Strategy Discussion", text: `Leadership offsite — Product strategy Q2-Q3 2026\n\nCEO opened: we need to double ARR by end of year. Currently at €840K, target €1.6M. Three growth vectors discussed:\n\n1. Enterprise expansion: 12 prospects in pipeline, but SSO and audit logs are blockers. CFO noted that 4 of these are €100K+ deals. Decision: SSO moves to P0, target ship date June 15.\n\n2. Self-serve growth: landing page converts at 2.1%, but activation (first capture within 48h) is only 34%. VP Product argues we need better onboarding.\n\n3. Platform play: CTO presented the connector roadmap. Email forwarding is 80% built. Slack integration estimated 3 weeks. Jira read bridge is the big bet — 6 weeks. Consensus: ship email forwarding by April 15, Slack by May 1. Jira deferred to Q3.\n\nCompetitive note: Cycle.app was acquired by Atlassian in September. Their customers are looking for alternatives. Marketing should target Cycle refugees.` },
 ];
 
 /* ═══ REVEAL HOOK ═══ */
@@ -90,11 +90,11 @@ export default function HomePage() {
             <span className="gradient-text">have the </span><em className="text-[#818cf8] not-italic">answers.</em>
           </h1>
           <p className="reveal text-[17px] text-[#9698b0] max-w-[520px] mx-auto mb-10 leading-relaxed" style={{ animationDelay: "0.2s" }}>
-            Every conversation your team has contains signals about what to build next. Gravii captures them, connects them, and shows you what matters most. Decisions trace back to evidence, not gut feel.
+            Paste any transcript. Gravii extracts the entities, signals, and decisions your team keeps forgetting. Every conversation compounds into a scored intelligence graph.
           </p>
           <div className="reveal flex gap-3 justify-center flex-wrap" style={{ animationDelay: "0.3s" }}>
             <a href="#demo" className="shimmer px-7 py-3.5 bg-[#6366f1] hover:bg-[#818cf8] text-white text-[15px] font-bold rounded-xl transition-all hover:-translate-y-0.5 hover:shadow-[0_6px_24px_rgba(99,102,241,0.4)]">
-              Try it now - paste any meeting
+              Try it now — paste any meeting
             </a>
             <a href="https://app.gravii.app/signup" className="px-7 py-3.5 bg-[#12131a] hover:bg-[#1a1b25] text-white border border-[#252640] hover:border-[#3a3b50] text-[15px] font-semibold rounded-xl transition-all">
               Start free
@@ -127,7 +127,7 @@ export default function HomePage() {
               <span className="gradient-text">Paste anything.</span> <em className="text-[#818cf8] not-italic">See the intelligence.</em>
             </h2>
             <p className="reveal text-[15px] text-[#9698b0] max-w-[440px] mx-auto" style={{ animationDelay: "0.1s" }}>
-              Meeting transcript, customer call, strategy doc - watch Gravii extract what matters in seconds.
+              Meeting transcript, customer call, strategy doc — watch Gravii extract what matters in seconds.
             </p>
           </div>
           <div className="max-w-[780px] mx-auto">
@@ -159,24 +159,143 @@ export default function HomePage() {
             )}
             {demoState === "result" && demoResult && (
               <div className="window-chrome">
-                <div className="window-bar"><span className="window-dot bg-red-500/60"/><span className="window-dot bg-amber-500/60"/><span className="window-dot bg-emerald-500/60"/><span className="ml-3 text-[11px] text-[#4a4b60]">Gravii Intelligence Snapshot</span></div>
+                <div className="window-bar"><span className="window-dot bg-red-500/60"/><span className="window-dot bg-amber-500/60"/><span className="window-dot bg-emerald-500/60"/><span className="ml-3 text-[11px] text-[#4a4b60]">Gravii Intelligence Report</span></div>
                 <div className="p-6 sm:p-8">
-                  <div className="flex items-start justify-between mb-6 flex-wrap gap-3">
-                    <div><span className="text-[10px] font-mono text-[#4a4b60] uppercase tracking-wider">{demoResult.content_type_label}</span><h3 className="text-lg font-bold mt-1">{demoResult.title}</h3></div>
-                    {demoResult.urgency && <span className={`text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full ${demoResult.urgency==="high"?"bg-red-500/15 text-red-400":demoResult.urgency==="medium"?"bg-amber-500/15 text-amber-400":"bg-[#4a4b60]/15 text-[#4a4b60]"}`}>{demoResult.urgency} · {demoResult.urgency_reason}</span>}
+
+                  {/* Hero header */}
+                  <div className="mb-6">
+                    <span className="text-[9px] font-mono text-[#4a4b60] uppercase tracking-[2px]">{demoResult.content_type_label}</span>
+                    <h3 className="text-[22px] font-bold mt-1.5 mb-3 leading-tight">{demoResult.title}</h3>
+                    {demoResult.urgency && (
+                      <span className={`text-[10px] font-bold uppercase tracking-wider px-3 py-1.5 rounded-full ${demoResult.urgency==="high"?"bg-red-500/10 text-red-400 border border-red-500/20":demoResult.urgency==="medium"?"bg-amber-500/10 text-amber-400 border border-amber-500/20":"bg-[#4a4b60]/10 text-[#4a4b60] border border-[#4a4b60]/20"}`}>{demoResult.urgency} · {demoResult.urgency_reason}</span>
+                    )}
                   </div>
-                  {demoResult.headline && <div className="px-4 py-3 rounded-xl bg-[#6366f1]/8 border border-[#6366f1]/15 mb-6"><p className="text-sm font-semibold text-[#818cf8]">{demoResult.headline}</p></div>}
-                  {demoResult.columns && <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">{demoResult.columns.map((col:any,ci:number)=>(<div key={ci}><div className="flex items-center gap-2 mb-3"><div className="w-2 h-2 rounded-full" style={{background:col.color}}/><span className="text-xs font-semibold text-[#9698b0]">{col.label}</span></div><div className="space-y-2">{col.items?.map((item:any,ii:number)=>(<div key={ii} className="px-3 py-2.5 rounded-lg bg-[#12131a] border border-[#252640]/50"><p className="text-[13px] font-medium">{item.text}</p>{item.detail&&<p className="text-[11px] text-[#4a4b60] mt-0.5">{item.detail}</p>}{item.amount&&<span className="text-[10px] font-mono font-bold text-amber-400 mt-1 inline-block">{item.amount}</span>}</div>))}</div></div>))}</div>}
+
+                  {/* Stats strip */}
+                  <div className="grid grid-cols-3 gap-3 mb-6">
+                    {[
+                      { value: demoResult.columns?.reduce((s:number,c:any)=>s+(c.items?.length||0),0)||0, label: "Insights", color: "#6366f1" },
+                      { value: demoResult.traction?.length||0, label: "Signals", color: "#10b981" },
+                      { value: demoResult.traction?.reduce((s:number,t:any)=>{ const m=String(t.reason||"").match(/€([\d,]+)K/); return s+(m?parseInt(m[1].replace(/,/g,""))*1000:0); },0)||0, label: "ARR at risk", color: "#ef4444", isCurrency: true },
+                    ].map((stat,i) => (
+                      <div key={i} className="rounded-xl bg-[#12131a] border border-[#252640] p-4 text-center">
+                        <div className="text-[24px] font-extrabold leading-none" style={{color:stat.color}}>
+                          {stat.isCurrency ? (stat.value > 0 ? `€${Math.round(stat.value/1000)}K` : "—") : stat.value}
+                        </div>
+                        <div className="text-[10px] text-[#4a4b60] mt-1 font-medium">{stat.label}</div>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Headline */}
+                  {demoResult.headline && (
+                    <div className="flex rounded-xl overflow-hidden mb-6 border border-[#6366f1]/20">
+                      <div className="w-1 bg-[#6366f1] flex-shrink-0" />
+                      <div className="flex-1 px-4 py-3 bg-[#6366f1]/[0.04]">
+                        <p className="text-[14px] font-semibold text-[#818cf8] leading-relaxed">{demoResult.headline}</p>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Impact cards - Prioritize / Monitor */}
+                  {demoResult.columns && (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+                      {demoResult.columns.map((col:any,ci:number)=>(
+                        <div key={ci}>
+                          <div className="flex items-center gap-2 mb-3">
+                            <div className="w-2.5 h-2.5 rounded-full" style={{background:col.color}}/>
+                            <span className="text-[11px] font-bold text-[#9698b0] uppercase tracking-wider">{col.label}</span>
+                          </div>
+                          <div className="space-y-2">
+                            {col.items?.map((item:any,ii:number)=>(
+                              <div key={ii} className="flex rounded-xl overflow-hidden border border-[#252640]">
+                                <div className="w-1 flex-shrink-0" style={{background: col.color}} />
+                                <div className="flex-1 px-4 py-3 bg-[#12131a]">
+                                  <p className="text-[13px] font-semibold mb-0.5">{item.text}</p>
+                                  {item.detail&&<p className="text-[11px] text-[#6b6c82] leading-relaxed">{item.detail}</p>}
+                                  {item.amount&&<span className="text-[11px] font-bold text-amber-400 mt-1 inline-block">{item.amount}</span>}
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+
+                  {/* Decisions + Next Moves */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
-                    {demoResult.decisions?.length>0&&<div><p className="text-xs font-semibold text-[#9698b0] mb-2">⚖ Decisions Made</p>{demoResult.decisions.map((d:any,i:number)=>(<div key={i} className="px-3 py-2 rounded-lg bg-[#6366f1]/6 border border-[#6366f1]/10 mb-1.5"><p className="text-[13px] font-medium">{d.text}</p>{d.owner&&<p className="text-[10px] text-[#4a4b60] mt-0.5">→ {d.owner}</p>}</div>))}</div>}
-                    {demoResult.next_moves?.length>0&&<div><p className="text-xs font-semibold text-[#9698b0] mb-2">➜ Next Moves</p>{demoResult.next_moves.map((m:string,i:number)=>(<div key={i} className="px-3 py-2 rounded-lg bg-[#12131a] border border-[#252640]/50 mb-1.5"><p className="text-[13px] text-[#9698b0]">{m}</p></div>))}</div>}
+                    {demoResult.decisions?.length>0&&(
+                      <div>
+                        <p className="text-[10px] font-bold text-[#9698b0] uppercase tracking-[1.5px] mb-2.5">Decisions</p>
+                        <div className="space-y-1.5">{demoResult.decisions.map((d:any,i:number)=>(
+                          <div key={i} className="flex rounded-xl overflow-hidden border border-[#6366f1]/15">
+                            <div className="w-1 bg-[#6366f1] flex-shrink-0" />
+                            <div className="flex-1 px-3.5 py-2.5 bg-[#6366f1]/[0.03]">
+                              <p className="text-[13px] font-medium">{d.text}</p>
+                              {d.owner&&<p className="text-[10px] text-[#6366f1] mt-0.5 font-medium">→ {d.owner}</p>}
+                            </div>
+                          </div>
+                        ))}</div>
+                      </div>
+                    )}
+                    {demoResult.next_moves?.length>0&&(
+                      <div>
+                        <p className="text-[10px] font-bold text-[#9698b0] uppercase tracking-[1.5px] mb-2.5">Next moves</p>
+                        <div className="space-y-1.5">{demoResult.next_moves.map((m:string,i:number)=>(
+                          <div key={i} className="px-3.5 py-2.5 rounded-xl bg-[#12131a] border border-[#252640]">
+                            <p className="text-[13px] text-[#9698b0]">{m}</p>
+                          </div>
+                        ))}</div>
+                      </div>
+                    )}
                   </div>
-                  {demoResult.blind_spots?.length>0&&<div className="mb-6"><p className="text-xs font-semibold text-[#9698b0] mb-2">⚠ Blind Spots</p>{demoResult.blind_spots.map((b:string,i:number)=>(<div key={i} className="px-3 py-2 rounded-lg bg-amber-500/6 border border-amber-500/10 mb-1.5"><p className="text-[13px] text-[#9698b0]">{b}</p></div>))}</div>}
-                  {demoResult.traction?.length>0&&<div><p className="text-xs font-semibold text-[#9698b0] mb-2">◎ Traction Signals</p><div className="space-y-2">{demoResult.traction.map((t:any,i:number)=>(<div key={i} className="flex items-center gap-3 px-3 py-2 rounded-lg bg-[#12131a] border border-[#252640]/50"><div className="w-10 h-10 rounded-lg bg-[#6366f1]/10 flex items-center justify-center text-[#818cf8] text-sm font-bold font-mono flex-shrink-0">{t.score}</div><div className="flex-1 min-w-0"><p className="text-[13px] font-semibold">{t.entity}</p><p className="text-[10px] text-[#4a4b60]">{t.reason}</p></div><div className="w-20 h-1.5 rounded-full bg-[#1a1b25] overflow-hidden flex-shrink-0"><div className="h-full rounded-full bg-[#6366f1] traction-bar-fill visible" style={{width:`${t.score}%`}}/></div></div>))}</div><p className="text-[10px] text-[#4a4b60] mt-3 text-center italic">One conversation. Imagine what 50 would reveal.</p></div>}
+
+                  {/* Blind Spots */}
+                  {demoResult.blind_spots?.length>0&&(
+                    <div className="mb-6">
+                      <p className="text-[10px] font-bold text-amber-400 uppercase tracking-[1.5px] mb-2.5">Blind spots</p>
+                      <div className="space-y-1.5">{demoResult.blind_spots.map((b:string,i:number)=>(
+                        <div key={i} className="flex rounded-xl overflow-hidden border border-amber-500/15">
+                          <div className="w-1 bg-amber-500 flex-shrink-0" />
+                          <div className="flex-1 px-3.5 py-2.5 bg-amber-500/[0.03]">
+                            <p className="text-[13px] text-[#9698b0]">{b}</p>
+                          </div>
+                        </div>
+                      ))}</div>
+                    </div>
+                  )}
+
+                  {/* Traction scores */}
+                  {demoResult.traction?.length>0&&(
+                    <div>
+                      <p className="text-[10px] font-bold text-[#9698b0] uppercase tracking-[1.5px] mb-3">Traction signals</p>
+                      <div className="space-y-2">
+                        {demoResult.traction.map((t:any,i:number)=>(
+                          <div key={i} className="flex items-center gap-4 px-4 py-3 rounded-xl bg-[#12131a] border border-[#252640]">
+                            <div className="text-[22px] font-extrabold text-[#6366f1] w-12 text-center flex-shrink-0 leading-none">{t.score}</div>
+                            <div className="w-px h-8 bg-[#252640] flex-shrink-0" />
+                            <div className="flex-1 min-w-0">
+                              <p className="text-[14px] font-semibold">{t.entity}</p>
+                              <p className="text-[11px] text-[#6b6c82] leading-relaxed">{t.reason}</p>
+                            </div>
+                            <div className="w-16 flex-shrink-0">
+                              <div className="h-2 rounded-full bg-[#1a1b25] overflow-hidden">
+                                <div className="h-full rounded-full bg-gradient-to-r from-[#6366f1] to-[#818cf8] traction-bar-fill visible" style={{width:`${t.score}%`}}/>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                      <p className="text-[11px] text-[#4a4b60] mt-4 text-center">One conversation. <span className="text-[#818cf8] font-medium">Imagine what 50 would reveal.</span></p>
+                    </div>
+                  )}
                 </div>
-                <div className="px-6 sm:px-8 pb-6 flex gap-3 flex-wrap">
-                  <button onClick={()=>{setDemoText("");setDemoState("input");setDemoResult(null);}} className="px-4 py-2 rounded-lg bg-[#12131a] border border-[#252640] text-[#9698b0] text-xs font-medium hover:border-[#3a3b50] transition-all cursor-pointer">Analyze another</button>
-                  <a href="https://app.gravii.app/signup" className="px-4 py-2 rounded-lg bg-[#6366f1] text-white text-xs font-semibold hover:bg-[#818cf8] transition-all">Start building your graph →</a>
+
+                {/* Footer actions */}
+                <div className="px-6 sm:px-8 pb-6 flex gap-3 flex-wrap border-t border-[#252640] pt-5 mt-2">
+                  <button onClick={()=>{setDemoText("");setDemoState("input");setDemoResult(null);}} className="px-4 py-2.5 rounded-xl bg-[#12131a] border border-[#252640] text-[#9698b0] text-xs font-medium hover:border-[#3a3b50] transition-all cursor-pointer">Try another</button>
+                  <a href="https://app.gravii.app/signup" className="px-5 py-2.5 rounded-xl bg-[#6366f1] text-white text-xs font-bold hover:bg-[#818cf8] transition-all hover:-translate-y-0.5 hover:shadow-[0_4px_16px_rgba(99,102,241,0.3)]">Start building your graph →</a>
                 </div>
               </div>
             )}
@@ -199,18 +318,18 @@ export default function HomePage() {
             </p>
           </div>
 
-          {/* Screenshot cards - 2x2 grid */}
+          {/* Screenshot cards — 2x2 grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             {[
               {
                 title: "AI Capture",
-                desc: "Paste any text. The AI identifies who's involved, what's discussed, and what was decided - with evidence and signal strength.",
+                desc: "Paste any text. The AI identifies who's involved, what's discussed, and what was decided — with evidence and signal strength.",
                 screenshot: "screenshot-capture.png",
                 fallbackAlt: "Gravii capture results showing extracted entities and signals",
               },
               {
                 title: "Intelligence Dashboard",
-                desc: "Traction scores, hot accounts, signal feed, and graph health - all in one configurable view.",
+                desc: "Traction scores, hot accounts, signal feed, and graph health — all in one configurable view.",
                 screenshot: "screenshot-dashboard.png",
                 fallbackAlt: "Gravii dashboard with traction scores and signal feed",
               },
@@ -222,14 +341,14 @@ export default function HomePage() {
               },
               {
                 title: "Traction Leaderboard",
-                desc: "Every feature ranked by signal strength. Click any score to see every meeting, every customer, every quote that built it. Demand, risk, strategic alignment, all traceable.",
+                desc: "Every feature and initiative ranked by signal strength. Dimension breakdown shows why something matters — demand, risk, strategic alignment.",
                 screenshot: "screenshot-traction.png",
                 fallbackAlt: "Gravii traction leaderboard with signal breakdown",
               },
             ].map((card, i) => (
               <div key={i} className="reveal rounded-2xl border border-[#252640] bg-[#0d0e15] overflow-hidden" style={{ animationDelay: `${i * 0.1}s` }}>
                 <div className="aspect-[16/10] bg-[#12131a] border-b border-[#252640] overflow-hidden">
-                  <Image src={`/images/${card.screenshot}`} alt={card.fallbackAlt} width={800} height={500} className="w-full h-full object-contain object-top" />
+                  <Image src={`/images/${card.screenshot}`} alt={card.fallbackAlt} width={800} height={500} className="w-full h-full object-cover object-top" />
                 </div>
                 <div className="p-5">
                   <h3 className="text-[15px] font-bold mb-1">{card.title}</h3>
@@ -258,7 +377,7 @@ export default function HomePage() {
               {
                 icon: "icon-callout-compound.png",
                 title: "Signals compound, not duplicate",
-                desc: "When DataFlow asks for API access in March, and again in May, and their CTO mentions it in a QBR - that's one signal getting stronger, not three separate entries. Gravii recognizes the pattern and strengthens the evidence.",
+                desc: "When DataFlow asks for API access in March, and again in May, and their CTO mentions it in a QBR — that's one signal getting stronger, not three separate entries. Gravii recognizes the pattern and strengthens the evidence.",
               },
               {
                 icon: "icon-callout-evidence.png",
@@ -268,7 +387,7 @@ export default function HomePage() {
               {
                 icon: "icon-callout-configurable.png",
                 title: "The decision stays human. The AI is auditable.",
-                desc: "Gravii reinforces multi-dimensional context - demand, risk, strategic alignment, momentum, breadth. You define the weights. You confirm the signals. The AI proposes, you decide.",
+                desc: "Gravii reinforces multi-dimensional context — demand, risk, strategic alignment, momentum, breadth. You define the weights. You confirm the signals. The AI proposes, you decide.",
               },
             ].map((item, i) => (
               <div key={i} className="reveal flex gap-5 items-start" style={{ animationDelay: `${i * 0.1}s` }}>
@@ -286,7 +405,7 @@ export default function HomePage() {
             <h3 className="text-[14px] font-bold mb-4">How signals enter Gravii</h3>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               {[
-                { step: "1", title: "Paste any text", desc: "Meeting transcripts, call notes, Slack threads, strategy docs, support summaries - anything." },
+                { step: "1", title: "Paste any text", desc: "Meeting transcripts, call notes, Slack threads, strategy docs, support summaries — anything." },
                 { step: "2", title: "Forward emails", desc: "Set up auto-forwarding from Fireflies, Otter, or Gong. New transcripts process automatically." },
                 { step: "3", title: "Review & confirm", desc: "The AI proposes entities and signals. You review, adjust, and confirm. Nothing enters the graph without your approval." },
               ].map((s) => (
@@ -325,7 +444,7 @@ export default function HomePage() {
               <div>
                 <h3 className="text-sm font-semibold text-[#818cf8] mb-1">Starter</h3>
                 <div><span className="text-4xl font-extrabold tracking-tight">€99</span><span className="text-sm text-[#4a4b60] ml-1">/mo</span></div>
-                <p className="text-[11px] text-amber-400 font-semibold mt-1">Launch price - will be €199</p>
+                <p className="text-[11px] text-amber-400 font-semibold mt-1">Launch price — will be €199</p>
               </div>
               <a href="https://app.gravii.app/signup" className="shimmer px-5 py-2.5 bg-[#6366f1] hover:bg-[#818cf8] text-white text-sm font-bold rounded-lg transition-all hover:-translate-y-0.5">Start free trial</a>
             </div>
@@ -337,7 +456,7 @@ export default function HomePage() {
                 "Traction scoring (5 dimensions)",
                 "Intelligence graph",
                 "Roadmap with evidence",
-                "BYOK - your own AI key",
+                "BYOK — your own AI key",
                 "EU hosting (Frankfurt)",
               ].map(f => (
                 <div key={f} className="flex items-start gap-2 text-[12px] text-[#9698b0]">
@@ -348,7 +467,7 @@ export default function HomePage() {
           </div>
 
           <p className="text-center text-[12px] text-[#4a4b60] mb-12">
-            Enterprise plans with SSO, audit logs, and sovereign mode - coming soon.
+            Enterprise plans with SSO, audit logs, and sovereign mode — coming soon.
           </p>
 
           {/* Final CTA */}
