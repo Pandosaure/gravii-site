@@ -348,7 +348,7 @@ export default function HomePage() {
             ].map((card, i) => (
               <div key={i} className="reveal rounded-2xl border border-[#252640] bg-[#0d0e15] overflow-hidden" style={{ animationDelay: `${i * 0.1}s` }}>
                 <div className="aspect-[16/10] bg-[#12131a] border-b border-[#252640] overflow-hidden">
-                  <Image src={`/images/${card.screenshot}`} alt={card.fallbackAlt} width={800} height={500} className="w-full h-full object-cover object-top" />
+                  <Image src={`/images/${card.screenshot}`} alt={card.fallbackAlt} width={800} height={500} className="w-full h-full object-contain object-top" />
                 </div>
                 <div className="p-5">
                   <h3 className="text-[15px] font-bold mb-1">{card.title}</h3>
