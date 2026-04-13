@@ -454,7 +454,10 @@ export default function HomePage() {
             <span className="text-xs font-semibold text-[#6b6c82]">Gravii</span>
             <span className="text-[10px] text-[#4a4b60] ml-2">Product memory for B2B teams</span>
           </div>
-          <span className="text-[10px] text-[#4a4b60]">EU hosted · GDPR compliant · © {new Date().getFullYear()}</span>
+          <div className="flex items-center gap-4">
+            <a href="/trust" className="text-[10px] text-[#6b6c82] hover:text-white transition-colors">Trust</a>
+            <span className="text-[10px] text-[#4a4b60]">EU hosted &middot; GDPR compliant &middot; &copy; {new Date().getFullYear()}</span>
+          </div>
         </div>
       </footer>
     </>
