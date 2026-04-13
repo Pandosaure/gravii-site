@@ -426,124 +426,22 @@ export default function HomePage() {
 
       <div className="section-divider" />
 
-      {/* ═══ SECTION 5: PRICING + CTA ═══ */}
+      {/* ═══ SECTION 5: CTA ═══ */}
       <section className="py-20" id="pricing">
-        <div className="max-w-[1060px] mx-auto px-6">
-          <div className="text-center mb-12">
-            <h2 className="reveal text-[clamp(26px,4vw,40px)] font-bold tracking-tight mb-3">
-              <span className="gradient-text">Start free.</span> <em className="text-[#818cf8] not-italic">Scale with your team.</em>
-            </h2>
-            <p className="reveal text-[15px] text-[#9698b0]" style={{ animationDelay: "0.1s" }}>
-              14-day free trial, no credit card required. Every plan includes unlimited captures.
-            </p>
-          </div>
-
-          {/* Three pricing cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
-            {/* Starter */}
-            <div className="reveal price-card-hover p-6 rounded-2xl border border-[#252640] bg-[#0d0e15] flex flex-col" style={{ animationDelay: "0.1s" }}>
-              <h3 className="text-sm font-semibold text-[#9698b0] mb-1">Starter</h3>
-              <p className="text-[12px] text-[#4a4b60] mb-5">Product memory for solo PMs</p>
-              <div className="mb-1">
-                <span className="text-3xl font-extrabold tracking-tight">&euro;99</span>
-                <span className="text-sm text-[#4a4b60] ml-1">/mo</span>
-              </div>
-              <p className="text-[10px] text-amber-400 font-semibold mb-5">Launch price - will be &euro;199</p>
-              <a href="https://app.gravii.app/signup" className="block w-full text-center py-2.5 rounded-lg border border-[#252640] text-[#9698b0] text-sm font-semibold hover:border-[#6366f1] hover:text-white transition-all mb-6">Start free trial</a>
-              <div className="space-y-2.5 flex-1">
-                {[
-                  "Capture and AI extraction",
-                  "Intelligence graph",
-                  "Traction scoring (5 dimensions)",
-                  "Roadmap with evidence",
-                  "Dashboard",
-                  "Custom node types",
-                  "AI traction wizard",
-                  "BYOK - your own AI key",
-                  "EU hosting (Frankfurt)",
-                ].map(f => (
-                  <div key={f} className="flex items-start gap-2 text-[12px] text-[#9698b0]">
-                    <span className="text-emerald-400 text-xs mt-0.5">&#10003;</span>{f}
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Team - highlighted */}
-            <div className="reveal price-card-hover p-6 rounded-2xl border border-[#6366f1] bg-gradient-to-b from-[#6366f1]/8 to-[#0d0e15] relative flex flex-col shadow-[0_0_40px_rgba(99,102,241,0.08)]" style={{ animationDelay: "0.15s" }}>
-              <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded-full bg-[#6366f1] text-white text-[10px] font-bold uppercase tracking-wider">Most popular</div>
-              <h3 className="text-sm font-semibold text-[#818cf8] mb-1">Team</h3>
-              <p className="text-[12px] text-[#4a4b60] mb-5">Scale across your product team</p>
-              <div className="mb-1">
-                <span className="text-3xl font-extrabold tracking-tight">&euro;199</span>
-                <span className="text-sm text-[#4a4b60] ml-1">/mo</span>
-              </div>
-              <p className="text-[10px] text-amber-400 font-semibold mb-5">Launch price - will be &euro;399</p>
-              <a href="https://app.gravii.app/signup" className="shimmer block w-full text-center py-2.5 rounded-lg bg-[#6366f1] hover:bg-[#818cf8] text-white text-sm font-bold transition-all hover:-translate-y-0.5 hover:shadow-[0_4px_16px_rgba(99,102,241,0.3)] mb-6">Start free trial</a>
-              <p className="text-[11px] text-[#6b6c82] font-medium mb-3">Everything in Starter, plus:</p>
-              <div className="space-y-2.5 flex-1">
-                {[
-                  "Unlimited team members and roles",
-                  "Email forwarding capture",
-                  "Slack integration",
-                  "Jira/Linear signal import",
-                  "Dependencies and roadmap links",
-                  "Shared views and exports",
-                  "Dedicated Slack support channel",
-                ].map(f => (
-                  <div key={f} className="flex items-start gap-2 text-[12px] text-[#9698b0]">
-                    <span className="text-[#818cf8] text-xs mt-0.5">&#10003;</span>{f}
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Enterprise */}
-            <div className="reveal price-card-hover p-6 rounded-2xl border border-[#252640] bg-[#0d0e15] flex flex-col" style={{ animationDelay: "0.2s" }}>
-              <h3 className="text-sm font-semibold text-[#9698b0] mb-1">Enterprise</h3>
-              <p className="text-[12px] text-[#4a4b60] mb-5">Control, compliance, sovereignty</p>
-              <div className="mb-1">
-                <span className="text-xl font-extrabold tracking-tight text-[#9698b0]">Custom pricing</span>
-              </div>
-              <p className="text-[10px] text-[#4a4b60] mb-5">&nbsp;</p>
-              <a href="mailto:tommy@gravii.app" className="block w-full text-center py-2.5 rounded-lg border border-[#252640] text-[#9698b0] text-sm font-semibold hover:border-[#6366f1] hover:text-white transition-all mb-6">Contact us</a>
-              <p className="text-[11px] text-[#6b6c82] font-medium mb-3">Everything in Team, plus:</p>
-              <div className="space-y-2.5 flex-1">
-                {[
-                  "SSO / SAML",
-                  "Audit logs",
-                  "Sovereign mode (dedicated infrastructure)",
-                  "DPA included",
-                  "Custom SLAs",
-                  "Dedicated account manager",
-                ].map(f => (
-                  <div key={f} className="flex items-start gap-2 text-[12px] text-[#9698b0]">
-                    <span className="text-emerald-400 text-xs mt-0.5">&#10003;</span>{f}
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          <p className="text-center text-[12px] text-[#4a4b60] mb-12">
-            14-day free trial, no credit card required.
-          </p>
-
-          {/* Final CTA */}
+        <div className="max-w-[600px] mx-auto px-6">
           <div className="text-center">
-            <h3 className="reveal text-[20px] font-bold mb-3">
-              <span className="gradient-text">Product memory for teams that</span> <em className="text-[#818cf8] not-italic">ship fast.</em>
-            </h3>
-            <p className="reveal text-[14px] text-[#6b6c82] mb-6" style={{ animationDelay: "0.1s" }}>
-              The faster you build, the more important it becomes to know what matters.
+            <h2 className="reveal text-[clamp(26px,4vw,40px)] font-bold tracking-tight mb-4">
+              <span className="gradient-text">Try Gravii with your own data</span>
+            </h2>
+            <p className="reveal text-[15px] text-[#9698b0] mb-8 max-w-[440px] mx-auto" style={{ animationDelay: "0.1s" }}>
+              Free early access for product teams. Bring your own AI key, keep full control of your data.
             </p>
-            {!ctaSubmitted ? (
-              <div className="reveal flex gap-2 max-w-[400px] mx-auto" style={{ animationDelay: "0.2s" }}>
-                <input type="email" value={ctaEmail} onChange={(e)=>setCtaEmail(e.target.value)} placeholder="you@company.com"
-                  className="flex-1 h-12 px-4 rounded-xl border border-[#252640] bg-[#12131a] text-white text-sm outline-none focus:border-[#6366f1] transition-colors" />
-                <button onClick={()=>submitEmail(ctaEmail)} className="h-12 px-6 rounded-xl bg-[#6366f1] text-white text-sm font-bold hover:bg-[#818cf8] transition-all cursor-pointer border-none hover:-translate-y-0.5 hover:shadow-[0_4px_20px_rgba(99,102,241,0.4)]">Get early access</button>
-              </div>
-            ) : <p className="text-emerald-400 text-sm font-semibold">You're on the list. We'll reach out soon.</p>}
+            <a href="https://app.gravii.app/signup" className="reveal shimmer inline-block px-8 py-3.5 bg-[#6366f1] hover:bg-[#818cf8] text-white text-[15px] font-bold rounded-xl transition-all hover:-translate-y-0.5 hover:shadow-[0_6px_24px_rgba(99,102,241,0.4)]" style={{ animationDelay: "0.15s" }}>
+              Get early access
+            </a>
+            <p className="reveal text-[12px] text-[#4a4b60] mt-5" style={{ animationDelay: "0.2s" }}>
+              EU hosted &middot; BYOK &middot; Row-level security
+            </p>
           </div>
         </div>
       </section>
