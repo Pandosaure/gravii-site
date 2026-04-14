@@ -73,6 +73,7 @@ export default function HomePage() {
             <a href="#product" className="hidden sm:block text-sm text-[#9698b0] font-medium hover:text-white transition-colors">Product</a>
             <a href="#pricing" className="hidden sm:block text-sm text-[#9698b0] font-medium hover:text-white transition-colors">Pricing</a>
             <a href="/trust" className="hidden sm:block text-sm text-[#9698b0] font-medium hover:text-white transition-colors">Trust</a>
+            <a href="/blog" className="hidden sm:block text-sm text-[#9698b0] font-medium hover:text-white transition-colors">Blog</a>
             <a href="https://app.gravii.app/login" className="px-5 py-2.5 bg-[#6366f1] hover:bg-[#818cf8] text-white text-sm font-semibold rounded-lg transition-all hover:-translate-y-0.5 hover:shadow-[0_4px_20px_rgba(99,102,241,0.4)]">Sign in</a>
           </div>
         </div>
@@ -457,6 +458,7 @@ export default function HomePage() {
           </div>
           <div className="flex items-center gap-4">
             <a href="/trust" className="text-[10px] text-[#6b6c82] hover:text-white transition-colors">Trust</a>
+            <a href="/blog" className="text-[10px] text-[#6b6c82] hover:text-white transition-colors">Blog</a>
             <span className="text-[10px] text-[#4a4b60]">EU hosted &middot; GDPR compliant &middot; &copy; {new Date().getFullYear()}</span>
           </div>
         </div>
