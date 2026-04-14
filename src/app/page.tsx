@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import posthog from "posthog-js";
 
 /* ═══ SAMPLES ═══ */
 const SAMPLES = [
@@ -44,16 +45,18 @@ export default function HomePage() {
   const analyzeText = async () => {
     if (!demoText.trim() || demoText.length < 50) { setDemoError("Paste at least a few paragraphs."); return; }
     setDemoState("loading"); setDemoError("");
+    posthog.capture("demo_started", { text_length: demoText.length });
     try {
       const res = await fetch("/api/analyze", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ text: demoText }) });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error);
       setDemoResult(data); setDemoState("result");
-    } catch (err: any) { setDemoError(err.message || "Failed. Try again."); setDemoState("input"); }
+      posthog.capture("demo_completed", { entities: data.entities?.length || 0, signals: data.traction?.length || 0 });
+    } catch (err: any) { setDemoError(err.message || "Failed. Try again."); setDemoState("input"); posthog.capture("demo_failed"); }
   };
 
   const submitEmail = (addr: string) => {
-    console.log("Early access email:", addr);
+    posthog.capture("email_submitted", { email: addr });
     setCtaSubmitted(true);
   };
 
