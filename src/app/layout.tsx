@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
+  icons: { icon: "/favicon.svg" },
   title: "Gravii — Product Intelligence That Builds Itself",
   description:
     "Gravii connects to your team's tools and automatically turns every meeting, ticket, and conversation into a scored intelligence graph. Zero-input. Evidence-based. EU-hosted.",

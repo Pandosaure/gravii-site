@@ -66,9 +66,7 @@ export default function HomePage() {
       <nav className={`fixed top-0 left-0 right-0 z-50 py-4 nav-glass ${navScrolled ? "scrolled" : ""}`}>
         <div className="max-w-[1100px] mx-auto px-6 flex items-center justify-between">
           <a href="#" className="flex items-center gap-2.5">
-            <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-[#6366f1] to-[#8b5cf6] flex items-center justify-center">
-              <span className="text-white text-sm font-bold">G</span>
-            </div>
+            <svg width="28" height="28" viewBox="60 60 400 400" fill="none"><rect x="72" y="72" width="96" height="96" rx="24" stroke="white" strokeWidth="32" strokeLinejoin="round" opacity="0.3"/><rect x="136" y="136" width="160" height="160" rx="40" stroke="white" strokeWidth="32" strokeLinejoin="round" opacity="0.5"/><rect x="200" y="200" width="256" height="256" rx="64" fill="#6366F1"/></svg>
             <span className="text-lg font-extrabold tracking-tight">Gravii</span>
           </a>
           <div className="flex items-center gap-8">
@@ -455,7 +453,7 @@ export default function HomePage() {
       <footer className="py-8 border-t border-[#252640]/40">
         <div className="max-w-[1100px] mx-auto px-6 flex items-center justify-between flex-wrap gap-4">
           <div className="flex items-center gap-2">
-            <div className="w-5 h-5 rounded bg-gradient-to-br from-[#6366f1] to-[#8b5cf6] flex items-center justify-center"><span className="text-white text-[10px] font-bold">G</span></div>
+            <svg width="20" height="20" viewBox="60 60 400 400" fill="none"><rect x="72" y="72" width="96" height="96" rx="24" stroke="white" strokeWidth="32" strokeLinejoin="round" opacity="0.3"/><rect x="136" y="136" width="160" height="160" rx="40" stroke="white" strokeWidth="32" strokeLinejoin="round" opacity="0.5"/><rect x="200" y="200" width="256" height="256" rx="64" fill="#6366F1"/></svg>
             <span className="text-xs font-semibold text-[#6b6c82]">Gravii</span>
             <span className="text-[10px] text-[#4a4b60] ml-2">Product memory for B2B teams</span>
           </div>
