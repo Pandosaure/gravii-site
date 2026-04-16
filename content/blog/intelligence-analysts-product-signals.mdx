@@ -1,0 +1,161 @@
+---
+title: "What Product Teams Can Learn From Intelligence Analysts About Connecting Signals"
+description: "Intelligence analysts don't collect more data. They connect data that already exists. B2B product teams have the same problem and can steal the same playbook."
+date: "2026-04-17"
+author: "Tommy Jamet"
+authorRole: "Seasoned Head of Product, Founder of Gravii"
+authorLinkedIn: "https://www.linkedin.com/in/tommyjamet/"
+tags: ["product intelligence", "signal analysis", "product management", "pattern recognition"]
+published: true
+---
+
+In 2001, the U.S. intelligence community had the data it needed to prevent the September 11 attacks. The CIA knew about two of the hijackers. The FBI had flagged suspicious flight school enrollments. The NSA had intercepted relevant communications. No single agency lacked information. The failure, as the 9/11 Commission later concluded, was one of connection. Signals sat in separate systems, owned by separate teams, governed by separate incentives.
+
+If you run a B2B product team, this should sound familiar.
+
+You have customer call notes in one place, support tickets in another, CRM data in a third, and competitive intelligence scattered across Slack threads nobody will ever search again. Each signal, taken alone, looks unremarkable. A passing mention of "API access." A support ticket about export formats. A competitor showing up in a renewal conversation. Individually, noise. Connected, a pattern that should reshape your roadmap.
+
+> **TL;DR** Intelligence analysts use corroboration, temporal analysis, and source diversity to turn weak signals into actionable conclusions. Product managers face the same challenge but lack the tradecraft. Borrowing these methods - weighing convergence over conviction, tracking signal timelines, and valuing source independence - produces better prioritization than any framework applied to bad data.
+
+## Convergence over conviction
+
+Intelligence analysts have a term for it: corroboration. One source saying something with high confidence is less valuable than five independent sources saying it with low confidence. The reasoning is straightforward. A single source can be wrong, biased, or compromised. Five independent sources arriving at the same conclusion through different means is statistically unlikely to be coincidence.
+
+Product teams almost never think this way.
+
+When a VP of Engineering at your largest customer sends a detailed email requesting a feature, that feels like strong signal. When five mid-level users at five different companies mention the same friction point in passing during onboarding calls, that feels like background noise. But the analyst's framework says the second scenario is the stronger signal. The VP has organizational incentives that may not reflect genuine need. The five independent users have nothing in common except the same pain point.
+
+This is the difference between conviction and convergence. PMs are trained to weight signals by the authority of the source. Analysts weight signals by the independence of the sources. One method tracks organizational politics. The other tracks reality.
+
+The practical implication: stop counting how loudly a feature is requested. Start counting how many independent paths lead to the same conclusion. Three customers mentioning "bulk import" in three different contexts - a sales call, a support ticket, a churned account's exit interview - is stronger evidence than one customer mentioning it twelve times.
+
+## Temporal analysis changes everything
+
+When a signal appears matters as much as what it says. Intelligence analysts are obsessive about timelines because the sequence of events often reveals intent that the events themselves do not.
+
+Product teams almost universally ignore this dimension. A feature request is a feature request, whether it was made last week or eighteen months ago. This is a mistake.
+
+Consider a concrete example. In January, one customer mentions "API access" during a quarterly business review. It's a passing comment, unprompted, no urgency. In February, two customers mention API access - one in the context of a competitor evaluation, the other while describing a workaround they built. In March, four customers raise it: two with explicit churn deadlines attached, one referencing the competitor again, one asking for a timeline they can share with their engineering team.
+
+The trajectory tells you more than any single data point. January was ambient signal. February was confirmation with competitive context. March is a deadline. A PM who treats these as "seven API requests" is missing the story. An analyst who tracks the timeline sees acceleration, competitive pressure, and a closing window for action.
+
+{/* [UNIQUE INSIGHT] */}
+Here is the counterintuitive part: a feature mentioned three times in three consecutive months with increasing urgency is a more important signal than a feature mentioned twenty times over two years with stable urgency. Volume without acceleration is a wish list. Acceleration, even at low volume, is a market moving. Most prioritization frameworks (RICE, WSJF, opportunity scoring) have no field for "rate of change." They capture a snapshot. Analysts capture a trajectory. The trajectory is almost always more informative.
+
+## Source diversity is your most underrated signal
+
+An intelligence analyst assessing a threat weights source diversity above almost everything else. A report from a human asset, confirmed by satellite imagery, reinforced by intercepted communications, is treated as near-certain. Three reports from the same human asset, no matter how detailed, are treated with caution. The principle: independent collection methods eliminate shared blind spots.
+
+Product teams do the opposite. They weight by seniority.
+
+If the CEO of a $500K ARR account says "we need real-time dashboards," that becomes a roadmap item. If a support agent notices a pattern of tickets about stale data, a customer success manager hears the same complaint in a renewal call, and a competitor's changelog shows they just shipped live updating - that convergence of three independent source types often gets less attention than the CEO's single request.
+
+This is backwards. The CEO has a single perspective shaped by whatever demo they saw last week. The three independent sources - support pattern, CS conversation, competitive movement - triangulate on the same conclusion through completely different observation methods. An analyst would call the CEO's request "single-source reporting" and flag it for corroboration. A PM calls it "executive feedback" and starts writing a spec.
+
+Source diversity matters because each source type has characteristic blind spots. Customers tell you what they think they want, which is often a solution rather than a problem. Support tickets tell you what's broken, but not what's strategically important. Competitive intelligence tells you what the market values, but not what your specific customers need. Usage data tells you what people do, but not why. When multiple source types converge on the same conclusion, you've effectively cancelled out each source's individual bias.
+
+## Why PMs don't naturally think this way
+
+This is not an insult. It is a description of how the discipline developed.
+
+Product management training emphasizes frameworks for organizing and prioritizing work. RICE scoring. OKRs. Now/Next/Later roadmaps. Story mapping. Jobs-to-be-Done. These are all useful. They are also all downstream of a more fundamental question: is the evidence underlying your priorities any good?
+
+Frameworks operate on inputs. If the inputs are bad - if you're scoring features based on who shouted loudest in the last meeting, or what the most senior stakeholder mentioned in passing - then the framework produces precise-looking garbage. RICE with bad reach estimates and made-up confidence scores is not better than intuition. It's worse, because it looks rigorous.
+
+Intelligence analysts spend most of their training on the quality of evidence itself. How to assess source reliability. How to detect deception. How to distinguish correlation from causation in temporal data. How to weight corroborated signals over single-source reporting. PMs spend most of their training on what to do after the evidence is collected - which implicitly assumes the evidence is already good.
+
+The tooling reflects this gap. PM tools are built for organizing work: backlogs, sprints, roadmaps, tickets. They're excellent at tracking what you've decided to build. They're terrible at connecting the [signals that informed the decision](/blog/capture-customer-signals). There is no "corroboration score" in Jira. There is no "source diversity index" in Productboard. The tools don't encourage analytical tradecraft because the discipline never required it.
+
+The result is that most PMs are excellent project managers and mediocre analysts. They can ship a roadmap on time. They struggle to explain, with evidence, why the roadmap contains what it contains. This isn't a talent problem. It's a [training and tooling gap](/blog/feature-prioritization-evidence).
+
+## The product intelligence graph
+
+What would it look like if a PM team actually applied analytical tradecraft to their signal flow?
+
+Not a dashboard with bar charts. Not a spreadsheet of feature requests sorted by vote count. Something closer to what intelligence analysts call a link chart: a network of entities connected by observed relationships, weighted by evidence quality, and tracked over time.
+
+The entities are the things you care about: customers, prospects, features, product areas, competitors, team members. The connections are observed signals: requests, complaints, risks, decisions, competitive mentions. Each connection carries metadata - when it was observed, what source type generated it, how it relates to other signals, how urgent it was.
+
+In this model, a feature doesn't have a "score." It has a subgraph. You can see which customers mentioned it, through which channels, over what timeframe, with what urgency trajectory. You can see whether the signal comes from one source type (all customer calls) or multiple independent types (calls plus support plus competitive intelligence). You can see whether the [context that generated the signal](/blog/losing-context-customer-calls) is still accessible or has decayed into a bare-bones note that says "Customer X wants feature Y."
+
+<figure style={{margin: '2rem 0', textAlign: 'center'}}>
+<svg viewBox="0 0 560 380" xmlns="http://www.w3.org/2000/svg" style={{width: '100%', maxWidth: '560px'}}>
+  <rect width="560" height="380" fill="#12131a" rx="12"/>
+  <text x="280" y="28" textAnchor="middle" fill="#9698b0" fontSize="12" fontWeight="600">SIGNAL CONVERGENCE: THREE SOURCES, ONE CONCLUSION</text>
+
+  {/* Time axis */}
+  <line x1="70" y1="340" x2="500" y2="340" stroke="#252640" strokeWidth="1"/>
+  <text x="120" y="358" textAnchor="middle" fill="#6b6c82" fontSize="10">January</text>
+  <text x="280" y="358" textAnchor="middle" fill="#6b6c82" fontSize="10">February</text>
+  <text x="440" y="358" textAnchor="middle" fill="#6b6c82" fontSize="10">March</text>
+
+  {/* Source labels */}
+  <rect x="18" y="90" width="10" height="10" rx="2" fill="#6366f1"/>
+  <text x="34" y="99" fill="#818cf8" fontSize="10">Customer calls</text>
+  <rect x="18" y="160" width="10" height="10" rx="2" fill="#22d3ee"/>
+  <text x="34" y="169" fill="#22d3ee" fontSize="10">Support tickets</text>
+  <rect x="18" y="230" width="10" height="10" rx="2" fill="#f59e0b"/>
+  <text x="34" y="239" fill="#f59e0b" fontSize="10">Competitor intel</text>
+
+  {/* Convergence target */}
+  <circle cx="440" cy="168" r="32" fill="#6366f1" opacity="0.12" stroke="#6366f1" strokeWidth="1.5" strokeDasharray="4 3"/>
+  <text x="440" y="172" textAnchor="middle" fill="#c7d2fe" fontSize="11" fontWeight="600">API</text>
+  <text x="440" y="185" textAnchor="middle" fill="#c7d2fe" fontSize="11" fontWeight="600">access</text>
+
+  {/* Customer call signals - growing */}
+  <circle cx="120" cy="100" r="5" fill="#6366f1" opacity="0.4"/>
+  <circle cx="260" cy="100" r="8" fill="#6366f1" opacity="0.6"/>
+  <circle cx="280" cy="110" r="8" fill="#6366f1" opacity="0.6"/>
+  <circle cx="420" cy="140" r="10" fill="#6366f1" opacity="0.85"/>
+  <circle cx="440" cy="145" r="10" fill="#6366f1" opacity="0.85"/>
+  <circle cx="455" cy="150" r="10" fill="#6366f1" opacity="0.85"/>
+  <circle cx="430" cy="155" r="10" fill="#6366f1" opacity="0.85"/>
+
+  {/* Support ticket signals - growing */}
+  <circle cx="280" cy="175" r="7" fill="#22d3ee" opacity="0.5"/>
+  <circle cx="430" cy="175" r="9" fill="#22d3ee" opacity="0.8"/>
+  <circle cx="450" cy="180" r="9" fill="#22d3ee" opacity="0.8"/>
+
+  {/* Competitor signals */}
+  <circle cx="270" cy="235" r="7" fill="#f59e0b" opacity="0.5"/>
+  <circle cx="440" cy="200" r="9" fill="#f59e0b" opacity="0.8"/>
+
+  {/* Convergence lines (dashed, pointing inward) */}
+  <line x1="120" y1="105" x2="415" y2="155" stroke="#6366f1" strokeWidth="1" strokeDasharray="3 4" opacity="0.4"/>
+  <line x1="280" y1="175" x2="420" y2="170" stroke="#22d3ee" strokeWidth="1" strokeDasharray="3 4" opacity="0.4"/>
+  <line x1="270" y1="230" x2="430" y2="195" stroke="#f59e0b" strokeWidth="1" strokeDasharray="3 4" opacity="0.4"/>
+
+  {/* Annotations */}
+  <text x="120" y="82" textAnchor="middle" fill="#6b6c82" fontSize="9">1 mention</text>
+  <text x="120" y="91" textAnchor="middle" fill="#6b6c82" fontSize="9">(passing)</text>
+  <text x="270" y="82" textAnchor="middle" fill="#6b6c82" fontSize="9">2 mentions</text>
+  <text x="270" y="91" textAnchor="middle" fill="#6b6c82" fontSize="9">(+ competitor)</text>
+  <text x="440" y="120" textAnchor="middle" fill="#ef4444" fontSize="9" fontWeight="600">4 mentions</text>
+  <text x="440" y="129" textAnchor="middle" fill="#ef4444" fontSize="9" fontWeight="600">(churn deadlines)</text>
+
+  {/* Signal strength indicator */}
+  <rect x="80" y="290" width="60" height="6" rx="3" fill="#6366f1" opacity="0.25"/>
+  <rect x="230" y="290" width="60" height="6" rx="3" fill="#6366f1" opacity="0.5"/>
+  <rect x="400" y="290" width="80" height="6" rx="3" fill="#6366f1" opacity="0.9"/>
+  <text x="110" y="310" textAnchor="middle" fill="#6b6c82" fontSize="9">Weak</text>
+  <text x="260" y="310" textAnchor="middle" fill="#6b6c82" fontSize="9">Moderate</text>
+  <text x="440" y="310" textAnchor="middle" fill="#ef4444" fontSize="9" fontWeight="600">Strong</text>
+  <text x="280" y="325" textAnchor="middle" fill="#4a4b60" fontSize="9">Signal strength (convergence x source diversity x acceleration)</text>
+</svg>
+</figure>
+
+This is what [product memory](/blog/product-memory) looks like when you take it seriously. Not a list of requests. A graph of evidence. The difference is the same as the difference between an intelligence briefing and a stack of unread cables.
+
+Some teams build this manually in Notion or spreadsheets (tools like [Gravii](https://gravii.app) are designed to do this automatically). The method matters more than the medium. What matters is that you're connecting signals rather than collecting them.
+
+## The analytical discipline that pays for itself
+
+You don't need a security clearance to think like an analyst. You need three habits.
+
+First, corroborate. When you hear a signal, ask: where else have I seen this? If the answer is "nowhere," it's an anecdote. If you find it in two other source types, it's evidence. Second, track timelines. A feature request isn't a point in time. It's a position on a trajectory. Is it accelerating? Decelerating? Stable? The trajectory tells you when to act, not just whether to act. Third, diversify your sources. If all your product insight comes from customer calls, you have a single-intelligence-discipline problem. Layer in support data, usage analytics, competitive intelligence, and sales feedback. Each source type cancels out the others' blind spots.
+
+These three habits - corroboration, temporal tracking, source diversification - are the core of analytical tradecraft. They've been refined over decades by people whose bad calls had consequences far worse than a misallocated sprint. And they apply, almost without modification, to the problem every PM faces: figuring out what to build next, with imperfect information, under time pressure.
+
+The frameworks will still be useful. RICE still works. OKRs still provide alignment. But frameworks applied to well-analyzed evidence produce fundamentally different outcomes than frameworks applied to whoever talked last. The [gap between signal capture and signal analysis](/blog/capture-customer-signals) is where most product teams lose the thread.
+
+The tools are beginning to catch up. The discipline doesn't have to wait.

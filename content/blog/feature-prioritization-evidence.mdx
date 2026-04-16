@@ -1,0 +1,138 @@
+---
+title: "Why Your Feature Prioritization Framework Ignores Half the Evidence"
+description: "RICE scores and impact-effort matrices look rigorous. But they're usually filled with guesses, recency bias, and whoever lobbied hardest."
+date: "2026-04-17"
+author: "Tommy Jamet"
+authorRole: "Seasoned Head of Product, Founder of Gravii"
+authorLinkedIn: "https://www.linkedin.com/in/tommyjamet/"
+tags: ["feature prioritization", "RICE framework", "product management", "evidence-based decisions"]
+published: true
+---
+
+You ran a prioritization exercise. You scored features on Reach, Impact, Confidence, and Effort. You plotted them on a 2x2. You ranked them by composite score and presented the roadmap. It felt rigorous. There were numbers.
+
+But where did the numbers come from?
+
+If you're honest, most of those inputs were fabricated. Not maliciously. They were invented in the moment, colored by whatever happened to be top of mind that week, and defended with the confidence of someone who's been a PM long enough to sound certain about uncertain things.
+
+> **TL;DR** Prioritization frameworks don't fail because the formula is wrong. They fail because the inputs are guesses. Fix the inputs - how many customers mentioned a feature, how urgently, and whether that signal is growing or fading - and any framework produces better roadmaps. The PM's real job isn't scoring features. It's building a system where evidence accumulates before the roadmap meeting starts.
+
+## Where do your RICE scores actually come from?
+
+RICE is elegant. Four variables, one formula, a ranked list. It promises objectivity in a discipline that runs on opinion. The problem is that each variable is only as good as the data behind it - and in most teams, there is no data behind it.
+
+**Reach.** How many customers will this affect in a given quarter? Unless you have usage analytics piped directly into your prioritization sheet - and almost nobody does - this number is a guess. Sometimes it's an informed guess. More often it's a round number that felt defensible.
+
+**Impact.** On a scale of 0.25 to 3, how much will this move the needle? This is where the last conversation you had exerts gravitational pull. If a customer mentioned this feature yesterday, it feels like a 3. If nobody's mentioned it in two weeks, it drifts toward a 1. The feature didn't change. Your memory did.
+
+**Confidence.** This is supposed to discount the score when you're uncertain. In practice, it measures how the PM feels that morning. Score a feature at 3pm on a Friday after a tough week and you'll give it a 60% confidence. Score the same feature at 10am on Monday after a good customer call and it's 80%. Same feature. Same evidence. Different number.
+
+**Effort.** The one variable that engineering actually owns - and the one most likely to be negotiated rather than estimated. "Can we call it a medium?" is not estimation. It's politics.
+
+The formula works. The inputs are fiction.
+
+## Three biases that corrupt your framework inputs
+
+It's not just that the inputs are imprecise. They're systematically biased. And the biases always push in the same direction: toward whatever is loudest, most recent, and most visible.
+
+**Recency bias.** The customer you spoke with yesterday carries more weight than the ten customers who said the same thing last month. This isn't laziness. It's how memory works. Ebbinghaus demonstrated in 1885 that recall decays exponentially - we lose roughly half of new information within an hour. By the time you're filling in your RICE spreadsheet, the customer from three weeks ago is a blur. The one from this morning is vivid, emotional, and therefore "high impact."
+
+The practical effect: your roadmap skews toward whatever came up in the last 48 hours. Features that accumulated steady demand over months get lower scores than features that happened to come up right before the scoring session.
+
+**Volume bias.** One VP who sends three emails about a feature feels like stronger signal than twelve customers who each mentioned it once in passing. The VP's request has a name attached, an escalation path, and organizational pressure behind it. The twelve customers are scattered across call notes that nobody aggregated.
+
+In every prioritization meeting I've been part of, the feature with an internal champion outranks the feature with broader but quieter demand. Not because the champion's request is more important - but because it's more present in the room.
+
+**Survivorship bias.** You only hear from customers who stayed. The ones who churned took their signals with them. That feature gap they mentioned in their last QBR? It's sitting in a call transcript that nobody re-read because the account closed. The [context loss between calls](/blog/losing-context-customer-calls) is bad enough with active customers. With churned ones, the loss is total.
+
+This means your prioritization framework has a blind spot exactly where it matters most: the features that would have prevented churn. You're optimizing for the customers you kept, not the ones you lost.
+
+## Evidence-based prioritization needs better inputs, not better formulas
+
+The instinct, when a framework produces bad results, is to find a better framework. Weighted scoring instead of RICE. ICE instead of impact-effort. Kano analysis. Opportunity scoring. The product management industry has produced dozens of prioritization methods, each one promising to fix what the last one got wrong.
+
+But the failure mode is always the same. The formula changes. The inputs don't.
+
+What you actually need is better raw material. Instead of asking "How much impact will this feature have?" - a question that invites confident guessing - you need to know:
+
+- **Breadth.** How many distinct customers or prospects mentioned this? Not "a lot" - an actual count, drawn from actual conversations.
+- **Strength.** How urgently? Is this a "nice to have" or a "we're evaluating competitors because you don't have this"?
+- **Type.** Is this signal coming from growth conversations (expansion, new deals) or risk conversations (churn, downgrade, competitive threat)?
+- **Momentum.** Is demand increasing or fading? A feature mentioned by two customers six months ago and nobody since is different from one mentioned by twelve customers over the last quarter with increasing urgency.
+
+{/* [UNIQUE INSIGHT] */}
+Here's the uncomfortable truth: most PMs can't answer these four questions for any feature on their roadmap. Not because they don't care, but because the evidence is scattered across Slack threads, call recordings, CRM notes, and their own fallible memory. The information exists. It was never aggregated. So when the spreadsheet asks for a number, they synthesize from whatever fragments are within arm's reach - and call it data.
+
+Consider the difference. "Acme Corp's VP mentioned mobile access yesterday" produces a RICE score. So does "12 customers mentioned API access over the last 3 months, with increasing urgency, including 3 accounts flagged as churn risks representing $380K in ARR." Both produce a number. Only one is evidence.
+
+The system that [captures those signals](/blog/capture-customer-signals) as they happen is what makes the difference - not the formula you run on them afterward.
+
+## How signal accumulation changes the picture
+
+Traditional prioritization is a point-in-time exercise. You gather in a room, fill in a spreadsheet, debate, rank, and declare the roadmap. The inputs are whatever the team remembers or can dig up in the moment.
+
+Signal accumulation inverts this. Instead of scoring features once, you let evidence build continuously. Every customer mention, every support ticket pattern, every churn conversation adds to a running tally. When it's time to prioritize, the data is already there - not reconstructed from memory, but accumulated from months of actual interactions.
+
+The difference shows up clearly in how features rank over time.
+
+<figure style={{margin: '2rem 0', textAlign: 'center'}}>
+<svg viewBox="0 0 500 280" xmlns="http://www.w3.org/2000/svg" style={{width: '100%', maxWidth: '500px'}}>
+  <rect width="500" height="280" fill="#12131a" rx="12"/>
+  <text x="250" y="28" textAnchor="middle" fill="#9698b0" fontSize="12" fontWeight="600">ACCUMULATED SIGNALS OVER TIME</text>
+  <line x1="60" y1="50" x2="60" y2="220" stroke="#252640" strokeWidth="1"/>
+  <line x1="60" y1="220" x2="460" y2="220" stroke="#252640" strokeWidth="1"/>
+  <text x="55" y="65" textAnchor="end" fill="#6b6c82" fontSize="10">20</text>
+  <text x="55" y="105" textAnchor="end" fill="#6b6c82" fontSize="10">15</text>
+  <text x="55" y="145" textAnchor="end" fill="#6b6c82" fontSize="10">10</text>
+  <text x="55" y="185" textAnchor="end" fill="#6b6c82" fontSize="10">5</text>
+  <text x="55" y="222" textAnchor="end" fill="#6b6c82" fontSize="10">0</text>
+  <text x="25" y="140" textAnchor="middle" fill="#6b6c82" fontSize="10" transform="rotate(-90 25 140)">Signals</text>
+  <line x1="60" y1="65" x2="460" y2="65" stroke="#252640" strokeWidth="0.5" strokeDasharray="4"/>
+  <line x1="60" y1="105" x2="460" y2="105" stroke="#252640" strokeWidth="0.5" strokeDasharray="4"/>
+  <line x1="60" y1="145" x2="460" y2="145" stroke="#252640" strokeWidth="0.5" strokeDasharray="4"/>
+  <line x1="60" y1="185" x2="460" y2="185" stroke="#252640" strokeWidth="0.5" strokeDasharray="4"/>
+  <text x="110" y="240" textAnchor="middle" fill="#6b6c82" fontSize="10">Jan</text>
+  <text x="210" y="240" textAnchor="middle" fill="#6b6c82" fontSize="10">Feb</text>
+  <text x="310" y="240" textAnchor="middle" fill="#6b6c82" fontSize="10">Mar</text>
+  <text x="410" y="240" textAnchor="middle" fill="#6b6c82" fontSize="10">Apr</text>
+  <polyline points="110,210 160,200 210,185 260,165 310,145 360,118 410,80" fill="none" stroke="#6366f1" strokeWidth="2.5" strokeLinejoin="round"/>
+  <circle cx="110" cy="210" r="3.5" fill="#6366f1"/>
+  <circle cx="160" cy="200" r="3.5" fill="#6366f1"/>
+  <circle cx="210" cy="185" r="3.5" fill="#6366f1"/>
+  <circle cx="260" cy="165" r="3.5" fill="#6366f1"/>
+  <circle cx="310" cy="145" r="3.5" fill="#6366f1"/>
+  <circle cx="360" cy="118" r="3.5" fill="#6366f1"/>
+  <circle cx="410" cy="80" r="3.5" fill="#6366f1"/>
+  <text x="420" y="72" fill="#818cf8" fontSize="10" fontWeight="600">API access</text>
+  <text x="420" y="83" fill="#6b6c82" fontSize="9">18 signals</text>
+  <polyline points="110,210 160,210 210,210 260,210 310,105 360,100 410,98" fill="none" stroke="#ef4444" strokeWidth="2.5" strokeLinejoin="round" strokeDasharray="6 3"/>
+  <circle cx="110" cy="210" r="3.5" fill="#ef4444"/>
+  <circle cx="210" cy="210" r="3.5" fill="#ef4444"/>
+  <circle cx="310" cy="105" r="3.5" fill="#ef4444"/>
+  <circle cx="360" cy="100" r="3.5" fill="#ef4444"/>
+  <circle cx="410" cy="98" r="3.5" fill="#ef4444"/>
+  <text x="420" y="95" fill="#ef4444" fontSize="10" fontWeight="600">Mobile app</text>
+  <text x="420" y="106" fill="#6b6c82" fontSize="9">VP request</text>
+  <text x="250" y="265" textAnchor="middle" fill="#4a4b60" fontSize="9">API access: steady growth from 12 customers. Mobile: one VP spike in March.</text>
+</svg>
+</figure>
+
+Look at what this reveals. API access has been building steadily across 12 different customers over four months. The signal is broad, growing, and comes from multiple independent sources. Mobile app, by contrast, spiked when one VP escalated in March - and then went flat.
+
+In a traditional prioritization meeting held in April, mobile app might win. The VP's request is recent, loud, and tied to a name everyone recognizes. API access is a slow accumulation of notes scattered across call summaries that nobody bothered to aggregate.
+
+But the accumulated evidence tells a different story. API access has breadth (12 customers), momentum (steadily increasing), and strength (three of those customers flagged it as a renewal risk). Mobile app has volume from one source and no sustained demand from anyone else.
+
+The VP's request wasn't wrong. It just wasn't representative. And without a system that accumulates signals over time, you have no way to tell the difference. This is what [product memory](/blog/product-memory) actually means in practice - not a perfect recall of every conversation, but a running count of evidence that corrects for the biases your brain introduces.
+
+## The framework isn't the problem
+
+RICE is fine. Impact-effort is fine. Whatever custom scoring model your team built in that offsite two years ago is fine. The formula was never the bottleneck.
+
+The bottleneck is that your inputs are reconstructed from memory at the moment of scoring, rather than accumulated from evidence over time. Fix the inputs and any framework produces a better roadmap. Leave the inputs broken and no framework can save you.
+
+This means the PM's job description needs a quiet update. The core skill isn't evaluating frameworks or running scoring exercises. It's building a system where evidence accumulates automatically - where every customer conversation, every support pattern, every churn signal feeds into a body of evidence that's already waiting when the roadmap meeting starts.
+
+You don't need to score features more precisely. You need to stop guessing at the inputs. Build a capture system (even a simple one in the tools you already have, or something purpose-built like [Gravii](https://gravii.app)). Tag signals to features and accounts. Let them accumulate. Then open your RICE spreadsheet.
+
+The numbers will be different this time. Not because the formula changed. Because the evidence did.

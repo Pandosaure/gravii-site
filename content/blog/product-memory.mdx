@@ -1,30 +1,270 @@
 ---
 title: "Product Memory: Why B2B Product Teams Keep Making the Same Mistakes"
-description: "Product teams lose critical context within 48 hours of every meeting. Product memory systems capture, connect, and score the signals that drive better decisions."
-date: "2026-04-20"
+description: "Product teams lose critical context within 48 hours of every meeting. Product memory captures, connects, and scores the signals that drive better decisions."
+date: "2026-04-17"
 author: "Tommy Jamet"
-authorRole: "Head of Product at Coincover, Founder of Gravii"
+authorRole: "Seasoned Head of Product, Founder of Gravii"
 authorLinkedIn: "https://www.linkedin.com/in/tommyjamet/"
-tags: ["product memory", "product management", "B2B"]
-published: false
+tags: ["product memory", "product intelligence", "B2B product management", "product decisions"]
+published: true
 ---
 
-# Product Memory: Why B2B Product Teams Keep Making the Same Mistakes
+Last quarter, I watched a product team at a Series B fintech ship a feature that three of their top-ten accounts had explicitly said they didn't want. The PM who greenlit it had been in the room when those customers said it. She'd taken notes. She'd even flagged it in Slack.
 
-This is a placeholder post to verify the blog infrastructure works correctly.
+But eight weeks later, when the prioritization discussion happened, that context was gone. What remained was a spreadsheet row that said "Enterprise permissions - 4 requests" and a VP who remembered one loud customer asking for it in a QBR. The feature shipped. Two accounts churned within 90 days, citing "misalignment with our needs." Combined ARR lost: $340K.
 
-## Heading Two Example
+This wasn't a failure of intelligence. It was a failure of memory.
 
-Body text goes here. This paragraph tests the prose styling. Product teams handle dozens of conversations every week - customer calls, internal standups, strategy sessions, support escalations. Each one contains signals about what to build, what's at risk, and what matters.
+> **TL;DR**
+> Product memory is the system that captures every signal from every conversation and connects them into a structured understanding of who said what about which feature and why. Unlike note-taking tools, CRMs, or analytics platforms, a product memory system compounds in value with every conversation - reinforcing or contradicting patterns across your entire customer base. The result: decisions grounded in the full weight of what you actually know, not just what you remember from last week.
 
-### Heading Three Example
+## What is product memory?
 
-More body text with **bold** and *italic* and [a link](https://gravii.app).
+Most product teams operate with a kind of organizational amnesia. They have data. They have tools. What they lack is connective tissue - the ability to trace a decision back through every conversation, every signal, and every stakeholder interaction that informed it.
 
-- List item one
-- List item two
-- List item three
+**Product memory is the system that captures every signal from every conversation and connects them into a structured graph of who said what about which feature and why.** It transforms scattered, decaying insights into a persistent, queryable understanding of your customer base. It doesn't summarize. It doesn't aggregate away nuance. It preserves the full context - the speaker, the account, the timing, the sentiment, the competitive backdrop - and makes that context available at the moment a decision needs to be made.
 
-> This is a blockquote testing the styling.
+This is a fundamentally different thing from a note-taking tool. Notes are flat text. Product memory is structured knowledge. Notes answer "what happened in this meeting." Product memory answers "across every conversation we've had in the last six months, what do our enterprise accounts actually think about this capability, and has that sentiment shifted?"
 
-That's it for the placeholder.
+Think of it as the difference between a filing cabinet and a detective's evidence board. The filing cabinet stores documents. The evidence board connects them - red threads between names, dates, events, and motives. Product memory is the evidence board for your product decisions.
+
+## Why traditional tools fail at this
+
+Every product team I've worked with has at least five tools that touch customer feedback. None of them solve the actual problem. Here's why.
+
+**CRMs capture accounts, not product signals.** Your Salesforce instance knows that Acme Corp is a $200K account with a renewal in Q3. It might even have a field for "product feedback." But that field contains "wants better reporting" - a sentence so compressed it's meaningless. The original conversation where the VP of Operations spent fifteen minutes explaining that their team exports data to Excel every Monday because your dashboards can't filter by business unit? That context lives in someone's notebook, if it lives anywhere at all.
+
+**Note-taking tools capture text, not structure.** Notion pages and Google Docs are excellent at recording what was said. They're terrible at connecting it to anything. Your notes from Tuesday's call with Acme live in a page that maybe five people will ever see. When another PM has a call with a different contact at Acme two weeks later and hears the same complaint, there's no mechanism to surface that pattern. The notes exist in parallel, never intersecting.
+
+**Analytics tools capture behavior, not intent.** Your product analytics can tell you that 23% of enterprise users never open the reporting module. What it can't tell you is whether that's because the feature is undiscoverable, because it doesn't meet their needs, or because they've already built a workaround in a spreadsheet. Behavior without intent is a Rorschach test - you see whatever you already believe.
+
+**Feedback tools capture requests, not reasoning.** Productboard, Canny, UserVoice - they'll tell you that "improved reporting" has 47 upvotes. But they strip away the why. One customer wants real-time dashboards. Another wants scheduled PDF exports. A third wants API access so they can build their own. Counting them as the same request is how you end up building a feature that satisfies none of them.
+
+<figure style={{margin: '2rem 0', textAlign: 'center'}}>
+<svg viewBox="0 0 700 380" xmlns="http://www.w3.org/2000/svg" style={{width: '100%', maxWidth: '700px'}}>
+  <rect width="700" height="380" fill="#12131a" rx="12"/>
+  <text x="350" y="30" textAnchor="middle" fill="#9698b0" fontSize="13" fontWeight="600" letterSpacing="0.5">TRADITIONAL TOOLS vs PRODUCT MEMORY</text>
+
+  {/* Left side - Fragmented */}
+  <text x="175" y="60" textAnchor="middle" fill="#6b6c82" fontSize="11" fontWeight="500">FRAGMENTED TOOLS</text>
+
+  <rect x="40" y="80" width="110" height="44" rx="6" fill="none" stroke="#6b6c82" strokeWidth="1" strokeDasharray="4,3"/>
+  <text x="95" y="100" textAnchor="middle" fill="#6b6c82" fontSize="10">CRM</text>
+  <text x="95" y="114" textAnchor="middle" fill="#6b6c82" fontSize="8" opacity="0.6">accounts only</text>
+
+  <rect x="170" y="80" width="110" height="44" rx="6" fill="none" stroke="#6b6c82" strokeWidth="1" strokeDasharray="4,3"/>
+  <text x="225" y="100" textAnchor="middle" fill="#6b6c82" fontSize="10">Notes</text>
+  <text x="225" y="114" textAnchor="middle" fill="#6b6c82" fontSize="8" opacity="0.6">text only</text>
+
+  <rect x="40" y="140" width="110" height="44" rx="6" fill="none" stroke="#6b6c82" strokeWidth="1" strokeDasharray="4,3"/>
+  <text x="95" y="160" textAnchor="middle" fill="#6b6c82" fontSize="10">Analytics</text>
+  <text x="95" y="174" textAnchor="middle" fill="#6b6c82" fontSize="8" opacity="0.6">behavior only</text>
+
+  <rect x="170" y="140" width="110" height="44" rx="6" fill="none" stroke="#6b6c82" strokeWidth="1" strokeDasharray="4,3"/>
+  <text x="225" y="160" textAnchor="middle" fill="#6b6c82" fontSize="10">Feedback</text>
+  <text x="225" y="174" textAnchor="middle" fill="#6b6c82" fontSize="8" opacity="0.6">requests only</text>
+
+  {/* X marks showing no connections */}
+  <text x="155" y="107" textAnchor="middle" fill="#ef4444" fontSize="14" opacity="0.5">✕</text>
+  <text x="155" y="167" textAnchor="middle" fill="#ef4444" fontSize="14" opacity="0.5">✕</text>
+  <text x="95" y="137" textAnchor="middle" fill="#ef4444" fontSize="14" opacity="0.5">✕</text>
+  <text x="225" y="137" textAnchor="middle" fill="#ef4444" fontSize="14" opacity="0.5">✕</text>
+
+  <text x="155" y="210" textAnchor="middle" fill="#ef4444" fontSize="10" fontStyle="italic">No connections between sources</text>
+
+  {/* Divider */}
+  <line x1="340" y1="55" x2="340" y2="350" stroke="#6b6c82" strokeWidth="1" strokeDasharray="6,4" opacity="0.3"/>
+
+  {/* Right side - Connected Graph */}
+  <text x="520" y="60" textAnchor="middle" fill="#9698b0" fontSize="11" fontWeight="500">PRODUCT MEMORY</text>
+
+  {/* Graph nodes */}
+  <circle cx="520" cy="140" r="24" fill="none" stroke="#6366f1" strokeWidth="1.5"/>
+  <text x="520" y="137" textAnchor="middle" fill="#6366f1" fontSize="8" fontWeight="500">Feature</text>
+  <text x="520" y="148" textAnchor="middle" fill="#6366f1" fontSize="8" fontWeight="500">Request</text>
+
+  <circle cx="430" cy="100" r="22" fill="none" stroke="#22c55e" strokeWidth="1.5"/>
+  <text x="430" y="97" textAnchor="middle" fill="#22c55e" fontSize="8" fontWeight="500">Account</text>
+  <text x="430" y="108" textAnchor="middle" fill="#22c55e" fontSize="8" fontWeight="500">Acme</text>
+
+  <circle cx="610" cy="100" r="22" fill="none" stroke="#22c55e" strokeWidth="1.5"/>
+  <text x="610" y="97" textAnchor="middle" fill="#22c55e" fontSize="8" fontWeight="500">Account</text>
+  <text x="610" y="108" textAnchor="middle" fill="#22c55e" fontSize="8" fontWeight="500">Globex</text>
+
+  <circle cx="440" cy="190" r="20" fill="none" stroke="#f59e0b" strokeWidth="1.5"/>
+  <text x="440" y="187" textAnchor="middle" fill="#f59e0b" fontSize="8" fontWeight="500">Signal</text>
+  <text x="440" y="198" textAnchor="middle" fill="#f59e0b" fontSize="8" fontWeight="500">"churn risk"</text>
+
+  <circle cx="600" cy="190" r="20" fill="none" stroke="#f59e0b" strokeWidth="1.5"/>
+  <text x="600" y="187" textAnchor="middle" fill="#f59e0b" fontSize="8" fontWeight="500">Signal</text>
+  <text x="600" y="198" textAnchor="middle" fill="#f59e0b" fontSize="8" fontWeight="500">"Q3 need"</text>
+
+  <circle cx="520" cy="240" r="18" fill="none" stroke="#8b5cf6" strokeWidth="1.5"/>
+  <text x="520" y="237" textAnchor="middle" fill="#8b5cf6" fontSize="8" fontWeight="500">Person</text>
+  <text x="520" y="248" textAnchor="middle" fill="#8b5cf6" fontSize="8" fontWeight="500">VP Ops</text>
+
+  {/* Connecting lines */}
+  <line x1="450" y1="108" x2="498" y2="130" stroke="#6366f1" strokeWidth="1" opacity="0.5"/>
+  <line x1="590" y1="108" x2="542" y2="130" stroke="#6366f1" strokeWidth="1" opacity="0.5"/>
+  <line x1="455" y1="178" x2="502" y2="155" stroke="#f59e0b" strokeWidth="1" opacity="0.5"/>
+  <line x1="585" y1="178" x2="538" y2="155" stroke="#f59e0b" strokeWidth="1" opacity="0.5"/>
+  <line x1="520" y1="222" x2="520" y2="164" stroke="#8b5cf6" strokeWidth="1" opacity="0.5"/>
+  <line x1="432" y1="120" x2="438" y2="170" stroke="#22c55e" strokeWidth="1" opacity="0.3"/>
+  <line x1="608" y1="120" x2="602" y2="170" stroke="#22c55e" strokeWidth="1" opacity="0.3"/>
+  <line x1="504" y1="234" x2="450" y2="205" stroke="#8b5cf6" strokeWidth="1" opacity="0.3"/>
+  <line x1="536" y1="234" x2="590" y2="205" stroke="#8b5cf6" strokeWidth="1" opacity="0.3"/>
+
+  <text x="520" y="290" textAnchor="middle" fill="#22c55e" fontSize="10" fontStyle="italic">Every signal connected to context</text>
+
+  {/* Bottom labels */}
+  <rect x="60" y="240" width="180" height="50" rx="6" fill="#1a1b26" stroke="#6b6c82" strokeWidth="0.5"/>
+  <text x="150" y="260" textAnchor="middle" fill="#6b6c82" fontSize="9">"Which customers asked for this?"</text>
+  <text x="150" y="278" textAnchor="middle" fill="#ef4444" fontSize="9" fontWeight="500">Cannot answer</text>
+
+  <rect x="410" y="310" width="220" height="50" rx="6" fill="#1a1b26" stroke="#6366f1" strokeWidth="0.5"/>
+  <text x="520" y="330" textAnchor="middle" fill="#9698b0" fontSize="9">"Which customers asked for this?"</text>
+  <text x="520" y="348" textAnchor="middle" fill="#22c55e" fontSize="9" fontWeight="500">Acme (VP Ops, churn risk) + Globex (Q3)</text>
+</svg>
+<figcaption style={{color: '#6b6c82', fontSize: '0.85rem', marginTop: '0.5rem'}}>Traditional tools store fragments. Product memory connects them into a queryable graph.</figcaption>
+</figure>
+
+The common thread across all four categories: they each capture one dimension and discard the rest. A product memory system doesn't replace these tools. It sits above them, connecting the account from your CRM, the quote from your notes, the behavior from your analytics, and the request from your feedback tool into a single, structured understanding.
+
+## What a product memory system actually does
+
+A product memory system has five core capabilities that distinguish it from anything else in the product stack. Each one addresses a specific failure mode in how teams handle [customer signals](/blog/capture-customer-signals) today.
+
+**1. It captures unstructured input from any source.**
+
+A PM finishes a customer call and drops a voice memo, a Slack message, or a rough set of bullet points. The system doesn't need clean, formatted input. It ingests whatever the PM produces naturally - transcripts, emails, chat logs, ticket summaries - and treats it all as raw material. The key distinction: capture happens at the speed of conversation, not at the speed of documentation. If your capture process requires the PM to stop and fill out a form, you've already lost half the signal.
+
+**2. It extracts entities and signals automatically.**
+
+From that raw input, the system identifies the structured elements: account names, people, features mentioned, sentiment expressed, urgency conveyed, competitive references made. This is the step that separates a product memory system from a glorified search engine. The extraction is opinionated - it knows what matters in a product context and pulls those elements out without the PM having to tag or categorize anything manually.
+
+**3. It connects everything in a graph.**
+
+This is where the real value starts. Every extracted entity becomes a node. Every relationship between entities becomes an edge. When Acme's VP of Operations mentions "bulk import" in a call, that creates connections: Acme - VP Ops - bulk import - Q3 deadline - competitive threat from Vendor X. When a different PM hears about bulk import from Globex two weeks later, those nodes connect. The graph grows denser. Patterns emerge that no individual PM could see from their own calls alone.
+
+**4. It scores traction over time.**
+
+Not all signals are equal. A feature mentioned once by a small account is noise. The same feature mentioned by four enterprise accounts, two of whom are at renewal risk, with increasing urgency over the past quarter - that's a pattern worth acting on. A product memory system tracks signal strength over time: frequency, recency, account value, sentiment trajectory. It doesn't just tell you what was said. It tells you what's getting louder.
+
+{/* [UNIQUE INSIGHT] */}
+
+**5. It surfaces what changed.**
+
+This is the capability most teams don't know they need until they have it. A product memory system can tell you: "Three months ago, your top accounts were asking for reporting improvements. Over the past six weeks, that conversation has shifted to API access. Here are the seven conversations where the shift happened." The ability to detect drift in customer sentiment - before it shows up as churn or a lost deal - is genuinely different from anything a static feedback board can provide. Most product teams discover strategic shifts in the rearview mirror. Product memory shows you the turn while it's happening.
+
+## Why product teams keep losing context
+
+The problem runs deeper than tooling. It's structural. B2B product management is a discipline built on conversations, yet it has no institutional memory for them.
+
+Consider what happens after a typical customer call. The PM has thirty minutes before their next meeting. They jot down the two or three things that seemed most urgent. Maybe they update a Jira ticket. Maybe they post a summary in Slack. By Thursday, when [prioritization happens](/blog/feature-prioritization-evidence), they're working from those compressed notes - not from the actual conversation.
+
+This is the [context loss problem](/blog/losing-context-customer-calls) at its core. It's not about discipline or rigor. Even the most diligent PM can't maintain a mental model of hundreds of conversations across dozens of accounts over months of product development cycles. The human brain is spectacularly good at pattern recognition in conversation. It is spectacularly bad at pattern retention across conversations separated by weeks.
+
+The result is a predictable pathology: decisions get made based on whatever information is most recent and most emotionally salient. The customer who spoke loudly in last week's QBR carries more weight than the five customers who mentioned the same issue quietly over the past quarter. This is not a failure of PM judgment. It's a failure of the information architecture that PM judgment depends on.
+
+Intelligence analysts have known this for decades. They don't rely on memory - they build [structured systems for connecting signals](/blog/intelligence-analysts-product-signals) across sources and time periods. Product management is, in many ways, an intelligence discipline. It's just one that hasn't yet adopted the tooling to match.
+
+## The compounding effect
+
+Here's the thing about product memory that makes it categorically different from a spreadsheet, a wiki, or a feedback board: it compounds.
+
+The first ten captures are mildly useful. You've got some notes in a structured format. Fine. But the fiftieth capture doesn't just add data - it reinforces or contradicts patterns established by the first forty-nine. The hundredth capture starts revealing second-order patterns: not just "customers want better reporting," but "enterprise accounts with more than 500 users want reporting, while mid-market accounts with fewer than 100 users want integrations, and the inflection point seems to be around the 200-user mark."
+
+This is compound interest applied to product intelligence. In financial terms, a product memory system doesn't earn simple interest (each conversation adds the same marginal value). It earns compound interest (each conversation adds value AND increases the value of every previous conversation by providing new context for comparison).
+
+<figure style={{margin: '2rem 0', textAlign: 'center'}}>
+<svg viewBox="0 0 600 340" xmlns="http://www.w3.org/2000/svg" style={{width: '100%', maxWidth: '600px'}}>
+  <rect width="600" height="340" fill="#12131a" rx="12"/>
+  <text x="300" y="28" textAnchor="middle" fill="#9698b0" fontSize="13" fontWeight="600" letterSpacing="0.5">THE COMPOUNDING VALUE OF PRODUCT MEMORY</text>
+
+  {/* Axes */}
+  <line x1="70" y1="280" x2="560" y2="280" stroke="#6b6c82" strokeWidth="1" opacity="0.4"/>
+  <line x1="70" y1="280" x2="70" y2="50" stroke="#6b6c82" strokeWidth="1" opacity="0.4"/>
+
+  {/* Y-axis label */}
+  <text x="30" y="165" textAnchor="middle" fill="#6b6c82" fontSize="10" transform="rotate(-90, 30, 165)">Decision Quality</text>
+
+  {/* X-axis label */}
+  <text x="315" y="310" textAnchor="middle" fill="#6b6c82" fontSize="10">Conversations Captured</text>
+
+  {/* X-axis ticks */}
+  <text x="70" y="296" textAnchor="middle" fill="#6b6c82" fontSize="9">0</text>
+  <text x="168" y="296" textAnchor="middle" fill="#6b6c82" fontSize="9">25</text>
+  <text x="266" y="296" textAnchor="middle" fill="#6b6c82" fontSize="9">50</text>
+  <text x="364" y="296" textAnchor="middle" fill="#6b6c82" fontSize="9">100</text>
+  <text x="462" y="296" textAnchor="middle" fill="#6b6c82" fontSize="9">200</text>
+  <text x="560" y="296" textAnchor="middle" fill="#6b6c82" fontSize="9">500</text>
+
+  {/* Linear line - traditional tools (flat/slight incline) */}
+  <path d="M 70 260 L 168 252 L 266 244 L 364 236 L 462 228 L 560 220" fill="none" stroke="#6b6c82" strokeWidth="2" strokeDasharray="6,4"/>
+
+  {/* Compound curve - product memory */}
+  <path d="M 70 265 Q 120 262 168 255 Q 220 245 266 225 Q 320 195 364 155 Q 420 105 462 80 Q 510 62 560 58" fill="none" stroke="#6366f1" strokeWidth="2.5"/>
+
+  {/* Area fill under compound curve */}
+  <path d="M 70 265 Q 120 262 168 255 Q 220 245 266 225 Q 320 195 364 155 Q 420 105 462 80 Q 510 62 560 58 L 560 280 L 70 280 Z" fill="url(#compoundGrad)" opacity="0.15"/>
+
+  <defs>
+    <linearGradient id="compoundGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stopColor="#6366f1"/>
+      <stop offset="100%" stopColor="#12131a"/>
+    </linearGradient>
+  </defs>
+
+  {/* Annotation - inflection zone */}
+  <rect x="230" y="195" width="90" height="22" rx="4" fill="#1a1b26" stroke="#6366f1" strokeWidth="0.5"/>
+  <text x="275" y="210" textAnchor="middle" fill="#6366f1" fontSize="8">Inflection point</text>
+  <line x1="275" y1="217" x2="275" y2="225" stroke="#6366f1" strokeWidth="1" opacity="0.5"/>
+
+  {/* Gap annotation */}
+  <line x1="462" y1="80" x2="462" y2="228" stroke="#22c55e" strokeWidth="1" strokeDasharray="3,3" opacity="0.5"/>
+  <text x="480" y="150" fill="#22c55e" fontSize="9" fontWeight="500">Value gap</text>
+  <text x="480" y="163" fill="#22c55e" fontSize="9" fontWeight="500">widens</text>
+
+  {/* Legend */}
+  <line x1="350" y1="325" x2="370" y2="325" stroke="#6366f1" strokeWidth="2.5"/>
+  <text x="375" y="329" fill="#9698b0" fontSize="9">Product memory (compounds)</text>
+
+  <line x1="140" y1="325" x2="160" y2="325" stroke="#6b6c82" strokeWidth="2" strokeDasharray="6,4"/>
+  <text x="165" y="329" fill="#6b6c82" fontSize="9">Traditional tools (linear)</text>
+</svg>
+<figcaption style={{color: '#6b6c82', fontSize: '0.85rem', marginTop: '0.5rem'}}>Each new capture adds value and increases the value of every previous capture. Traditional tools grow linearly. Product memory compounds.</figcaption>
+</figure>
+
+The practical implication is counterintuitive: the most valuable capture in a product memory system is not the first one. It's the most recent one. Because it has the benefit of being interpreted against every capture that came before it.
+
+Consider the difference. A customer saying "we need better reporting" in isolation is vague. You could interpret it a dozen ways, and you'd probably interpret it through the lens of whatever you're already building. But that same statement, placed in a graph that already contains 200 data points about reporting from 40 different accounts, tells you exactly where it fits - which segment cares most, whether the urgency is increasing, and whether this customer's version of "better reporting" matches the pattern or represents something genuinely new.
+
+This is why spreadsheets and wikis plateau. They store information, but they don't compound it. Adding row 500 to a spreadsheet gives you exactly as much marginal insight as adding row 50. There's no reinforcement, no pattern detection, no contradiction surfacing. It's storage, not intelligence.
+
+## The cost of not having it
+
+If the compounding value argument feels abstract, consider the concrete cost of its absence.
+
+Product teams without memory make three predictable mistakes. First, they re-learn things. A PM joins a call and hears a pain point that another PM documented six months ago, but nobody can find those notes. The organization pays the cost of discovery twice. Across a team of five PMs handling 20 accounts each, this happens dozens of times per quarter.
+
+Second, they miss convergence. When five different accounts mention adjacent versions of the same need, but each in different language and to different PMs, the pattern is invisible. No single PM has enough data points to see it. Without a system that connects signals across the entire team's conversations, genuine trends look like isolated anecdotes.
+
+Third, they build for ghosts. The loudest signal wins, and the loudest signal is rarely the most representative one. The customer with the executive sponsor who calls your CEO gets their feature prioritized. The eight customers who mentioned the same need in routine check-ins, without drama, get nothing. This is how roadmaps end up driven by relationship dynamics rather than evidence.
+
+The cumulative cost is substantial. I've seen teams spend entire quarters building capabilities that later analysis showed were requested by fewer than 5% of accounts by revenue. Not because the PM was careless, but because the information architecture made it impossible to see the full picture.
+
+And the cost compounds in the other direction too. Every quarter without product memory is a quarter of conversations that generate no lasting organizational value. Those calls happen anyway. The PM's time is already spent. The only question is whether the intelligence from those conversations persists for months or evaporates in days.
+
+## The decision stays human
+
+I want to be precise about what product memory does not do. It does not tell you what to build. It does not generate a prioritized backlog. It does not replace the PM's judgment about what matters strategically.
+
+What it does is make that judgment dramatically better-informed. It answers questions like: How many accounts have mentioned this capability in the last 90 days? Is that number increasing or decreasing? Which of those accounts are at renewal risk? What's the average contract value of accounts requesting this versus accounts that aren't? Are customers describing the same problem, or different problems that sound similar?
+
+These are the questions every PM wants to answer during prioritization. Today, they answer them from memory, anecdote, and intuition - which means they answer them poorly, inconsistently, and with massive blind spots. A product memory system doesn't remove judgment from the equation. It gives judgment something solid to stand on.
+
+The fundamental shift is from "I think our customers want this" to "here are the 23 conversations across 14 accounts that support this, weighted by recency, account value, and sentiment trajectory, and here are the 4 conversations that contradict it." The decision is still yours. But the foundation under that decision is concrete rather than sand.
+
+This is what I'm building with [Gravii](https://gravii.app) - a product memory system designed for B2B product teams who are tired of making high-stakes decisions based on whatever they happen to remember from last week. Not another dashboard. Not another feedback board. The connective tissue that's been missing from the product stack since the beginning.
+
+Product memory isn't a category that exists yet. But the problem it solves - the systematic loss of customer intelligence between the moment it's spoken and the moment it's needed - is one that every PM reading this has felt. The question isn't whether this problem is real. The question is how much longer you're willing to make decisions without solving it.
