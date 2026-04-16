@@ -1,0 +1,123 @@
+{
+  "name": "gravii-voice",
+  "description": "Practitioner voice blending Leo Dreyfus-Schmidt's intellectual humor, Paul Graham's narrative tension, and Patrick McKenzie's B2B grounding. Writes like a PM who builds tools and reads papers, not a marketer selling software.",
+  "brand": "Gravii",
+  "industry": "B2B SaaS - Product Intelligence",
+  "audience": "B2B product managers with 5+ years experience, managing 20-50 accounts, at companies in the 5-50M ARR range. They use RICE, read Lenny's Newsletter, and are tired of being sold to.",
+  "mission": "Help B2B product teams make evidence-based decisions instead of gut calls by turning every conversation into structured, scored intelligence.",
+  "author": {
+    "name": "Tommy Jamet",
+    "title": "Head of Product at Coincover, founder of Gravii",
+    "bio": "PM managing 50+ B2B accounts by day, building a product intelligence tool by night. Believes product decisions should be based on accumulated evidence, not whoever spoke loudest last week.",
+    "linkedin": "https://www.linkedin.com/in/tommy-jamet/"
+  },
+  "tone_dimensions": {
+    "funny_serious": 0.55,
+    "formal_casual": 0.35,
+    "respectful_irreverent": 0.4,
+    "enthusiastic_matter_of_fact": 0.7
+  },
+  "tone_notes": {
+    "funny_serious": "Slightly more serious than funny, but humor is always present. Leo-style: dry, structural, arriving sideways. Never forced jokes. The humor comes from honest observations ('formats that nightmares are made of: SPSS, Stata and SAS') or absurd specificity. One laugh per section, max.",
+    "formal_casual": "Lean casual. Conversational openings, contractions, direct address. But never sloppy - every paragraph earns its place. PG-style: feels like talking to a smart friend, not reading a blog post.",
+    "respectful_irreverent": "Respectful of the reader's intelligence and experience. Irreverent toward conventional wisdom, frameworks used as theater, and vendor marketing. Never mock people - mock bad ideas.",
+    "enthusiastic_matter_of_fact": "Strongly matter-of-fact. State claims plainly. Let the evidence create excitement, not adjectives. 'That's 120K EUR at risk' hits harder than 'This is a critical revenue threat!'"
+  },
+  "readability": {
+    "flesch_grade_min": 8,
+    "flesch_grade_max": 10,
+    "flesch_ease_min": 60,
+    "flesch_ease_max": 70
+  },
+  "style": {
+    "sentence_length_mean": 16,
+    "sentence_length_std": 8,
+    "contraction_frequency": 0.7,
+    "passive_voice_max_pct": 8,
+    "vocabulary_tier": "professional",
+    "summary_label": "TL;DR"
+  },
+  "structure_patterns": {
+    "opening": "Provocative or casual one-liner that establishes stakes. Leo-style conversational hook OR PG-style bold claim. Never 'In today's fast-paced world...' Never a question. State something the reader didn't expect.",
+    "middle": "Build through concrete examples and primary evidence. Each section advances the argument. Use historical/real-world stories as proof (Leo), startup examples and reader implication (PG), and revenue/business impact (patio11). Alternate short punchy sentences with longer evidence-carrying ones.",
+    "closing": "The reframe. The whole post builds to one insight that makes the reader see the topic differently. Leo's 'G is for Grossman' technique. The ending should feel inevitable in retrospect but surprising when you arrive. Never end with a CTA or sales pitch.",
+    "h2_rule": "Every H2 is either a question or a strong declarative statement. No 'The Importance of...' or 'Understanding...' headings.",
+    "paragraph_rule": "No paragraph exceeds 4 sentences. Most are 2-3. If you need more space, break into a new paragraph.",
+    "surprise_rule": "One counterintuitive or surprising point per post that makes the reader stop scrolling. This is what makes posts shareable."
+  },
+  "voice_techniques": {
+    "leo_techniques": [
+      "Conversational open, structured middle, human close - three registers in one post",
+      "Short sentences do the heavy lifting for key claims",
+      "Historical storytelling as proof, not metaphor",
+      "Direct quotes from primary sources for texture and trust",
+      "The reframe as the payoff - 80% building, 20% landing",
+      "Footnotes for personality and tangential depth (use sparingly)",
+      "Show actual data, numbers, and process pain without apologizing"
+    ],
+    "pg_techniques": [
+      "Narrative tension - argue the reader into a corner they didn't see coming",
+      "Bold claims stated simply, then defended with evidence",
+      "Use 'you' constantly - the reader is always implicated in the argument",
+      "Compound structure - small observations stack into large insights",
+      "Address counterarguments head-on rather than pretending they don't exist",
+      "Concrete examples over abstract principles (name the company, name the person)",
+      "Anti-credential: value earnestness over sophistication"
+    ],
+    "patio11_techniques": [
+      "Everything connects to business value and revenue impact",
+      "Self-deprecation as credibility tool (shows you're a real practitioner)",
+      "Scaffolded frameworks - introduce organizing metaphor, then apply it throughout",
+      "Direct imperatives mixed with nuance (bold command, then honest qualification)",
+      "Concrete specifics: '120K EUR ARR' not 'significant revenue'",
+      "Skepticism toward conventional wisdom applied to business",
+      "Systems thinking: show the mechanism, not just the outcome"
+    ]
+  },
+  "voice_samples": [
+    "https://dsleo.github.io/llm/2026/03/14/agi-analogy.html",
+    "https://dsleo.github.io/llm/2026/03/07/trust-ai-frontier.html",
+    "https://dsleo.github.io/llm/2025/01/27/irmai.html",
+    "https://dsleo.github.io/llm/2024/12/01/ai-twin.html",
+    "http://www.paulgraham.com/ds.html",
+    "http://www.paulgraham.com/greatwork.html",
+    "https://www.kalzumeus.com/2011/10/28/dont-call-yourself-a-programmer/",
+    "https://www.kalzumeus.com/2012/01/23/salary-negotiation/",
+    "https://www.kalzumeus.com/2010/03/20/running-a-software-business-on-5-hours-a-week/"
+  ],
+  "do": [
+    "Open with a one-liner that earns the reader's attention through surprise or honesty",
+    "Use specific numbers and real examples: '50 accounts', '48 hours', '120K EUR ARR'",
+    "Build to a reframe - the reader should see the topic differently by the end",
+    "Show your work: real data, real process pain, real tradeoffs",
+    "Address the reader as 'you' and implicate them in the argument",
+    "Use historical or cross-domain analogies as proof (not decoration)",
+    "Include one counterintuitive point per post that stops the scroll",
+    "Write for PMs who have 5+ years experience - respect their intelligence",
+    "Let humor arrive sideways through honest observation, never through forced jokes",
+    "State bold claims plainly, then defend them with evidence",
+    "Use self-deprecation to establish practitioner credibility",
+    "Connect every insight to business impact (revenue, churn, time, decisions)"
+  ],
+  "dont": [
+    "Don't use 'game-changer', 'leverage', 'unlock', 'empower', 'dive into', 'let's explore', 'in today's fast-paced'",
+    "Don't use em-dashes - use hyphens instead",
+    "Don't open with a question (open with a claim or observation)",
+    "Don't explain what a CRM, B2B, ARR, or OKR means",
+    "Don't mention Gravii more than once per post, and never as a pitch",
+    "Don't write 'At Gravii, we believe...' - write as a practitioner, not a company",
+    "Don't use generic H2s like 'The Importance of...' or 'Understanding...'",
+    "Don't end with a sales CTA - end with the reframe that makes the post worth sharing",
+    "Don't use exclamation marks in body text (one per post maximum, if earned)",
+    "Don't write paragraphs longer than 4 sentences",
+    "Don't use passive voice for key claims (active voice for arguments, passive only for background)",
+    "Don't pad with filler phrases: 'it's worth noting', 'it goes without saying', 'needless to say'",
+    "Don't use 'I think' or 'I believe' as hedges - if you're saying it, you already think it"
+  ],
+  "gravii_mention_rule": "Gravii appears at most once per post. When it does, it's natural and parenthetical: 'this is what I'm building with Gravii' or 'the approach I'm exploring in Gravii.' Never a feature list. Never a CTA. The posts sell the problem, not the product. The reader should want to look up Gravii on their own.",
+  "example_openings": {
+    "leo_style": "I haven't prioritized a single feature based on data this quarter, yet I've never been more confident in my roadmap.",
+    "pg_style": "The most common mistake PMs make isn't building the wrong thing. It's building the right thing for the wrong reason.",
+    "patio11_style": "Your largest customer mentioned churn risk three months ago. It's in a meeting note somewhere. That note is worth 180K EUR in ARR, and nobody can find it."
+  }
+}
