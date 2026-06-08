@@ -1,125 +1,71 @@
 ---
-title: "The Real Cost of Losing Context Between Customer Calls"
-description: "Within 48 hours of a customer call, most PMs have lost 60-70% of the nuance. The feature request is remembered. The reasoning is gone."
-date: "2026-04-17"
+title: "The Real Cost of Losing Context Between Client Meetings"
+description: "Within days of a client conversation, most of the nuance is gone. The decision survives. The reasoning behind it does not. For a firm whose product is judgment, that loss is the expensive one."
+date: "2026-06-08"
 author: "Tommy Jamet"
 authorRole: "Seasoned Head of Product, Founder of Gravii"
 authorLinkedIn: "https://www.linkedin.com/in/tommyjamet/"
-tags: ["customer context", "product management", "B2B customer intelligence", "meeting notes"]
+tags: ["institutional memory", "knowledge work", "grounded AI", "professional services", "company brain"]
 published: true
 ---
 
-Three weeks ago, you had a great call with your largest account. The VP of Operations told you they'd evaluate a competitor if a specific workflow feature wasn't shipped by Q3. You remember the feature request. You wrote it down. It's in Jira.
+Three weeks ago a senior person at your firm had an important conversation with a client. A position was agreed, a concern was raised, a deadline was set. The conclusion made it into a deliverable. Most of what made the conclusion *correct* did not.
 
-But here's what you don't remember: the Q3 deadline. The competitor's name. The fact that this was the third time someone at that account raised the same issue. That the VP's exact words were "this is becoming a board-level conversation." You don't remember any of that because you processed six more calls that week, and human memory doesn't work the way product managers need it to.
+Nobody wrote down that the client's concern was really about exposure across one specific workstream, or that the agreement was conditional on a date, or that this was the third time the same worry had come up. Those details are what made the advice right. They are also the first things to go, because the person who held them has had six more conversations since.
 
-That missing context - the deadline, the competitor, the escalation pattern - is the difference between shipping the feature in time and reading about the churn in a quarterly business review. The feature request was worth nothing without the reasoning behind it. And the reasoning is gone.
+> **Key Takeaways**
+> - People lose a large share of new detail within days. One replication found retention drops to about 25% after a week without reinforcement (Ebbinghaus forgetting curve, 1885; [PLOS ONE](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0120644), 2015).
+> - In a firm whose product is judgment, the costly loss is not the decision, it is the reasoning and the conditions behind it.
+> - The fix is not better note-taking. It is a layer where context accumulates instead of decaying, and answers cite the evidence they came from.
 
-> **TL;DR** Most PMs retain only 30-40% of the nuance from customer calls after 48 hours. Across 50 accounts and 100+ calls per quarter, this creates a compounding information deficit that corrupts prioritization, misses churn signals, and leads to decisions based on a fraction of the available evidence. The fix isn't better note-taking. It's a system where context accumulates instead of decaying.
+## The decay starts within hours
 
-## The 48-hour decay
+After a meeting you remember the headlines. The client wants X. They are worried about Y. You captured the action items and you feel like you understood the conversation. Then a few days pass, and the specifics dissolve. Why did they want it? What were they doing instead? What exactly were they exposed to, and who else on their side was involved? Those are the details that made the conclusion defensible, and they are the first to fade.
 
-After a customer call, you remember the headlines. They want feature X. They're frustrated about Y. You captured the action items. You feel confident you understood the conversation.
-
-Then 48 hours pass. The specifics dissolve. Why did they want that feature? What are they currently doing instead? What's the dollar impact of the workaround? Who else on their team is affected? These details made the signal actionable, and they're the first to go.
-
-This isn't a discipline problem. It's a cognitive one. Hermann Ebbinghaus documented the forgetting curve in 1885, and subsequent research has consistently shown that people lose 50-70% of newly learned information within 48 hours without structured reinforcement. For product managers, the implication is brutal: the most valuable part of every customer conversation - the context that makes a feature request meaningful - is the part your brain discards first.
-
-You keep the noun. You lose the verb. "They want bulk export" survives. "Because their compliance team runs a manual reconciliation process every Friday that takes four hours and the CFO is threatening to switch vendors over it" does not.
-
-## The compounding loss across 50 accounts
-
-One forgotten detail from one call is annoying. The math across a real portfolio is catastrophic.
-
-A typical B2B PM has 5-10 customer calls per week across 30-50 accounts. Call it 8 per week to be conservative. Over a 13-week quarter, that's 104 calls. If you lose 60% of the contextual nuance from each call, your quarterly decision-making rests on roughly 40% of the available evidence.
-
-But it's worse than that, because the losses compound. The insight from call 7 that would have connected to something from call 43 never gets connected. The pattern across three accounts that should have surfaced a horizontal need stays invisible. You're not just losing individual data points. You're losing the relationships between them.
-
-{/* [UNIQUE INSIGHT] */}
-Here's the part nobody talks about: the PMs who manage the most accounts - the ones with the broadest customer exposure and theoretically the best pattern recognition - are the ones losing the most context. Scale doesn't help you here. It actively works against you. The PM with 15 accounts retains more per-account context than the PM with 50, which means your most strategically positioned people are making decisions with the least complete picture.
+This is not a discipline problem, it is a cognitive one. Hermann Ebbinghaus documented the forgetting curve in 1885, and replications since have held the line: without structured reinforcement, people lose most new detail fast, down to roughly a quarter of it within a week ([PLOS ONE, 2015](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0120644)). You keep the noun and lose the reason. "They agreed to the conservative position" survives. "They agreed because their exposure on the migration scope was uncapped, conditional on signing by the 18th" does not.
 
 <figure style={{margin: '2rem 0', textAlign: 'center'}}>
-<svg viewBox="0 0 500 280" xmlns="http://www.w3.org/2000/svg" style={{width: '100%', maxWidth: '500px'}}>
-  <rect width="500" height="280" fill="#12131a" rx="12"/>
-  <text x="250" y="28" textAnchor="middle" fill="#9698b0" fontSize="12" fontWeight="600">CONTEXT RETAINED vs. ACCOUNTS MANAGED</text>
-  <line x1="60" y1="45" x1="60" y2="230" stroke="#2a2b3d" strokeWidth="1"/>
-  <line x1="60" y1="230" x2="470" y2="230" stroke="#2a2b3d" strokeWidth="1"/>
-  <text x="15" y="55" fill="#6b6c82" fontSize="10" textAnchor="start">100%</text>
-  <text x="15" y="100" fill="#6b6c82" fontSize="10" textAnchor="start">80%</text>
-  <text x="15" y="145" fill="#6b6c82" fontSize="10" textAnchor="start">60%</text>
-  <text x="15" y="190" fill="#6b6c82" fontSize="10" textAnchor="start">40%</text>
-  <text x="15" y="230" fill="#6b6c82" fontSize="10" textAnchor="start">20%</text>
-  <text x="60" y="250" fill="#6b6c82" fontSize="10" textAnchor="middle">5</text>
-  <text x="162" y="250" fill="#6b6c82" fontSize="10" textAnchor="middle">15</text>
-  <text x="265" y="250" fill="#6b6c82" fontSize="10" textAnchor="middle">25</text>
-  <text x="368" y="250" fill="#6b6c82" fontSize="10" textAnchor="middle">35</text>
-  <text x="470" y="250" fill="#6b6c82" fontSize="10" textAnchor="middle">50</text>
-  <text x="265" y="272" fill="#6b6c82" fontSize="10" textAnchor="middle">Number of accounts managed</text>
-  <text x="12" y="145" fill="#6b6c82" fontSize="9" textAnchor="middle" transform="rotate(-90, 12, 145)">Context retained per account</text>
-  <path d="M60,55 Q120,62 162,95 Q220,135 265,165 Q330,195 368,210 Q430,222 470,225" fill="none" stroke="#6366f1" strokeWidth="2.5"/>
-  <path d="M60,55 Q120,62 162,95 Q220,135 265,165 Q330,195 368,210 Q430,222 470,225 L470,230 L60,230 Z" fill="url(#contextGradient)" opacity="0.3"/>
-  <defs>
-    <linearGradient id="contextGradient" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stopColor="#6366f1" stopOpacity="0.4"/>
-      <stop offset="100%" stopColor="#6366f1" stopOpacity="0.02"/>
-    </linearGradient>
-  </defs>
-  <circle cx="60" cy="55" r="3.5" fill="#6366f1"/>
-  <circle cx="162" cy="95" r="3.5" fill="#6366f1"/>
-  <circle cx="265" cy="165" r="3.5" fill="#6366f1"/>
-  <circle cx="368" cy="210" r="3.5" fill="#6366f1"/>
-  <circle cx="470" cy="225" r="3.5" fill="#6366f1"/>
-  <text x="75" y="50" fill="#6366f1" fontSize="9">~90%</text>
-  <text x="177" y="90" fill="#6366f1" fontSize="9">~72%</text>
-  <text x="280" y="160" fill="#6366f1" fontSize="9">~48%</text>
-  <text x="383" y="205" fill="#6366f1" fontSize="9">~33%</text>
-  <text x="445" y="220" fill="#6366f1" fontSize="9">~25%</text>
+<svg viewBox="0 0 560 220" role="img" aria-label="A decay curve showing retained detail falling from 100 percent at the moment of a conversation to about 25 percent one week later, per the Ebbinghaus forgetting curve replicated in PLOS ONE, 2015." xmlns="http://www.w3.org/2000/svg" style={{maxWidth: '560px', width: '100%', height: 'auto'}}>
+  <text x="0" y="20" fill="currentColor" fontSize="15" fontWeight="600">Detail retained after a conversation, without reinforcement</text>
+  <line x1="44" y1="56" x2="44" y2="170" stroke="currentColor" strokeWidth="1" opacity="0.25"></line>
+  <line x1="44" y1="170" x2="540" y2="170" stroke="currentColor" strokeWidth="1" opacity="0.25"></line>
+  <path d="M44 60 C 120 120, 200 150, 300 160 C 400 167, 480 168, 540 168" fill="none" stroke="var(--accent)" strokeWidth="2.5"></path>
+  <circle cx="44" cy="60" r="4" fill="var(--accent)"></circle>
+  <circle cx="540" cy="168" r="4" fill="var(--accent)"></circle>
+  <text x="52" y="54" fill="currentColor" fontSize="12" fontWeight="600">100%</text>
+  <text x="500" y="160" fill="currentColor" fontSize="12" fontWeight="600">~25%</text>
+  <text x="44" y="188" fill="currentColor" fontSize="11" opacity="0.6">the meeting</text>
+  <text x="496" y="188" fill="currentColor" fontSize="11" opacity="0.6">one week later</text>
+  <text x="0" y="210" fill="currentColor" fontSize="11" opacity="0.55">Source: Ebbinghaus forgetting curve (1885), replicated in PLOS ONE, 2015.</text>
 </svg>
-<figcaption style={{color: '#6b6c82', fontSize: '0.85rem', marginTop: '0.5rem'}}>As account count grows, per-account context retention drops sharply. The relationship is not linear - it degrades fastest between 15 and 35 accounts.</figcaption>
 </figure>
 
 ## What specifically gets lost
 
-Not all context decays equally. The headline survives. The detail doesn't. Here's what actually disappears, in rough order of how fast it goes.
+Not all context decays at the same rate. The headline lasts. The detail that made it actionable does not.
 
-**The exact words the customer used.** Your notes say "wants better reporting." The customer actually said "our CEO pulls this report every Monday morning and last week he called it embarrassing." Those are not the same signal. One is a feature request. The other is an executive escalation with a weekly cadence of reputational damage.
+**The exact words.** Your note says "wants more reporting." What the client said was "our board called last quarter's pack embarrassing." Those are not the same signal. One is a request. The other is a standing reputational problem with a name attached.
 
-**The timeline.** "By Q3" becomes "soon" becomes "at some point." Deadlines are the first concrete detail to blur, and they're often the most important. A customer who needs something by September is a fundamentally different planning input than a customer who would like it eventually.
+**The conditions.** "By Q3" softens to "soon" softens to "at some point." Deadlines and conditions are the first concrete things to blur, and they are usually what made the commitment a commitment.
 
-**The competitive context.** They mentioned evaluating a competitor. Which one? What specifically attracted them? Was it pricing, a feature gap, or something about your support experience? This information shapes your response entirely, and it's gone within a week.
+**The reasoning.** Why the position was conservative, what the alternative was, what you ruled out. This is the part a colleague needs to inherit the work, and the part that is gone within a week.
 
-**The internal champion's motivation.** The person on the call isn't just representing the company. They have a personal stake. Maybe they advocated for your product internally and their credibility depends on you delivering. Maybe they're new and looking for a quick win. Understanding this changes how you prioritize their request, and it's the kind of nuance that never makes it into a CRM field.
+**The connection.** The hardest thing to retain is that what this client said relates to what another client, or another engagement, said a month ago. No single person holds enough of the picture to see it.
 
-**The cross-account connection.** The hardest thing to retain is the relationship between what this customer said and what another customer said two weeks ago. These connections are where [real prioritization evidence](/blog/feature-prioritization-evidence) lives - the difference between "one customer asked for this" and "four customers described the same underlying pain in different ways."
+## Why the usual fixes do not hold
 
-## How PMs compensate (and why it doesn't scale)
+People are not careless about this. They build systems to compensate, and every system works at small scale and breaks at the scale that matters.
 
-Product managers are smart people. They know context matters. So they build systems to preserve it. Every one of these systems works at small scale and breaks at the scale where it matters most.
-
-**Re-reading notes before each call.** This is the most common approach, and the math kills it. If you have 8 calls this week and spend 10 minutes reviewing notes before each, that's 80 minutes of prep - and that's only reviewing the last conversation, not the full account history. At 50 accounts, you'd need to review notes you haven't looked at in months. Nobody does this.
-
-**Asking customers to repeat themselves.** This works exactly once. The second time a customer realizes you've forgotten what they told you, trust erodes. The third time, they stop telling you important things. They start telling your competitor instead.
-
-**CRM fields.** Structured fields are great for tracking deal stages and renewal dates. They are terrible for capturing "the CFO called the report embarrassing every Monday." Nuance doesn't fit in dropdowns. The most important context from a customer conversation is precisely the kind of information that no structured field was designed to hold.
-
-**Elaborate Notion databases.** I've seen PMs build beautiful systems - tagged, linked, filterable. These databases take 20-30 minutes per call to maintain properly. At 8 calls per week, that's 3-4 hours just on documentation. The system becomes a part-time job. Within two months, entries get shorter. Within four, they stop altogether. Every PM who has built one of these knows exactly how this story ends.
-
-These aren't bad approaches. They're rational responses to a real problem. But they all share the same failure mode: they require the PM to do the work of [capturing and connecting signals](/blog/capture-customer-signals) manually, and manual processes collapse under load.
+Re-reading notes before each meeting only covers the last conversation, never the full history. Asking the client to repeat themselves works exactly once before it costs you trust. Structured fields in a CRM are built for stages and dates, not for "the board called the pack embarrassing." And the elaborate note databases people build take so long to maintain that within two months the entries get shorter and within four they stop. They all share one failure mode: the context enters through one person's head, and that head becomes the bottleneck. You cannot fix that with a better head.
 
 ## Context that accumulates instead of decaying
 
-The pattern behind every workaround above is the same. Context enters the system through the PM's brain, and the PM's brain becomes the bottleneck. The fix isn't a better brain. It's removing the brain from the critical path.
+The shift is architectural, not behavioral. You are not asking people to take better notes. You are changing where the context lives, from individual memory, which decays, to a shared layer, which accumulates.
 
-What would it look like if every customer conversation automatically added to a structured, searchable record? If that record was connected - not just to the account, but to what every other customer said about similar topics? If, before your next call, you didn't re-read notes but instead saw the complete picture: every feature request, every deadline, every competitive mention, every escalation pattern, every connection to other accounts?
+That layer reads the artifacts your firm already produces, the engagement notes, the client correspondence, the meeting summaries, and resolves them into something you can simply ask. Before the next conversation you do not re-read months of notes. You ask what the firm knows about this client, and the answer comes back grounded in the specific notes it used, with dates. Every new conversation makes the picture more complete instead of overwriting the fragments that happened to survive.
 
-This is what a [product memory](/blog/product-memory) system does. It doesn't replace the PM's judgment. It replaces the PM's recall - the part that was failing anyway.
+Two things make this trustworthy rather than just convenient. It [captures selectively, with your consent](/blog/capture-customer-signals), not by vacuuming everything. And it answers only from real evidence, citing it, and says plainly when it has none. A layer that confidently fills the gaps is worse than memory loss, because someone acts on the invention.
 
-The shift is architectural, not behavioral. You're not asking PMs to take better notes or build better databases. You're changing where context lives: from individual memory (which decays) to a shared system (which accumulates). Every conversation makes the picture more complete instead of replacing the fragments that survived from last time.
+The most expensive thing in a knowledge firm is not doing the wrong work. It is making a call with a quarter of what you knew, when the whole of it was spoken aloud in a meeting, written in an email, and then forgotten, not because it did not matter, but because no system caught it before memory let it go. This is what a [company brain](/blog/product-memory) is for, and [how it is built](/blog/building-the-company-brain) is the part that makes it credible.
 
-Some teams are starting to build this (Gravii is one approach). But regardless of tooling, the principle is the same: context should compound, not decay.
-
-And here's the reframe worth sitting with. The most expensive thing in product management isn't building the wrong feature. Plenty of smart writing exists about that particular failure mode. The truly expensive thing is quieter: making decisions with 30% of the information when 100% was available - spoken aloud in a call, written in an email, mentioned in a thread - and then forgotten. Not because it didn't matter, but because no system caught it before your memory let it go.
-
-Every PM has lost a customer and later realized the warning signs were there. They were always there. They were just in a call from six weeks ago that nobody remembered clearly enough to act on.
-
-The information existed. The memory didn't.
+The information existed. The memory didn't. [Request a pilot](mailto:tommy@gravii.app?subject=Request%20a%20pilot) if you want to see it run on your own.

@@ -18,6 +18,7 @@ const nextConfig = {
   async redirects() {
     return [
       { source: '/trust', destination: '/security', statusCode: 301 },
+      { source: '/blog/feature-prioritization-evidence', destination: '/blog/building-the-company-brain', statusCode: 301 },
     ]
   },
   async rewrites() {
