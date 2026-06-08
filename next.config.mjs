@@ -15,6 +15,11 @@ const nextConfig = {
   reactStrictMode: true,
   pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
   skipTrailingSlashRedirect: true,
+  async redirects() {
+    return [
+      { source: '/trust', destination: '/security', statusCode: 301 },
+    ]
+  },
   async rewrites() {
     return [
       { source: '/ingest/static/:path*', destination: 'https://eu-assets.i.posthog.com/static/:path*' },

@@ -3,6 +3,8 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import type { Metadata } from 'next'
 import { MDXRemote } from '@/components/blog/MDXRemote'
+import { Icon } from '@/components/site/icons'
+import { PILOT_HREF } from '@/components/site/constants'
 
 export async function generateStaticParams() {
   return getAllSlugs().map(slug => ({ slug }))
@@ -37,6 +39,8 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   const post = getPostBySlug(slug)
   if (!post || !post.published) return notFound()
 
+  const initials = post.author.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase()
+
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Article',
@@ -48,91 +52,49 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   }
 
   return (
-    <div className="min-h-screen bg-[#0a0b10] text-white">
+    <main>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-      {/* Nav */}
-      <nav className="max-w-[1100px] mx-auto px-6 py-5 flex items-center justify-between">
-        <a href="/" className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#6366f1] to-[#8b5cf6] flex items-center justify-center">
-            <span className="text-white text-sm font-bold">G</span>
+      <article className="gv-section">
+        <div className="gv-wrap" style={{ maxWidth: 720 }}>
+          <Link href="/blog" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, fontSize: 13.5, color: 'var(--muted)', marginBottom: 'var(--s6)' }}>
+            <span style={{ transform: 'rotate(180deg)', display: 'inline-flex' }}>{Icon.arrow({ width: 13, height: 13 })}</span> Field notes
+          </Link>
+
+          {post.tags[0] && (
+            <div className="gv-mono" style={{ fontSize: 12.5, color: 'var(--accent)', letterSpacing: '0.04em', marginBottom: 'var(--s4)' }}>{post.tags[0]}</div>
+          )}
+          <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(32px, 4.2vw, 52px)', lineHeight: 1.1, letterSpacing: '-0.02em', color: 'var(--ink)', fontWeight: 700, textWrap: 'balance' }}>{post.title}</h1>
+          <p className="gv-lead" style={{ marginTop: 'var(--s4)', maxWidth: 620 }}>{post.description}</p>
+
+          <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--s3)', margin: 'var(--s6) 0', paddingBottom: 'var(--s6)', borderBottom: '1px solid var(--line)' }}>
+            <span style={{ width: 40, height: 40, flex: '0 0 auto', borderRadius: 40, background: 'var(--accent-soft)', border: '1px solid var(--line)', color: 'var(--muted)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontWeight: 600, fontSize: 14 }}>{initials}</span>
+            <div style={{ fontSize: 14.5, color: 'var(--muted)' }}>
+              <a href={post.authorLinkedIn} target="_blank" rel="noopener noreferrer" style={{ fontWeight: 600, color: 'var(--ink)' }}>{post.author}</a>
+              {' · '}<span className="gv-mono" style={{ fontSize: 12.5, color: 'var(--faint)' }}>{formatDate(post.date)} · {post.readingTime}</span>
+            </div>
           </div>
-          <span className="text-[17px] font-bold tracking-tight">Gravii</span>
-        </a>
-        <div className="flex items-center gap-6">
-          <a href="/" className="text-sm text-[#9698b0] hover:text-white transition-colors">Home</a>
-          <a href="/blog" className="text-sm text-[#9698b0] hover:text-white transition-colors">Blog</a>
-          <a href="/trust" className="text-sm text-[#9698b0] hover:text-white transition-colors">Trust</a>
-        </div>
-      </nav>
 
-      <article className="max-w-[680px] mx-auto px-6 pt-12 pb-24">
-        {/* Back */}
-        <Link href="/blog" className="text-[13px] text-[#6b6c82] hover:text-white transition-colors mb-8 inline-block">&larr; Blog</Link>
-
-        {/* Header */}
-        <h1 className="text-[clamp(26px,4vw,32px)] font-bold tracking-tight leading-[1.2] mb-4">{post.title}</h1>
-        <p className="text-[16px] text-[#9698b0] leading-relaxed mb-6">{post.description}</p>
-
-        <div className="flex items-center gap-3 text-[12px] text-[#6b6c82] mb-4">
-          <a href={post.authorLinkedIn} target="_blank" rel="noopener noreferrer" className="text-[#818cf8] hover:text-white transition-colors font-medium">
-            {post.author}
-          </a>
-          <span>&middot;</span>
-          <span>{formatDate(post.date)}</span>
-          <span>&middot;</span>
-          <span>{post.readingTime}</span>
-        </div>
-
-        {post.tags.length > 0 && (
-          <div className="flex gap-2 mb-8">
-            {post.tags.map(tag => (
-              <span key={tag} className="text-[11px] px-2.5 py-1 rounded-full bg-[#252640]/50 text-[#6b6c82]">{tag}</span>
-            ))}
+          <div className="gv-prose">
+            <MDXRemote source={post.content} />
           </div>
-        )}
 
-        <div className="h-px bg-[#252640]/50 mb-12" />
-
-        {/* Article body */}
-        <div className="prose-gravii">
-          <MDXRemote source={post.content} />
-        </div>
-
-        {/* Author bio */}
-        <div className="h-px bg-[#252640]/50 mt-16 mb-8" />
-        <div className="flex items-start gap-4">
-          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#6366f1] to-[#8b5cf6] flex items-center justify-center flex-shrink-0">
-            <span className="text-white text-[13px] font-bold">TJ</span>
+          {/* author bio */}
+          <div style={{ marginTop: 'var(--s8)', paddingTop: 'var(--s6)', borderTop: '1px solid var(--line)', display: 'flex', gap: 'var(--s4)', alignItems: 'flex-start' }}>
+            <span style={{ width: 44, height: 44, flex: '0 0 auto', borderRadius: 44, background: 'var(--accent-soft)', border: '1px solid var(--line)', color: 'var(--muted)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontWeight: 600, fontSize: 15 }}>{initials}</span>
+            <div>
+              <a href={post.authorLinkedIn} target="_blank" rel="noopener noreferrer" style={{ fontWeight: 600, color: 'var(--ink)', fontSize: 15 }}>{post.author}</a>
+              <p style={{ fontSize: 14.5, color: 'var(--muted)', margin: 'var(--s2) 0 0', lineHeight: 'var(--lh-relaxed)', maxWidth: 560 }}>
+                {post.authorRole}. Building Gravii, a sovereign company brain for teams that hold confidential, regulated data.
+              </p>
+            </div>
           </div>
-          <div>
-            <a href={post.authorLinkedIn} target="_blank" rel="noopener noreferrer" className="text-[14px] font-semibold text-[#818cf8] hover:text-white transition-colors">
-              {post.author}
-            </a>
-            <p className="text-[12px] text-[#6b6c82] mt-0.5">{post.authorRole}</p>
-            <p className="text-[13px] text-[#9698b0] mt-2 leading-relaxed">
-              Tommy writes about product decision-making based on his experience managing 50+ B2B accounts and building Gravii, a product memory system for B2B product teams.
-            </p>
+
+          <div style={{ marginTop: 'var(--s8)', textAlign: 'center' }}>
+            <a className="gv-cta" href={PILOT_HREF}>Request a pilot {Icon.arrow({})}</a>
           </div>
         </div>
       </article>
-
-      {/* Footer */}
-      <footer className="py-8 border-t border-[#252640]/40">
-        <div className="max-w-[1100px] mx-auto px-6 flex items-center justify-between flex-wrap gap-4">
-          <div className="flex items-center gap-2">
-            <div className="w-5 h-5 rounded bg-gradient-to-br from-[#6366f1] to-[#8b5cf6] flex items-center justify-center">
-              <span className="text-white text-[10px] font-bold">G</span>
-            </div>
-            <span className="text-xs font-semibold text-[#6b6c82]">Gravii</span>
-          </div>
-          <div className="flex items-center gap-4">
-            <a href="/trust" className="text-[10px] text-[#6b6c82] hover:text-white transition-colors">Trust</a>
-            <a href="/blog" className="text-[10px] text-[#6b6c82] hover:text-white transition-colors">Blog</a>
-            <span className="text-[10px] text-[#4a4b60]">EU hosted &middot; &copy; {new Date().getFullYear()}</span>
-          </div>
-        </div>
-      </footer>
-    </div>
+    </main>
   )
 }

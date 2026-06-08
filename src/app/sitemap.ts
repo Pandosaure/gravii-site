@@ -12,7 +12,7 @@ export default function sitemap() {
 
   return [
     { url: 'https://gravii.app', lastModified: new Date(), changeFrequency: 'weekly' as const, priority: 1 },
-    { url: 'https://gravii.app/trust', lastModified: new Date(), changeFrequency: 'monthly' as const, priority: 0.5 },
+    { url: 'https://gravii.app/security', lastModified: new Date(), changeFrequency: 'monthly' as const, priority: 0.5 },
     { url: 'https://gravii.app/blog', lastModified: new Date(), changeFrequency: 'weekly' as const, priority: 0.8 },
     ...blogUrls,
   ]

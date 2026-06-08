@@ -8,7 +8,7 @@ export async function GET() {
   <channel>
     <title>Gravii Blog</title>
     <link>https://gravii.app/blog</link>
-    <description>Thoughts on product decision-making, customer signals, and building product memory.</description>
+    <description>Notes on grounded knowledge, honest abstention and sovereignty for teams that hold confidential, regulated data.</description>
     <language>en</language>
     <atom:link href="https://gravii.app/feed.xml" rel="self" type="application/rss+xml"/>
     ${posts.map(post => `
