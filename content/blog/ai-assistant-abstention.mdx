@@ -1,0 +1,119 @@
+---
+title: "Why Your AI Assistant Should Say 'I Don't Know'"
+description: "Weak context can push an LLM's wrong-answer rate from 10% to 66%. The hardest problem in a company brain isn't answering. It's knowing when to abstain."
+date: "2026-06-08"
+author: "Tommy Jamet"
+authorRole: "Seasoned Head of Product, Founder of Gravii"
+authorLinkedIn: "https://www.linkedin.com/in/tommyjamet/"
+tags: ["reliable AI", "AI abstention", "faithful citation", "RAG", "company brain"]
+published: true
+---
+
+*The hardest problem in an AI memory system is not answering. It's knowing when not to.*
+
+Every AI assistant you have ever used was built to answer. Ask it anything and it produces a fluent, confident reply. That instinct is fine for a chatbot that helps you write an email. It is dangerous for a system that holds the truth about your customers, your deals, and your decisions.
+
+Because the same instinct that makes an assistant helpful makes it lie. When it has nothing relevant to say, it does not stop. It generates. And a generated answer about whether a customer churned, or what was decided in last quarter's pricing review, is not a harmless guess. It's a wrong fact delivered with total confidence, and somebody acts on it.
+
+I've spent the past year building a company brain across three deployments. The single hardest thing to get right was not retrieval, or extraction, or the graph. It was teaching the system to say "I don't know."
+
+> **In a system of record, confidence without grounding is not a feature. It's the failure mode that quietly destroys trust.**
+
+This piece is about abstention: why reliable refusal is the unsolved problem in AI memory, why prompting can't fix it, and the two structural commitments that can. It assumes you know what RAG and an embedding are. If you want the architecture this sits inside, start with [the company brain piece](/blog/building-the-company-brain).
+
+> **Key Takeaways**
+> - Adding insufficient context can backfire badly: one model's incorrect-answer rate jumped from 10.2% with no context to 66.1% with insufficient context (Joren et al., "Sufficient Context," ICLR 2025).
+> - State-of-the-art RAG models produce unfaithful citations in up to 57% of adversarial cases, citing sources they did not actually use (Wallat et al., 2024).
+> - Reliable abstention has to be structural, a retrieval gate plus an evidence requirement, not a polite instruction in the prompt.
+
+## Why does an AI assistant answer when it should stay quiet?
+
+Because answering is what it was trained and rewarded to do. Large models optimize for a plausible continuation, not for a calibrated sense of what they actually know. Research from Google confirms how sharp this gets: one model went from a 10.2% incorrect-answer rate with no context to 66.1% with insufficient context (Joren et al., ["Sufficient Context," ICLR 2025](https://arxiv.org/abs/2411.06037)).
+
+Read that again. Giving the model weak, partially relevant context made it more wrong than giving it nothing at all. The retrieved snippets looked close enough to license an answer, so the model produced one instead of abstaining. That is the trap at the heart of every retrieval system: near-miss context is more dangerous than no context.
+
+In a consumer chatbot this is an annoyance. In a company brain it's a liability. The assistant is asked "did we promise this customer SSO by Q3?" It retrieves three loosely related notes, none of which actually answer the question, and it confidently invents a commitment. Now your account manager walks into a renewal repeating a promise nobody made.
+
+## How often do AI citations actually point to the right place?
+
+Less often than the polished output suggests. Even when an answer is correct, the citation attached to it frequently does not support it. Wallat et al. found that state-of-the-art RAG systems produce unfaithful citations in up to 57% of adversarial cases, where the model cites a source it did not actually rely on, a behavior the authors call post-rationalization (["Correctness is not Faithfulness in RAG Attributions," 2024](https://arxiv.org/abs/2412.18004)).
+
+This matters more than it sounds. A citation is the one thing that lets a human verify a machine's claim. If the link points to the wrong passage, the citation is theater. It builds trust it has not earned. The ALCE benchmark found a similar gap: on long-form questions, even the best models lacked complete citation support roughly half the time (Gao et al., ["ALCE," 2023](https://arxiv.org/abs/2305.14627)).
+
+So the bar for a trustworthy company brain is higher than "answer well." It's two things at once: refuse when the evidence isn't there, and when it is, cite the exact passage you used. Faithful citation and reliable abstention are the same discipline viewed from two sides.
+
+## Why won't "just tell it to be careful" work?
+
+Because a prompt is a suggestion, not a constraint. You can write "only answer if you are certain, and say I don't know otherwise" at the top of every request. It will help a little, on average, on a good day. It will not hold under the cases that matter, which are precisely the near-miss retrievals where the model feels most justified in answering.
+
+The Sufficient Context research makes this concrete: larger models hallucinate less than small ones, but they still output incorrect answers instead of abstaining when context is insufficient. The instinct to answer survives the instruction to be careful. Asking the model to police itself puts the guard and the prisoner in the same cell.
+
+> **If your only defense against a confident wrong answer is a sentence in the prompt, you do not have a defense. You have a hope.**
+
+Reliability cannot be a behavior you request. It has to be a property of the system, enforced outside the model, where the model cannot talk its way around it.
+
+## What makes abstention reliable: gate the answer, require the evidence
+
+Two structural commitments turn "I don't know" from a hope into a guarantee. Neither lives in the prompt. Both live in the plumbing around the model.
+
+**First, retrieval-gated answering.** Before the model is allowed to generate, retrieval runs and is scored. If nothing comes back above a confidence threshold, the system returns "I have nothing on that" and never calls the model to write prose. The decision to abstain is made by the retrieval layer, not by the language model. The model is only invited to speak once there is something real to ground it. This directly attacks the 66% failure mode: you do not hand the model insufficient context and trust it to notice, you refuse to hand it insufficient context at all.
+
+**Second, no fact without evidence.** Every fact stored in the brain carries a verbatim source quote and a traceable origin, the artifact and the date it came from. This is enforced at the schema level: a fact with no evidence cannot be written. When the assistant answers, it cites the specific evidence it used, and that citation can be checked against the verbatim quote. There is no room for post-rationalization because the source was attached at write time, not reconstructed at answer time.
+
+Anthropic's work on Contextual Retrieval shows how much the retrieval half of this is worth: combining contextual embeddings with contextual BM25 cut the top-20-chunk retrieval failure rate by 49%, and 67% with reranking added (Anthropic, ["Introducing Contextual Retrieval," 2024](https://www.anthropic.com/news/contextual-retrieval)). Better retrieval means the gate fires correctly more often, abstaining when it should and finding the real evidence when it exists.
+
+<figure style={{margin: '2rem 0', textAlign: 'center'}}>
+<svg viewBox="0 0 560 240" role="img" aria-label="A model's incorrect-answer rate rose from 10.2 percent with no context to 66.1 percent with insufficient context, per the Sufficient Context study, ICLR 2025." xmlns="http://www.w3.org/2000/svg" style={{maxWidth: '560px', width: '100%', height: 'auto'}}>
+  <text x="0" y="24" fill="currentColor" fontSize="15" fontWeight="600">Insufficient context makes a model more wrong, not less</text>
+  <text x="0" y="70" fill="currentColor" fontSize="13" opacity="0.7">No context</text>
+  <rect x="130" y="58" width="56" height="18" rx="3" fill="currentColor" opacity="0.35"></rect>
+  <text x="194" y="72" fill="currentColor" fontSize="13" fontWeight="600">10.2%</text>
+  <text x="0" y="120" fill="currentColor" fontSize="13" opacity="0.7">Insufficient context</text>
+  <rect x="130" y="108" width="363" height="18" rx="3" fill="var(--accent)"></rect>
+  <text x="501" y="122" fill="currentColor" fontSize="13" fontWeight="600">66.1%</text>
+  <text x="0" y="170" fill="currentColor" fontSize="12" opacity="0.55">Incorrect-answer rate for one model (Gemma). Source: Joren et al.,</text>
+  <text x="0" y="188" fill="currentColor" fontSize="12" opacity="0.55">"Sufficient Context: A New Lens on RAG Systems," ICLR 2025.</text>
+</svg>
+</figure>
+
+## How do you know any of this actually works?
+
+You measure it, and you refuse to report a number you have not measured. This is the part most teams skip, because measuring abstention is harder than demoing a good answer.
+
+We run a reproducible test harness against the system with one cardinal rule: never publish a metric we have not actually measured. A claim that the brain abstains correctly is worthless without a labeled set of questions, some answerable and some deliberately not, and a measured abstention rate against it. The same goes for citation fidelity. Does the cited passage actually support the claim? You can only know by checking, at scale, against ground truth.
+
+> **Our rule: an unmeasured reliability claim is marketing, not engineering. If we cannot show the number and how we got it, we do not state it.**
+
+This is the same analytical discipline good intelligence work runs on, weighing whether the evidence supports the conclusion before acting on it, a parallel I've written about in [what product teams can learn from intelligence analysts](/blog/intelligence-analysts-product-signals). The honest version of "our brain is reliable" is a measured abstention rate and a measured citation-fidelity rate, with the methodology attached. Everything else is a confident guess, which is exactly the behavior we are trying to engineer out of the machine.
+
+## What this means if you're building or buying a company brain
+
+Treat refusal as a first-class feature, not an edge case. When you evaluate any AI memory system, including the one I'm building at Gravii, ask it the questions it should not be able to answer. Ask about a customer it has never seen, a decision that was never made, a number that does not exist in your data. A good system says it has nothing. A dangerous one invents something plausible.
+
+Then check the citations on the answers it does give. Click through. If the cited source does not actually contain the claim, you have found post-rationalization, and you have learned that this system's confidence is uncorrelated with its correctness. That single test tells you more than any benchmark on the landing page.
+
+The most valuable answer a system of record can give is sometimes the refusal. It is the answer that keeps a human from acting on a fact that was never true.
+
+## Frequently Asked Questions
+
+### What is AI abstention?
+
+Abstention is an AI system choosing not to answer when it lacks the evidence to answer correctly, returning a response like "I have nothing on that." It matters because adding insufficient context can raise a model's incorrect-answer rate sharply, from 10.2% to 66.1% in one study (Joren et al., ICLR 2025), so refusing is often safer than guessing.
+
+### Why can't I just prompt an LLM to say "I don't know"?
+
+Because a prompt is a suggestion the model can override, and it tends to override it exactly when context is weak and answering feels justified. Research shows even large models output incorrect answers instead of abstaining under insufficient context. Reliable refusal has to be enforced structurally, through a retrieval gate, not requested in the prompt.
+
+### What is faithful citation in RAG?
+
+Faithful citation means the source an answer cites is the source the system actually used, and that source genuinely supports the claim. It's not guaranteed: state-of-the-art RAG produces unfaithful citations in up to 57% of adversarial cases (Wallat et al., 2024). Attaching a verbatim source quote at write time, then citing it at answer time, closes that gap.
+
+### Does better retrieval reduce hallucination?
+
+It helps significantly. Anthropic reports that contextual embeddings combined with contextual BM25 cut the top-20-chunk retrieval failure rate by 49%, rising to 67% with reranking (Anthropic, 2024). Better retrieval means an abstention gate fires correctly more often, refusing when evidence is absent and surfacing the real passage when it exists.
+
+## The takeaway
+
+A company brain earns trust the way a careful colleague does: by being right when it speaks and honest when it doesn't know. That requires two things the prompt cannot give you. Gate the answer on real retrieval, so the model never speaks without grounding. Require evidence on every fact, so every claim can be checked against the exact words it came from.
+
+Build those in and "I don't know" stops being a weakness. It becomes the signal that the rest of the answers can be trusted. For the architecture these principles live inside, read [building the company brain](/blog/building-the-company-brain).

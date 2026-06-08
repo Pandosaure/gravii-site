@@ -1,0 +1,176 @@
+---
+title: "Building the Company Brain: Architecture for the Agent Era"
+description: "Why RAG over documents isn't the answer, and what to build instead. A year of architecture lessons from shipping a Company Brain in production."
+date: "2026-05-15"
+author: "Tommy Jamet"
+authorRole: "Seasoned Head of Product, Founder of Gravii"
+authorLinkedIn: "https://www.linkedin.com/in/tommyjamet/"
+tags: ["company brain", "AI infrastructure", "MCP", "agent era", "knowledge architecture"]
+published: true
+---
+
+*Why RAG over documents isn't the answer, and what to build instead.*
+
+In late 2025, Tom Blomfield published Y Combinator's request for a Company Brain. The note was direct:
+
+> "Every company in the world is going to need one. This isn't a company-wide search or a chatbot over documents. It's a living map of how a company works."
+
+Diana Hu's parallel RFS for an "AI Operating System for Companies" confirmed the category from the same partner bench.
+
+I've spent the past year building one. Three deployments so far: a crypto custody platform, a Web3 gaming studio, and a handful of B2B SaaS design partners. The architectures look different on the surface. The substrate is the same.
+
+In the months since Blomfield's note, I've watched founders raise seed rounds, ship demos, and race to claim the category. Most of them are about to build the wrong thing.
+
+The wrong thing is RAG over documents.
+
+This piece walks through the architecture that actually works. What the brain layer is. Why the apps and integrations sit on top of it. Why the MCP server matters more than most builders entering this category realize. It's the architecture I've shipped against, the misses I've corrected, and the pattern I'd recommend to anyone serious about competing here.
+
+> **Most founders entering this space are building the wrong thing. The wrong thing is RAG over documents.**
+
+The piece is technical. It assumes you know what a graph database, a vector embedding, OAuth, and the Model Context Protocol are. If you don't, the rest of this won't land.
+
+## The misunderstanding
+
+The dominant framing today is RAG over documents. Glean is the canonical version. Notion AI is the productivity-suite version. Microsoft Copilot is the enterprise version. Dozens of YC-funded chatbots are the long tail. All of them follow the same shape: connect to your sources, embed everything, retrieve top-k chunks at query time, hand them to an LLM.
+
+This is search. It is not memory.
+
+Search finds the document. Memory knows who pushed for the decision, what signals justified it, which customers were affected, and what the outcome was.
+
+A company brain has structure. Entities for the customers, competitors, partners, products, features, people, and projects that make up the organization. Relationships between them. Signals attached to entities over time. Decisions logged with their rationale. Traction scores that decay as the underlying reality changes. None of this lives in a chunk of unstructured text waiting to be retrieved.
+
+Glean's strength is connector breadth across the unstructured corpus. Notion AI's strength is summarizing a single document well. Both are good at their actual problem. Neither is a Company Brain. The YC RFS said this plainly, and most founders who quoted it on their landing pages then proceeded to build the thing it explicitly said not to build.
+
+> **Search treats knowledge as a pile of text. Memory treats it as a living map.**
+
+The distinction matters because the architectural choices that work for search fail for memory, and the reverse. Memory needs typed entities, time awareness, write gates, and a tool surface that agents can call. Vector retrieval offers none of those by default.
+
+## The actual architecture
+
+Three layers. Brain, apps, integrations. Each one does one thing.
+
+```
+┌─────────────────────────────────────────┐
+│  Integration Layer                       │
+│  MCP Server | Slack/Teams | n8n | Email │
+└──────────────┬──────────────────────────┘
+               │
+┌──────────────┴──────────────────────────┐
+│  App Layer                               │
+│  Roadmap | Briefings | Decisions | etc.  │
+└──────────────┬──────────────────────────┘
+               │
+┌──────────────┴──────────────────────────┐
+│  Brain Layer                             │
+│  Markdown vault + indexing + signals     │
+└─────────────────────────────────────────┘
+```
+
+### The brain layer is the substrate
+
+I ship this as a markdown vault with structured frontmatter and a deterministic index. The file structure looks like:
+
+```
+Captures/2026-05/cap-2026-05-15-1147-a21c.md
+Sources/qbr-acme-2026-q1.md
+Partners/fireblocks.md
+Customers/acme.md
+Products/onboarding.md
+Features/sso.md
+People/sarah-chen.md
+Synthesized/Roadmaps/2026-q3.md
+Views/partner-feature-matrix.md
+.brain/index.json
+```
+
+Each entity file has YAML frontmatter (id, type, aliases, status, lifecycle markers) and a structured body with managed regions the system rewrites. Captures are atomic events with one primary entity and zero-to-many mentioned entities. Wikilinks across the vault create a graph for free.
+
+The index is a cache, not a source of truth. A version bump triggers automatic rebuild from disk. Resolution runs through tiers: exact label or alias match first, then fuzzy scoring (Levenshtein-ratio plus Jaccard unigrams plus a small additive bigram boost), then a reserved vector tier I have never had to enable at the scales these brains operate. Writes are confidence-gated: if the resolver scores below 0.9 on the primary entity, the capture lands as unassigned with the top five candidates surfaced, not silently bound to the wrong entity.
+
+I started with Postgres and a typed graph. I changed my mind after running both side-by-side for a few months. Markdown vaults win on five axes for this use case:
+
+1. **AI-native.** Every modern LLM speaks markdown fluently. Claude, GPT, and Gemini all parse YAML frontmatter and wikilinks without prompting tricks.
+2. **Human-readable.** A product manager can open a customer's entity file and read it. No SQL, no UI, no API.
+3. **Portable.** SharePoint, OneDrive, Git, local filesystem, and S3 all just work. Customers can own the vault. Procurement loves this.
+4. **Lower operational burden.** No schema migrations. No vector recomputes. No DB cluster to keep alive.
+5. **Plays naturally with agent ecosystems.** An agent that can read files and call tools doesn't need a Postgres adapter.
+
+This isn't a new pattern at personal scale. Tiago Forte's BASB (Building a Second Brain) and Andy Matuschak's Evergreen Notes have proven that densely-linked, atomic, markdown notes evolve into a coherent knowledge structure over years of use. The Company Brain is the same pattern applied to organizational memory, with the addition of typed entities and confidence-gated writes.
+
+> **Wikilinks create a graph for free. The brain is BASB for companies.**
+
+### The app layer is the lens
+
+Roadmap visualizers. Briefing generators. Decision trackers. Customer signal dashboards. QBR composers. Each app is a specialized view on the same brain. Apps don't store data. They query the brain through the tool surface.
+
+A Roadmap app calls `find_scheduled_entities`, `get_dependencies`, `compute_critical_path`. A Briefing app calls `summarize_account_period`, `find_unaddressed_signals`. A Decisions app reads the captures of type `internal_priority` and renders them as a timeline. None of these apps own their data. They render structured queries over the brain.
+
+This is the part most builders skip. They build one app and call it the product. The platform play is brain plus apps plus integrations. The product play is one app. They are fundamentally different businesses.
+
+### The integration layer is the access
+
+The MCP server is the agent-era answer to "where do users live." Wire the brain into Claude Desktop, Cursor, ChatGPT (via MCP), and every other agent surface. The user never opens your app to query the brain. They ask the agent they already use.
+
+Slack and Teams bots are the human-era answer to the same question. React with a 🧠 emoji on a thread, the bot captures it. Type a question in a DM, the bot answers from the brain.
+
+Email forwarding is the lightweight ambient capture path. Set up a forwarding rule for meeting summaries from Gong, Grain, or Otter. The brain receives them. The user does nothing.
+
+n8n or Composio handles the long tail of SaaS integrations: Linear webhooks, Salesforce updates, Notion page changes, Jira tickets, GitHub PR comments. Don't hand-roll OAuth for fifty tools. You will burn six months on auth and have nothing to show for it.
+
+The MCP server is the substrate that makes the brain accessible to every AI tool simultaneously. It is the integration layer that defines this category in the agent era.
+
+## Why now
+
+Three converging shifts make this the right moment.
+
+**MCP matured into production.** In December 2025, the protocol was donated to the Linux Foundation. OAuth 2.1 landed in the spec. The MCP Registry crossed roughly two thousand servers. Streamable HTTP became the standard transport, replacing the stdio-only pattern that worked for local development but not for hosted SaaS deployment. What used to be a Claude-Desktop convention is now a multi-vendor protocol with governance. Building on MCP today is building on the same kind of stable substrate that HTTP/2 became after standardization.
+
+**AI agents became real consumers of structured knowledge.** The Claude 4 family, GPT-5, and Gemini 2 generation reason natively over graphs, signals, and structured tool outputs in a way the 2024 models could not. Tool-calling went from a parlor trick to the primary interaction pattern. Agents are now the primary consumer of structured company knowledge. The brain isn't built for humans first and agents second. It's built for agents that humans drive.
+
+> **Tool-calling went from a parlor trick to the primary interaction pattern.**
+
+**Signal fragmentation hit a breaking point.** Every B2B SaaS company over fifty people has signals scattered across Slack, Jira, email, Discord, support tickets, Linear, Notion, GitHub, Salesforce, and (for crypto-native companies) on-chain transactions. The cost of fragmentation hit a level where companies are paying real money to consolidate. The YC RFS is the public acknowledgment of a problem founders have been raising in customer calls for two years.
+
+The three together mean the substrate exists, the consumers exist, and the buyers exist. Twelve months ago, one of the three was missing. That's why this is the moment.
+
+## What I've learned building this
+
+Some of this only sounds obvious after you've shipped against it.
+
+**Vault structure matters more than capture volume.** The first thing that breaks at scale is the graph. Entities orphan. Hubs balloon. Type confusion creeps in. At the crypto custody platform, entities started getting disconnected within the first thirty days as the graph grew past forty nodes. The fix was a BFS orphan sweep after every write plus hub routing: every entity belongs to a canonical hub (`partners`, `customers`, `products`, `internal`), and unparented entities get routed lazily. Without this, the brain stops being navigable around the seventy-entity mark.
+
+**Salience beats capture.** Everyone wants to capture. Almost no one builds the salience layer that makes capture useful. Signal strength scoring, temporal decay (mine is `max(0.1, 1 - (days/180) * 0.9)`), source weighting, role-typed buckets for primary versus mentioned entities. Without this, the brain accumulates noise and no one can answer the questions that justify the brain's existence. The synthesis layer is the value. Capture is the cost.
+
+**"Where users live" is half right.** The full version is: meet users where they live for ambient capture, but build a structured curation surface for the moments that matter. The single-mode tools (either passive ambient or active typing only) miss half the use case. Ambient captures customer calls and Slack threads automatically. Structured curation handles the moments when someone needs to type `hint_entity=fireblocks` and link a specific quote to a specific competitor.
+
+**Forward-deployed engineering is the right sales motion early.** Palantir's model. The founder is the FDE. Sit in the customer's Slack. Ship custom tools against their specific gaps. At the crypto custody platform, the first three months were ninety percent custom feature work: bespoke MCP tools for their partner-feature matrix, audit reports their compliance team needed, naming conventions specific to their industry. Product-led growth comes later. Early, it's FDE. Skipping this step to chase scale is how solo founders end up with thirty disengaged signups and no design partners.
+
+**I changed my mind on markdown vault versus typed graph.** I started Gravii on Postgres with a typed schema. The crypto custody deployment ran on a markdown vault. After three months side-by-side, the markdown vault won on portability, sovereignty, and AI-native rendering. The typed graph won on real-time multi-user collaboration and SQL semantics. Neither of those wins is load-bearing for the company brain use case at under-thousand-entity scale. They become relevant later. Most brains never get there.
+
+**The moment the brain became memory.** At the crypto custody platform, the maintaining founder asked the brain: "if we slip mpc-partial-signatures by a quarter, who do we need to call?" The brain returned three partners with their latest signals, cross-referenced from captures the founder had forgotten about, including one from six weeks earlier where a partner had explicitly tied a renewal decision to that exact feature. That's the moment the brain stopped being a notes app and became actual memory. The synthesis question only works if the substrate is structured. RAG can't answer that question because the question itself requires entity awareness, time awareness, and relationship traversal that vector retrieval doesn't have.
+
+> **The breakthrough moment is when the brain stops being a notes app and becomes actual memory.**
+
+## What builders should do
+
+If you're entering this category, here's the pattern that compounds.
+
+**Build the brain first, apps second, ecosystem third.** Don't ship the chatbot before the substrate. The chatbot without the brain is a demo. The brain without the chatbot is a moat.
+
+**Default to Streamable HTTP and OAuth 2.1 for any MCP work.** The stdio-only patterns that worked for local development won't survive procurement at any company over a hundred people. The transition cost is small if you start there.
+
+**Use n8n or Composio for the integration long tail.** Hand-rolling OAuth for fifty SaaS tools is the founder-time graveyard. Outsource integration breadth, focus your time on the brain and the apps.
+
+**Treat the brain as the moat, the apps as the value, the integrations as the distribution.** Confusing these costs you positioning. Investors who can't tell which one you are won't fund you.
+
+**Start with one vertical.** Product, sales, support, legal, engineering operations. Pick one. Prove the model with five design partners before going horizontal. The temptation to build for everyone is the temptation to build for no one. Vertical-first dominates faster than horizontal-first, and you get to horizontal anyway if you win.
+
+**Don't build "AI for X." Build the substrate that X-specific agents consume.** The first is a product. The second is a category. You can convert a product into a platform; you cannot convert category leadership into a feature.
+
+The Company Brain category is up for grabs right now. The default architecture every founder reaches for is wrong for the problem. The architecture that actually works runs in production at a handful of companies today and is barely on most builders' radar.
+
+> **Every company will have a brain. The question is what it looks like underneath.**
+
+---
+
+*This is the first piece in a series on Company Brain infrastructure for the agent era. Next: **Why deterministic resolution beats vector retrieval for company memory**. Subscribe to follow along.*
