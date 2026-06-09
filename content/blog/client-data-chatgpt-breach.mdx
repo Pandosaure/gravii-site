@@ -1,0 +1,87 @@
+---
+title: "Your Team Is Already Pasting Client Data Into ChatGPT"
+description: "For a confidentiality-bound firm, putting client data into a consumer chatbot can be an unauthorized disclosure. Banning it does not work. Here is what the sanctioned, sovereign alternative actually has to be, stated honestly."
+date: "2026-06-09"
+author: "Tommy Jamet"
+authorRole: "Seasoned Head of Product, Founder of Gravii"
+authorLinkedIn: "https://www.linkedin.com/in/tommyjamet/"
+tags: ["data sovereignty", "confidential data", "shadow AI", "BYOK", "professional services"]
+published: true
+---
+
+In April 2023, Samsung engineers pasted proprietary semiconductor source code into ChatGPT to debug it. Three times in about twenty days. Within weeks the company banned generative AI across its devices ([TechCrunch](https://techcrunch.com/2023/05/02/samsung-bans-use-of-generative-ai-tools-like-chatgpt-after-april-internal-data-leak/)). The engineers were not careless or malicious. They were doing exactly what the tool is good at, on the material they happened to be working with. The material happened to be a trade secret.
+
+If your firm handles other people's confidential data, the same thing is happening on your team right now. The only question is whether you know about it.
+
+> **Key Takeaways**
+> - About 11% of what employees paste into ChatGPT is confidential company data, and the average company leaks confidential material to it hundreds of times a week ([Cyberhaven](https://www.cyberhaven.com/blog/4-2-of-workers-have-pasted-company-data-into-chatgpt)).
+> - For a confidentiality-bound firm, entering client data into a consumer chatbot can be an unauthorized disclosure under privilege, an NDA, a data-processing agreement, or a professional duty.
+> - Banning it does not work. It drives the same behaviour underground.
+> - The sanctioned alternative has to be at least as fast, and genuinely sovereign. That word has a precise meaning, and some honest limits.
+
+## Is pasting client data into ChatGPT actually a breach?
+
+It can be, and for many firms it is. The reflex is to think of this as a security best-practice issue. For a confidentiality-bound business it is closer to a legal one.
+
+When your obligation to a client is external rather than aspirational, putting their data into a third party's system is a disclosure, not a convenience. Depending on your regime, that disclosure is governed by attorney-client privilege, an NDA you signed, a data-processing agreement that names your permitted sub-processors, or a professional confidentiality duty. A consumer chatbot is not on any of those lists. So the moment a tax detail, a deal term, or a patient record goes into the box, you have likely disclosed protected information to an unapproved party, whether or not anything ever leaks.
+
+The scale is not hypothetical. Cyberhaven, analysing usage across 1.6 million workers, found that roughly 11% of what employees paste into ChatGPT is confidential company data, and that the average company does this hundreds of times a week ([Cyberhaven](https://www.cyberhaven.com/blog/4-2-of-workers-have-pasted-company-data-into-chatgpt)). Those are not edge cases. That is the normal working behaviour of people trying to get their job done faster.
+
+<figure style={{margin: '2rem 0', textAlign: 'center'}}>
+<svg viewBox="0 0 560 150" role="img" aria-label="About 11 percent of the data employees paste into ChatGPT is confidential company data, per Cyberhaven." xmlns="http://www.w3.org/2000/svg" style={{maxWidth: '560px', width: '100%', height: 'auto'}}>
+  <text x="0" y="22" fill="currentColor" fontSize="15" fontWeight="600">Share of data pasted into ChatGPT that is confidential</text>
+  <rect x="0" y="44" width="500" height="22" rx="4" fill="currentColor" opacity="0.15"></rect>
+  <rect x="0" y="44" width="55" height="22" rx="4" fill="var(--accent)"></rect>
+  <text x="66" y="61" fill="currentColor" fontSize="15" fontWeight="600">11%</text>
+  <text x="0" y="100" fill="currentColor" fontSize="13" opacity="0.7">And the average company leaks confidential material to it hundreds of times a week.</text>
+  <text x="0" y="128" fill="currentColor" fontSize="12" opacity="0.55">Source: Cyberhaven, analysis of 1.6M workers.</text>
+</svg>
+</figure>
+
+## Why banning it does not work
+
+The intuitive response is Samsung's: forbid it. This fails for a reason worth understanding, because it is the same reason the problem exists.
+
+The work is real. Your people have a genuine need that the chatbot genuinely meets: summarise this engagement, draft this response, find what we decided. A ban does not remove the need. It removes the sanctioned way to meet it, and the need migrates to personal devices, personal accounts, and tools you cannot see. You have not closed the exposure. You have blinded yourself to it. This is the shadow-AI version of an old lesson: people route around controls that stand between them and getting their work done.
+
+So the bar is not "stop people using AI." It is "give them a sanctioned path that is at least as fast as the unsanctioned one, on the material they actually need to use." If the approved tool is slower or weaker than the tab they already have open, they will keep the tab open.
+
+## What the sanctioned alternative has to be
+
+A sanctioned path is not just ChatGPT with a logo on it. For a confidentiality-bound firm it has to do three things the consumer tool cannot.
+
+It has to answer from your firm's own knowledge, not the open internet, so that asking it is useful in the first place. It has to be grounded: every answer cites the evidence it relied on, and it [says plainly when it has nothing](/blog/ai-assistant-abstention) rather than inventing a confident reply that someone then acts on in front of a client. And it has to be sovereign: your data stays under your control, not deposited into someone else's model.
+
+The first two are about usefulness and trust, and they are the [whole point of a company brain](/blog/building-the-company-brain). The third is what makes your compliance team sign off. It is the objection-killer, not the headline. Nobody buys this because it is sovereign. They are allowed to buy it because it is.
+
+## What "sovereign" honestly means, and what it doesn't
+
+This is the part a careful buyer reads like a contract, so here is the precise version, including the limits.
+
+Sovereign should mean your data is isolated in a database that is yours alone, and encrypted with a key held in your own KMS, that you can revoke. Disable the key and access stops, unilaterally, without asking anyone. That is the guarantee that matters, and it is provable.
+
+It should also mean you bring your own model key, so answers run under your own provider account and its zero-retention terms, and that the system fails closed: with no key, it does not run on your real data, so there is no quiet fallback to a shared key. NDA and a data-processing agreement on request. Deletion and export guaranteed.
+
+Now the honest limits, because overclaiming here is its own breach of trust. Encryption with your own key is not the same as data residency. It controls who can decrypt, not where the bytes physically sit; if your policy requires the latter, that is a separate, explicit option. And no honest vendor should tell you "your data never touches us." To answer a question, plaintext passes through the application tier for the moment it takes to respond. Closing that last gap requires confidential computing, which is a roadmap item, not a claim to make today. A vendor who waves all of this away is telling you what you want to hear, which is exactly the behaviour you are trying to get away from.
+
+## The reframe
+
+Your team is not the problem, and a memo telling them to stop is not the solution. The behaviour is rational. The exposure is the cost of not giving them a better option. The fix is to make the sanctioned path the fast one: your firm's own knowledge, answered with cited evidence, honest about what it does not know, and sovereign in a way you can actually verify. For the trust details stated precisely, see [how your data is protected](/security). For what the firm-side knowledge layer is, start with [why your company keeps forgetting what it knows](/blog/product-memory).
+
+## Frequently Asked Questions
+
+### Is it a data breach to put client information into ChatGPT?
+
+For a confidentiality-bound firm, often yes. Entering protected client data into a consumer chatbot can be an unauthorized disclosure under privilege, an NDA, a data-processing agreement, or a professional confidentiality duty, regardless of whether the data is ever leaked onward. The exposure is the disclosure itself.
+
+### How common is this really?
+
+Common enough to be the norm. Cyberhaven found about 11% of what employees paste into ChatGPT is confidential company data, with the average company doing so hundreds of times a week ([Cyberhaven](https://www.cyberhaven.com/blog/4-2-of-workers-have-pasted-company-data-into-chatgpt)). Samsung banned generative AI in 2023 after engineers pasted proprietary source code into it three times in about twenty days ([TechCrunch](https://techcrunch.com/2023/05/02/samsung-bans-use-of-generative-ai-tools-like-chatgpt-after-april-internal-data-leak/)).
+
+### Does a sovereign tool mean my data never leaves my control?
+
+It means your data is isolated and encrypted with your own revocable key, you bring your own model key, and the system fails closed. It does not mean the data is never processed: plaintext still passes through the application tier at request time. Be sceptical of any vendor who claims otherwise. See [our security page](/security) for the full, honest version.
+
+---
+
+If you want a sanctioned path that is faster than the tab your team already has open, [request a pilot](mailto:tommy@gravii.app?subject=Request%20a%20pilot).
