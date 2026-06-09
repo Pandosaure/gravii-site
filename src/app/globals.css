@@ -16,12 +16,12 @@ html { scroll-behavior: smooth; }
 .gv-root {
   /* --- Concept A · light --- */
   --paper: #fbfbf9; --surface: #ffffff; --ink: #15171a; --muted: #5b6066;
-  --faint: #9aa0a3; --line: #e7e8e3; --accent: #1f4d3f; --accent-ink: #ffffff;
+  --faint: #6c7278; --line: #e7e8e3; --accent: #1f4d3f; --accent-ink: #ffffff;
   --accent-soft: #eef4f0; --wash: #f5f7f4;
 
-  --font-display: "Hanken Grotesk", system-ui, sans-serif;
-  --font-body: "Hanken Grotesk", system-ui, sans-serif;
-  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --font-display: var(--font-hanken), "Hanken Grotesk", system-ui, sans-serif;
+  --font-body: var(--font-hanken), "Hanken Grotesk", system-ui, sans-serif;
+  --font-mono: var(--font-plex), "IBM Plex Mono", ui-monospace, monospace;
 
   /* type scale (responsive) */
   --fs-hero: clamp(44px, 7.2vw, 92px);
@@ -61,7 +61,7 @@ html { scroll-behavior: smooth; }
 /* --- Concept A · dark (wired, enable by setting data-theme="dark") --- */
 .gv-root[data-theme="dark"] {
   --paper: #0e1110; --surface: #161a18; --ink: #eef1ee; --muted: #9aa39d;
-  --faint: #6f7873; --line: #242a27; --accent: #4ea487; --accent-ink: #08110d;
+  --faint: #828a84; --line: #242a27; --accent: #4ea487; --accent-ink: #08110d;
   --accent-soft: #18211d; --wash: #0b0e0d;
 }
 

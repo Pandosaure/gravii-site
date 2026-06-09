@@ -45,7 +45,7 @@ export default function SecurityPage() {
             Isolated, and encrypted with your own revocable key.
           </Reveal>
           <Reveal delay={130} as="p" className="gv-lead" style={{ marginTop: "var(--s5)", maxWidth: 600, ...ctr }}>
-            This page is written for the person who reads it like a contract. Here is what is true, stated precisely, including the caveats.
+            This page is written for the person who reads it like a contract. Here is what Gravii commits to, stated precisely, including the honest caveats and where we are today.
           </Reveal>
         </div>
       </section>
@@ -53,6 +53,9 @@ export default function SecurityPage() {
       {/* the claims */}
       <section className="gv-section tinted" style={{ paddingTop: "var(--s8)", paddingBottom: "var(--s8)" }}>
         <div className="gv-wrap" style={{ maxWidth: 880, ...ctr }}>
+          <Reveal as="p" style={{ fontSize: 15, lineHeight: "var(--lh-relaxed)", color: "var(--muted)", maxWidth: 720, ...ctr, textAlign: "center", marginBottom: "var(--s7)" }}>
+            Gravii is early. The commitments below describe how Gravii is built and what each pilot firm is set up with. If you need to know exactly what is live today, ask and we will show you.
+          </Reveal>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "var(--s5)" }}>
             {CLAIMS.map(([t, d]) => (
               <Reveal key={t} className="gv-card" style={{ padding: "var(--s6)", textAlign: "left" }}>

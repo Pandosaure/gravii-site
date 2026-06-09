@@ -14,6 +14,7 @@ export default function sitemap() {
     { url: 'https://gravii.app', lastModified: new Date(), changeFrequency: 'weekly' as const, priority: 1 },
     { url: 'https://gravii.app/security', lastModified: new Date(), changeFrequency: 'monthly' as const, priority: 0.5 },
     { url: 'https://gravii.app/blog', lastModified: new Date(), changeFrequency: 'weekly' as const, priority: 0.8 },
+    { url: 'https://gravii.app/privacy', lastModified: new Date(), changeFrequency: 'yearly' as const, priority: 0.3 },
     ...blogUrls,
   ]
 }

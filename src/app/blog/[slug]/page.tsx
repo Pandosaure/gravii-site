@@ -85,7 +85,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             <div>
               <a href={post.authorLinkedIn} target="_blank" rel="noopener noreferrer" style={{ fontWeight: 600, color: 'var(--ink)', fontSize: 15 }}>{post.author}</a>
               <p style={{ fontSize: 14.5, color: 'var(--muted)', margin: 'var(--s2) 0 0', lineHeight: 'var(--lh-relaxed)', maxWidth: 560 }}>
-                {post.authorRole}. Building Gravii, a sovereign company brain for teams that hold confidential, regulated data.
+                {post.authorRole}. He writes about grounded knowledge, honest abstention, and data sovereignty for teams that hold confidential, regulated data.
               </p>
             </div>
           </div>

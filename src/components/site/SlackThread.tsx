@@ -62,7 +62,8 @@ export function SlackThreadMockup() {
   const [stage, setStage] = useState(0);
   useEffect(() => {
     if (!inView || prefersReduced()) return;
-    const t = setTimeout(() => setStage((s) => (s + 1) % SLK_DUR.length), SLK_DUR[stage]);
+    if (stage >= SLK_DUR.length - 2) return; // play once and hold on the full thread (stage 6)
+    const t = setTimeout(() => setStage((s) => s + 1), SLK_DUR[stage]);
     return () => clearTimeout(t);
   }, [stage, inView]);
   const st = (inView && !prefersReduced()) ? stage : 6; // frozen / reduced: show full thread
@@ -77,13 +78,13 @@ export function SlackThreadMockup() {
         <span style={{ display: "inline-flex", gap: 6 }}>
           {[0, 1, 2].map((i) => <span key={i} style={{ width: 9, height: 9, borderRadius: 9, background: "var(--line)" }} />)}
         </span>
-        <span className="gv-mono" style={{ fontSize: 12, color: "var(--faint)", marginLeft: "var(--s2)" }}>Acme Capital</span>
+        <span className="gv-mono" style={{ fontSize: 12, color: "var(--faint)", marginLeft: "var(--s2)" }}>Northgate Advisory</span>
       </div>
 
       <div style={{ display: "grid", gridTemplateColumns: "172px 1fr" }}>
         {/* rail */}
         <div className="gv-hide-narrow" style={{ borderRight: "1px solid var(--line)", background: "var(--wash)", padding: "var(--s4) var(--s3)" }}>
-          <div style={{ fontSize: 13, fontWeight: 700, color: "var(--ink)", padding: "0 8px var(--s4)" }}>Acme Capital</div>
+          <div style={{ fontSize: 13, fontWeight: 700, color: "var(--ink)", padding: "0 8px var(--s4)" }}>Northgate Advisory</div>
           <div className="gv-mono" style={{ fontSize: 10.5, color: "var(--faint)", letterSpacing: "0.06em", padding: "0 8px 6px", textTransform: "uppercase" }}>Channels</div>
           {([["deal-room", true], ["compliance", false], ["customer-calls", false]] as const).map(([c, active]) => (
             <div key={c} style={{ display: "flex", alignItems: "center", gap: 7, padding: "6px 8px", borderRadius: 7, fontSize: 13.5,
