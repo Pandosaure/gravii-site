@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Wordmark } from "./primitives";
-import { PILOT_HREF, SIGNIN_HREF } from "./constants";
+import { REGISTER_HREF } from "./constants";
 
 export function Nav() {
   const [scrolled, setScrolled] = useState(false);
@@ -18,8 +18,7 @@ export function Nav() {
       <div className="links">
         <a className="nav-page" href="/security">Security</a>
         <a className="nav-page" href="/blog">Blog</a>
-        <a href={SIGNIN_HREF}>Sign in</a>
-        <a className="cta-link" href={PILOT_HREF}>Request a pilot</a>
+        <a className="cta-link" href={REGISTER_HREF}>Register interest</a>
       </div>
     </nav>
   );

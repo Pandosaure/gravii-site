@@ -4,7 +4,7 @@ import Link from 'next/link'
 import type { Metadata } from 'next'
 import { MDXRemote } from '@/components/blog/MDXRemote'
 import { Icon } from '@/components/site/icons'
-import { PILOT_HREF } from '@/components/site/constants'
+import { REGISTER_HREF } from '@/components/site/constants'
 
 export async function generateStaticParams() {
   return getAllSlugs().map(slug => ({ slug }))
@@ -91,7 +91,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           </div>
 
           <div style={{ marginTop: 'var(--s8)', textAlign: 'center' }}>
-            <a className="gv-cta" href={PILOT_HREF}>Request a pilot {Icon.arrow({})}</a>
+            <a className="gv-cta" href={REGISTER_HREF}>Register interest {Icon.arrow({})}</a>
           </div>
         </div>
       </article>

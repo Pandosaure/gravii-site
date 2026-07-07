@@ -9,7 +9,7 @@ import { type CSSProperties, type RefObject } from "react";
 import { SourceChip, Reveal, useInView, useSlowCycle, useReveal } from "./primitives";
 import { Icon } from "./icons";
 import { SlackThreadMockup } from "./SlackThread";
-import { PILOT_HREF } from "./constants";
+import { REGISTER_HREF } from "./constants";
 
 const ctr: CSSProperties = { marginLeft: "auto", marginRight: "auto" };
 
@@ -62,7 +62,7 @@ function Hero() {
         <Reveal delay={130} as="p" className="gv-lead" style={{ marginTop: "var(--s5)", maxWidth: 580, ...ctr }}>
           Ask your company&apos;s knowledge in plain language, right in Slack. Every answer is grounded in the evidence behind it.
         </Reveal>
-        <Reveal delay={200} style={{ marginTop: "var(--s6)" }}><a className="gv-cta" href={PILOT_HREF}>Request a pilot</a></Reveal>
+        <Reveal delay={200} style={{ marginTop: "var(--s6)" }}><a className="gv-cta" href={REGISTER_HREF}>Register interest</a></Reveal>
         <Reveal delay={300} style={{ marginTop: "var(--s8)" }}>
           <SlackThreadMockup />
         </Reveal>
@@ -157,7 +157,7 @@ function FinalCTA() {
         <Reveal delay={120} as="p" className="gv-lead" style={{ marginTop: "var(--s5)", maxWidth: 500, ...ctr }}>
           A done-with-you pilot. No self-serve signup, no pricing games.
         </Reveal>
-        <Reveal delay={200} style={{ marginTop: "var(--s6)" }}><a className="gv-cta" href={PILOT_HREF}>Request a pilot {Icon.arrow({})}</a></Reveal>
+        <Reveal delay={200} style={{ marginTop: "var(--s6)" }}><a className="gv-cta" href={REGISTER_HREF}>Register interest {Icon.arrow({})}</a></Reveal>
       </div>
     </section>
   );

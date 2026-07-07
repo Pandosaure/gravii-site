@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Reveal } from "@/components/site/primitives";
 import { Icon } from "@/components/site/icons";
-import { PILOT_HREF } from "@/components/site/constants";
+import { REGISTER_HREF } from "@/components/site/constants";
 
 export const metadata: Metadata = {
   title: "Security & Sovereignty - Gravii",
@@ -91,7 +91,7 @@ export default function SecurityPage() {
             Ask it directly. We would rather have the hard conversation early.
           </Reveal>
           <Reveal delay={200} style={{ marginTop: "var(--s6)", display: "flex", gap: "var(--s4)", justifyContent: "center", flexWrap: "wrap" }}>
-            <a className="gv-cta" href={PILOT_HREF}>Request a pilot {Icon.arrow({})}</a>
+            <a className="gv-cta" href={REGISTER_HREF}>Register interest {Icon.arrow({})}</a>
             <a href="mailto:tommy@gravii.app?subject=Security%20question" style={{ display: "inline-flex", alignItems: "center", gap: "var(--s2)", height: 50, color: "var(--ink)", fontWeight: 600 }}>
               Email a security question
             </a>
