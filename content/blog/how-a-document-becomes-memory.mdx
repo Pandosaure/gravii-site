@@ -1,0 +1,52 @@
+---
+title: "How a Document Becomes Memory"
+description: "What actually happens when an AI 'reads' a document. A plain walkthrough of chunking, context, dual indexing, and why the details decide whether the answers can be trusted."
+date: "2026-05-24"
+author: "Tommy Jamet"
+authorRole: "Seasoned Head of Product, Founder of Gravii"
+authorLinkedIn: "https://www.linkedin.com/in/tommyjamet/"
+tags: ["retrieval", "embeddings", "RAG", "contextual retrieval", "company brain"]
+published: true
+---
+
+*What actually happens when an AI "reads" a document.*
+
+Everyone talks about feeding documents to an AI as if the machine simply reads them the way you do. It doesn't. A document has to be taken apart, understood in more than one way, and stored so it can be found again months later by a question nobody has asked yet. The quality of that unglamorous middle step is what decides whether the answers you get back are trustworthy or just fluent.
+
+Here is the whole journey, one document from arrival to memory.
+
+<figure style={{margin: '2rem 0', textAlign: 'center'}}>
+  <img src="/images/how-a-document-becomes-memory.png" alt="A document being split into chunks with added context, indexed two ways as a meaning map and a keyword index, then stored as one memory" style={{maxWidth: '100%', height: 'auto', borderRadius: '12px'}} />
+</figure>
+
+## Why split the document at all?
+
+A whole document is too big to search well. Ask "what did we agree on pricing," and you do not want the entire twelve-page contract back, you want the sentence. So the document is broken into chunks, small passages a few paragraphs long. Retrieval then works at the level of the passage, not the file.
+
+The naive version of this is where most systems quietly go wrong. Cut a document into blind slices and a chunk that says "he agreed to the new rate" loses the fact that "he" is the client and "the new rate" was 1,050 a day. The passage is now unfindable and, worse, misleading if it ever surfaces.
+
+## The step that changes everything: context
+
+Before a chunk is stored, we prepend a short, situating blurb generated from the whole document. That lone chunk stops being "he agreed to the new rate" and becomes "In the Northcrest renewal, the client agreed to the new rate of 1,050 a day for three years." The passage now carries its own context.
+
+This is not a nicety. Anthropic's own research on Contextual Retrieval found that adding this situating context cut retrieval failures by roughly half, and by two thirds once reranking is added ([Anthropic, "Introducing Contextual Retrieval," 2024](https://www.anthropic.com/news/contextual-retrieval)). The difference between a memory you can rely on and one that misleads you is often just this one step.
+
+## One meaning, understood two ways
+
+A context-rich chunk is then indexed twice, because there are two different ways to find something and you want both.
+
+The first is the meaning map. Each chunk is turned into an embedding, a mathematical fingerprint of what it is *about*. Passages about similar things end up close together, so a question about "day rates" can find a passage that never used those exact words but discussed "the amount we charge per day." This is search by meaning.
+
+The second is the keyword index. The same chunk is indexed by its actual words, so a search for a specific name, a clause number, or an account can land on the literal match. This is search by term.
+
+Meaning search finds the passage that means the same thing; keyword search finds the passage that says the exact thing. Rely on only one and you miss half of what you should find. Combining them, and fusing the two rankings into a single result, is what gives a reliable answer its reach.
+
+## Stored as one memory
+
+Finally the pieces come to rest in one place, each chunk holding its context, its meaning fingerprint, its keyword form, and a pointer back to the exact source it came from. That last part matters more than any of the clever indexing: because every stored piece knows where it came from, an answer built from it can cite the exact line, or admit there is nothing on record. A memory that cannot point back to its source is not memory, it is a guess with good grammar.
+
+## Why the plumbing is the product
+
+None of this shows up in a demo. Two systems can look identical answering an easy question and behave completely differently on the hard one, where the context was thin and the honest answer was "I do not have that." The care taken in these middle steps, splitting well, adding context, indexing both ways, keeping the source attached, is precisely what separates a system you can trust with client work from one that sounds confident and is occasionally, invisibly, wrong.
+
+That is the part I spend my time on. If you want the bigger picture of what this memory sits inside, read [building the company brain](/blog/building-the-company-brain), and for why the refusal to guess matters as much as the answer, [why your AI assistant should say "I don't know"](/blog/ai-assistant-abstention).
